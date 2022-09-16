@@ -9,7 +9,7 @@ const Footer = () => {
         <img className="w-3/4 md:w-full" src={logo} alt="FooterLogo" />
       </div>
       <p className="text-base sm:text-lg md:text-2xl ">
-        جميع الحقوق محفوظة لبنك الاسكان والتعمير @2022
+        جميع الحقوق محفوظة لبنك الاسكان والتعمير &reg; 2022
       </p>
       <ul className="flex justify-between gap-1">
         <li>

@@ -54,7 +54,9 @@ const LandingNavbar = (props) => {
         md:pt-0"
         >
           <li className="text-5xl  md:text-xl">
-            <AnchorLink
+            <AnchorLink onClick={()=>{
+              setShowMenu(false)
+            }}
               className="md:p-4 py-2 block hover:text-red-600"
               href="#about"
             >
@@ -62,7 +64,9 @@ const LandingNavbar = (props) => {
             </AnchorLink>
           </li>
           <li className="text-5xl  md:text-xl py-10 md:py-0">
-            <AnchorLink
+            <AnchorLink onClick={()=>{
+              setShowMenu(false)
+            }}
               className="md:p-4 py-2 block hover:text-red-600"
               href="#blood"
             >
@@ -70,7 +74,9 @@ const LandingNavbar = (props) => {
             </AnchorLink>
           </li>
           <li className="text-5xl  md:text-xl">
-            <AnchorLink
+            <AnchorLink onClick={()=>{
+              setShowMenu(false)
+            }}
               className="md:p-4 py-2 block hover:text-red-600"
               href="#contact"
             >

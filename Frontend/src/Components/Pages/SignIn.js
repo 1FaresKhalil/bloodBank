@@ -1,12 +1,25 @@
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 import Navbar from "../UI/LandingNavbar";
 import Footer from "../UI/Footer";
 import Logo from "../../Assets/images/Logo.png";
-import GoogleIcon from '../../Assets/images/google-ic.png'
-import SignImg from '../../Assets/images/sign-img.png'
+import GoogleIcon from "../../Assets/images/google-ic.png";
+import SignImg from "../../Assets/images/sign-img.png";
 const SignIn = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+      once: true,
+    });
+  }, []);
   return (
-    <div className="bg-[#F9F1EF]">
-      <Navbar />
+    <div
+      data-aos="fade-up"
+      className="bg-[#F9F1EF] flex flex-col justify-between "
+    >
+      <Navbar data-aos="fade-up" />
       <div className="flex justify-center lg:justify-between container xl:max-w-[1200px] mx-auto bg-white mt-6 rounded-xl shadow ">
         <div className="basis-[92%] lg:basis-1/2">
           <div>
@@ -69,13 +82,26 @@ const SignIn = () => {
                 name="accept__terms"
                 value="yes"
               />
-              <label className="text-red-600 text-[14px] pr-[10px]" htmlFor="terms">أوافق على الشروط والأحكام</label>
+              <label
+                className="text-red-600 text-[14px] pr-[10px]"
+                htmlFor="terms"
+              >
+                أوافق على الشروط والأحكام
+              </label>
             </div>
             <button className="contained-btn w-full ">انشاء حساب</button>
             <div className="flex flex-col items-center gap-4">
               <span className="pt-5">او</span>
-              <a href="/"><img src={GoogleIcon} alt="google-icon" /></a>
-              <p className="text-[#7B809A] text-[14px] pb-4">هل لديك حساب بالفعل ؟ <a className="text-red-600" href="/"> قم بتسجيل الدخول</a></p>
+              <a href="/">
+                <img src={GoogleIcon} alt="google-icon" />
+              </a>
+              <p className="text-[#7B809A] text-[14px] pb-4">
+                هل لديك حساب بالفعل ؟{" "}
+                <a className="text-red-600" href="/">
+                  {" "}
+                  قم بتسجيل الدخول
+                </a>
+              </p>
             </div>
           </div>
         </div>
@@ -83,7 +109,7 @@ const SignIn = () => {
           <img className="h-full" src={SignImg} alt="sign-img" />
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

@@ -12,7 +12,7 @@ const LandingNavbar = (props) => {
       data-aos={animateAos}
       className={`md:h-auto md:container px-5 flex flex-wrap mx-auto pt-1 pb-6 rounded-xl md:py-0 items-center justify-between w-full text-lg text-gray-700 ${
         showMenu
-          ? "bg-white h-full content-between fixed z-20"
+          ? "bg-white h-full content-between fixed md:static z-10 md:z-0 transition-opacity"
           : "bg-transparent"
       } md:bg-transparent`}
     >
@@ -38,11 +38,12 @@ const LandingNavbar = (props) => {
       <div
         className={`${
           !showMenu ? "hidden" : ""
-        } w-full pb-4 md:pb-0 md:flex md:items-center md:w-auto `}
+        } w-full pb-4 md:pb-0 md:flex md:items-center md:w-auto`}
         id="menu"
       >
         <ul
           className="
+          transition-all
         text-center  
         pt-4
         text-base text-gray-700
@@ -50,17 +51,17 @@ const LandingNavbar = (props) => {
         md:justify-between 
         md:pt-0"
         >
-          <li className="text-5xl md:text-xl">
+          <li className="text-5xl  md:text-xl">
             <a className="md:p-4 py-2 block hover:text-red-600" href="/">
               من نحن
             </a>
           </li>
-          <li className="text-5xl md:text-xl py-10 md:py-0">
+          <li className="text-5xl  md:text-xl py-10 md:py-0">
             <a className="md:p-4 py-2 block hover:text-red-600" href="/">
               عن الدم
             </a>
           </li>
-          <li className="text-5xl md:text-xl">
+          <li className="text-5xl  md:text-xl">
             <a className="md:p-4 py-2 block hover:text-red-600" href="/">
               تواصل معنا
             </a>
@@ -69,11 +70,15 @@ const LandingNavbar = (props) => {
       </div>
       <div
         className={`${
-          !showMenu ? "hidden" : "w-full"
+          !showMenu ? "hidden" : "w-full md:w-auto"
         }  flex flex-col md:flex-row md:flex  gap-4`}
       >
-        <button className="outlined-btn w-[137px]">تسجيل الدخول</button>
-        <button className="contained-btn w-[137px]">حساب جديد </button>
+        <button className="outlined-btn py-3 md:py-2 text-2xl sm:text-lg ">
+          تسجيل الدخول
+        </button>
+        <button className="contained-btn py-3 md:py-2 text-2xl sm:text-lg">
+          حساب جديد{" "}
+        </button>
       </div>
     </nav>
   );

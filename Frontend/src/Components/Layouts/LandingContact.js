@@ -12,6 +12,7 @@ const LandingContact = () => {
   }, []);
   return (
     <div
+      id="contact"
       data-aos="fade-up"
       style={{ backgroundImage: `url(${ContactImage})` }}
       className="min-h-[525px] mt-24 bg-no-repeat bg-cover bg-[position:left] "

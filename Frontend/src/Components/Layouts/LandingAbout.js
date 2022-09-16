@@ -13,6 +13,7 @@ const LandingAbout = () => {
   }, []);
   return (
     <div
+      id="about"
       data-aos="fade-up"
       className="container m-auto px-8 flex flex-col md:flex-row justify-between "
     >

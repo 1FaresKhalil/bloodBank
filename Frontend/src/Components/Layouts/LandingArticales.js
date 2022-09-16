@@ -12,7 +12,7 @@ const LandingArticales = () => {
     });
   }, []);
   return (
-    <div data-aos="fade-up" className=" container mx-auto px-8">
+    <div id="blood" data-aos="fade-up" className=" container mx-auto px-8">
       <h2 className="text-center text-2xl md:text-3xlg lg:text-5xl text-red-500 my-5 lg:my-10">
         التبرع بالدم ينقذ المزيد من الأرواح
       </h2>

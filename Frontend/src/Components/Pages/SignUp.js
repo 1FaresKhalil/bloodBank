@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
+import { Link } from "react-router-dom";
 import Navbar from "../UI/LandingNavbar";
 import Footer from "../UI/Footer";
 import Logo from "../../Assets/images/Logo.png";
 import GoogleIcon from "../../Assets/images/google-ic.png";
 import SignImg from "../../Assets/images/sign-img.png";
 import InputLine from "../UI/InputLine";
-const SignIn = () => {
+const SignUp = () => {
   useEffect(() => {
     AOS.init({
       duration: 2000,
@@ -81,15 +81,14 @@ const SignIn = () => {
             <button className="contained-btn w-full ">انشاء حساب</button>
             <div className="flex flex-col items-center gap-4">
               <span className="pt-5">او</span>
-              <a href="/">
+              <button>
                 <img src={GoogleIcon} alt="google-icon" />
-              </a>
+              </button>
               <p className="text-[#7B809A] text-[14px] pb-4">
-                هل لديك حساب بالفعل ؟{" "}
-                <a className="text-red-600" href="/">
-                  {" "}
+                هل لديك حساب بالفعل ؟
+                <Link to={"sign-in"} className="text-red-600">
                   قم بتسجيل الدخول
-                </a>
+                </Link>
               </p>
             </div>
           </div>
@@ -103,4 +102,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

@@ -4,7 +4,7 @@ import LandingArticales from "../Layouts/LandingArticales";
 import LandingContact from "../Layouts/LandingContact";
 import Footer from "../UI/Footer";
 
-const landingPage = () => {
+const LandingPage = () => {
   return (
     <div>
       <LandingHeader />
@@ -15,4 +15,4 @@ const landingPage = () => {
     </div>
   );
 };
-export default landingPage;
+export default LandingPage;

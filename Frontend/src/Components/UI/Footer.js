@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import logo from "../../Assets/images/Logo.png";
 import facebookIcon from "../../Assets/images/fb.png";
 import whatsIcon from "../../Assets/images/whats.png";
@@ -13,9 +15,9 @@ const Footer = () => {
       </p>
       <ul className="flex justify-between gap-1">
         <li>
-          <a href="/">
+          <Link to={"/"}>
             <img src={facebookIcon} alt="facebook-logo" />
-          </a>
+          </Link>
         </li>
         <li className="">
           <a href="/">

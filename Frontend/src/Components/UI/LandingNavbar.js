@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { AiOutlineAlignLeft, AiOutlineClose } from "react-icons/ai";
+import AnchorLink from "react-anchor-link-smooth-scroll";
+import { Link } from "react-router-dom";
 import logo from "../../Assets/images/Logo.png";
 
 const LandingNavbar = (props) => {
@@ -17,9 +19,9 @@ const LandingNavbar = (props) => {
       } md:bg-transparent`}
     >
       <div>
-        <a href="/">
+        <Link to={"/"}>
           <img src={logo} alt="logo" />
-        </a>
+        </Link>
       </div>
 
       <div
@@ -52,19 +54,28 @@ const LandingNavbar = (props) => {
         md:pt-0"
         >
           <li className="text-5xl  md:text-xl">
-            <a className="md:p-4 py-2 block hover:text-red-600" href="/">
+            <AnchorLink
+              className="md:p-4 py-2 block hover:text-red-600"
+              href="#about"
+            >
               من نحن
-            </a>
+            </AnchorLink>
           </li>
           <li className="text-5xl  md:text-xl py-10 md:py-0">
-            <a className="md:p-4 py-2 block hover:text-red-600" href="/">
+            <AnchorLink
+              className="md:p-4 py-2 block hover:text-red-600"
+              href="#blood"
+            >
               عن الدم
-            </a>
+            </AnchorLink>
           </li>
           <li className="text-5xl  md:text-xl">
-            <a className="md:p-4 py-2 block hover:text-red-600" href="/">
+            <AnchorLink
+              className="md:p-4 py-2 block hover:text-red-600"
+              href="#contact"
+            >
               تواصل معنا
-            </a>
+            </AnchorLink>
           </li>
         </ul>
       </div>
@@ -73,12 +84,18 @@ const LandingNavbar = (props) => {
           !showMenu ? "hidden" : "w-full md:w-auto"
         }  flex flex-col md:flex-row md:flex  gap-4`}
       >
-        <button className="outlined-btn py-3 md:py-2 text-2xl sm:text-lg ">
+        <Link
+          to={"sign-in"}
+          className="outlined-btn py-3 md:py-2 text-2xl sm:text-lg "
+        >
           تسجيل الدخول
-        </button>
-        <button className="contained-btn py-3 md:py-2 text-2xl sm:text-lg">
-          حساب جديد{" "}
-        </button>
+        </Link>
+        <Link
+          to={"sign-up"}
+          className="contained-btn py-3 md:py-2 text-2xl sm:text-lg"
+        >
+          حساب جديد
+        </Link>
       </div>
     </nav>
   );

@@ -20,7 +20,7 @@ const SignIn = () => {
       className="bg-[#F9F1EF] flex flex-col justify-between "
     >
       <Navbar data-aos="fade-up" />
-      <div className="flex justify-center lg:justify-between container xl:max-w-[1200px] mx-auto bg-white mt-6 rounded-xl shadow ">
+      <div className="flex justify-center lg:justify-between container xl:max-w-[1200px] mx-auto bg-white mt-6 rounded-xl shadow pb-3 xl:pb-0 ">
         <div className="basis-[92%] lg:basis-1/2">
           <div>
             <img

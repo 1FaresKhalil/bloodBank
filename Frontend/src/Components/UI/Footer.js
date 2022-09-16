@@ -15,9 +15,9 @@ const Footer = () => {
       </p>
       <ul className="flex justify-between gap-1">
         <li>
-          <Link to={"/"}>
+          <a href="/">
             <img src={facebookIcon} alt="facebook-logo" />
-          </Link>
+          </a>
         </li>
         <li className="">
           <a href="/">

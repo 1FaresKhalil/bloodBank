@@ -82,7 +82,7 @@ const LandingNavbar = (props) => {
       <div
         className={`${
           !showMenu ? "hidden" : "w-full md:w-auto"
-        }  flex flex-col md:flex-row md:flex  gap-4`}
+        }  flex flex-col md:flex-row md:flex  text-center gap-4`}
       >
         <Link
           to={"sign-in"}

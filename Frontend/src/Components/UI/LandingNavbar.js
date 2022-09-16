@@ -10,8 +10,8 @@ const LandingNavbar = (props) => {
   return (
     <nav
       data-aos={animateAos}
-      className={`md:container px-5 flex flex-wrap mx-auto pt-1 pb-6 rounded-xl md:py-0 items-center justify-between w-full text-lg text-gray-700 ${
-        showMenu ? "bg-white" : "bg-transparent"
+      className={`md:h-auto md:container px-5 flex flex-wrap mx-auto pt-1 pb-6 rounded-xl md:py-0 items-center justify-between w-full text-lg text-gray-700 ${
+        showMenu ? "bg-white h-full content-between" : "bg-transparent"
       } md:bg-transparent`}
     >
       <div>
@@ -27,38 +27,38 @@ const LandingNavbar = (props) => {
         }}
       >
         {showMenu ? (
-          <AiOutlineClose className="md:hidden text-4xl font-bold cursor-pointer" />
+          <AiOutlineClose className="md:hidden text-4xl font-bold cursor-pointer self-center" />
         ) : (
-          <AiOutlineAlignLeft className="md:hidden text-4xl font-bold cursor-pointer" />
+          <AiOutlineAlignLeft className="md:hidden text-4xl font-bold cursor-pointer self-center" />
         )}
       </div>
 
       <div
         className={`${
           !showMenu ? "hidden" : ""
-        } w-full pb-4 md:pb-0 md:flex md:items-center md:w-auto transition`}
+        } w-full pb-4 md:pb-0 md:flex md:items-center md:w-auto `}
         id="menu"
       >
         <ul
           className="
-          
+        text-center  
         pt-4
         text-base text-gray-700
         md:flex
         md:justify-between 
         md:pt-0"
         >
-          <li className="text-xl">
+          <li className="text-5xl md:text-xl">
             <a className="md:p-4 py-2 block hover:text-red-600" href="/">
               من نحن
             </a>
           </li>
-          <li className="text-xl">
+          <li className="text-5xl md:text-xl py-10 md:py-0">
             <a className="md:p-4 py-2 block hover:text-red-600" href="/">
               عن الدم
             </a>
           </li>
-          <li className="text-xl">
+          <li className="text-5xl md:text-xl">
             <a className="md:p-4 py-2 block hover:text-red-600" href="/">
               تواصل معنا
             </a>
@@ -67,8 +67,8 @@ const LandingNavbar = (props) => {
       </div>
       <div
         className={`${
-          !showMenu ? "hidden" : ""
-        }  flex flex-col md:flex-row md:flex  gap-4 transition`}
+          !showMenu ? "hidden" : "w-full"
+        }  flex flex-col md:flex-row md:flex  gap-4`}
       >
         <button className="outlined-btn">تسجيل الدخول</button>
         <button className="contained-btn">حساب جديد </button>

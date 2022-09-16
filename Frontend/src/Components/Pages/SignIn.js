@@ -7,6 +7,7 @@ import Footer from "../UI/Footer";
 import Logo from "../../Assets/images/Logo.png";
 import GoogleIcon from "../../Assets/images/google-ic.png";
 import SignImg from "../../Assets/images/sign-img.png";
+import InputLine from "../UI/InputLine";
 const SignIn = () => {
   useEffect(() => {
     AOS.init({
@@ -16,10 +17,10 @@ const SignIn = () => {
   }, []);
   return (
     <div
-      data-aos="fade-up"
+      data-aos="fade-down"
       className="bg-[#F9F1EF] flex flex-col justify-between "
     >
-      <Navbar data-aos="fade-up" />
+      <Navbar data-aos="fade-down" />
       <div className="flex justify-center lg:justify-between container xl:max-w-[1200px] mx-auto bg-white mt-6 rounded-xl shadow pb-3 xl:pb-0 ">
         <div className="basis-[92%] lg:basis-1/2">
           <div>
@@ -31,48 +32,36 @@ const SignIn = () => {
           </div>
           <div className="w-4/5 mx-auto">
             <div className="flex flex-col">
-              <label
-                className="pb-[11px] text-[#7B809A] text-[14px]"
-                htmlFor="user"
-              >
-                اسم المستخدم
-              </label>
-              <input
-                className="pb-[11px] border-b border-[#C7CCD0] placeholder:text-[#C7CCD0] focus:outline-none text-[14px]"
-                placeholder="وسام حمدي"
-                id="user"
-                type="text"
-                name="Username"
+              <InputLine
+                label="اسم المستخدم"
+                input={{
+                  placeholder: "وسام حمدي",
+                  id: "user",
+                  type: "text",
+                  name: "username",
+                }}
               />
             </div>
             <div className="flex flex-col py-[15px]">
-              <label
-                className="pb-[11px] text-[#7B809A] text-[14px]"
-                htmlFor="mail"
-              >
-                البريد الالكتروني
-              </label>
-              <input
-                className="pb-[11px] border-b border-[#C7CCD0] placeholder:text-[#C7CCD0] focus:outline-none text-[14px]"
-                placeholder="mrwan@email.com"
-                id="mail"
-                type="mail"
-                name="mail"
+              <InputLine
+                label="البريد الالكتروني"
+                input={{
+                  placeholder: "mrwan@email.com",
+                  id: "mail",
+                  type: "mail",
+                  name: "mail",
+                }}
               />
             </div>
             <div className="flex flex-col">
-              <label
-                className="pb-[11px] text-[#7B809A] text-[14px]"
-                htmlFor="pass"
-              >
-                كلمة المرور
-              </label>
-              <input
-                className="pb-[11px] border-b border-[#C7CCD0] placeholder:text-[#C7CCD0] focus:outline-none text-[14px]"
-                placeholder="*******************"
-                id="pass"
-                type="password"
-                name="pass"
+              <InputLine
+                label=";كلمة المرور"
+                input={{
+                  placeholder: "*******************",
+                  id: "pass",
+                  type: "password",
+                  name: "pass",
+                }}
               />
             </div>
             <div className="flex pb-10 pt-8">

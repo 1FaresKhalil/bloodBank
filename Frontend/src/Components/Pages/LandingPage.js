@@ -10,8 +10,8 @@ const landingPage = () => {
       <LandingHeader />
       <LandingAbout />
       <LandingArticales />
-      <LandingContact/>
-      <Footer/>
+      <LandingContact />
+      <Footer />
     </div>
   );
 };

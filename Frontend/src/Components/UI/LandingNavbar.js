@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { AiOutlineAlignLeft, AiOutlineClose } from "react-icons/ai";
 import logo from "../../Assets/images/Logo.png";
 
 const LandingNavbar = (props) => {
@@ -11,7 +12,7 @@ const LandingNavbar = (props) => {
       data-aos={animateAos}
       className={`md:container px-5 flex flex-wrap mx-auto pt-1 pb-6 rounded-xl md:py-0 items-center justify-between w-full text-lg text-gray-700 ${
         showMenu ? "bg-white" : "bg-transparent"
-      } md:bg-transparent transition`}
+      } md:bg-transparent`}
     >
       <div>
         <a href="/">
@@ -19,25 +20,18 @@ const LandingNavbar = (props) => {
         </a>
       </div>
 
-      <svg
+      <div
         onClick={() => {
           setClicked(true);
           return !showMenu ? setShowMenu(true) : setShowMenu(false);
         }}
-        xmlns="http://www.w3.org/2000/svg"
-        id="menu-button"
-        className="h-6 w-6 cursor-pointer md:hidden block"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16"
-        />
-      </svg>
+        {showMenu ? (
+          <AiOutlineClose className="md:hidden text-4xl font-bold cursor-pointer" />
+        ) : (
+          <AiOutlineAlignLeft className="md:hidden text-4xl font-bold cursor-pointer" />
+        )}
+      </div>
 
       <div
         className={`${
@@ -47,6 +41,7 @@ const LandingNavbar = (props) => {
       >
         <ul
           className="
+          
         pt-4
         text-base text-gray-700
         md:flex

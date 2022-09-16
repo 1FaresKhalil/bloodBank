@@ -11,7 +11,9 @@ const LandingNavbar = (props) => {
     <nav
       data-aos={animateAos}
       className={`md:h-auto md:container px-5 flex flex-wrap mx-auto pt-1 pb-6 rounded-xl md:py-0 items-center justify-between w-full text-lg text-gray-700 ${
-        showMenu ? "bg-white h-full content-between" : "bg-transparent"
+        showMenu
+          ? "bg-white h-full content-between fixed z-20"
+          : "bg-transparent"
       } md:bg-transparent`}
     >
       <div>

@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 import logo from "../../Assets/images/Logo.png";
 import facebookIcon from "../../Assets/images/fb.png";
 import whatsIcon from "../../Assets/images/whats.png";

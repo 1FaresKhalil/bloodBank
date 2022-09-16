@@ -70,8 +70,8 @@ const LandingNavbar = (props) => {
           !showMenu ? "hidden" : "w-full"
         }  flex flex-col md:flex-row md:flex  gap-4`}
       >
-        <button className="outlined-btn">تسجيل الدخول</button>
-        <button className="contained-btn">حساب جديد </button>
+        <button className="outlined-btn w-[137px]">تسجيل الدخول</button>
+        <button className="contained-btn w-[137px]">حساب جديد </button>
       </div>
     </nav>
   );

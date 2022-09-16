@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Rakkas";
+  src: url("./Assets/fonts/Rakkas-Regular.eot");
+  src: url("./Assets/fonts/Rakkas-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("./Assets/fonts/Rakkas-Regular.woff2") format("woff2"),
+    url("./Assets/fonts/Rakkas-Regular.woff") format("woff"),
+    url("./Assets/fonts/Rakkas-Regular.ttf") format("truetype"),
+    url("./Assets/fonts/Rakkas-Regular.svg#Rakkas-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  body {
+    @apply font-Poppins;
+  }
+}
+@layer components {
+  .outlined-btn {
+    @apply rounded-xl border-[1px] border-red-600 px-2 py-1 sm:px-4 sm:py-2 text-red-600 text-base sm:text-lg shadow;
+  }
+  .contained-btn {
+    @apply rounded-xl border-[1px] bg-red-600 px-2 py-1 sm:px-4 sm:py-2 text-white text-base sm:text-lg shadow;
+  }
+  .outlined-btn:hover {
+    @apply bg-red-700 text-white transition;
+  }
+  .contained-btn:hover {
+    @apply bg-red-700 transition;
+  }
+}

@@ -17,7 +17,7 @@ const LandingAbout = () => {
       data-aos="fade-up"
       className="container m-auto px-8 flex flex-col md:flex-row justify-between "
     >
-      <div className="mt-10 lg:mt-0 md:basis-1/2 xl:basis-1/3 self-center">
+      <div className="mt-10 lg:mt-0  md:basis-8/12 lg:basis-1/2 xl:basis-1/3 self-center">
         <h2 className="my-5 md:mb-10 md:mt-0 text-3xl md:text-5xl text-red-500">
           من نحن
         </h2>

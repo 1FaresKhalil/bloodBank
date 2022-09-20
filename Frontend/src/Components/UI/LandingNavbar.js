@@ -31,9 +31,9 @@ const LandingNavbar = (props) => {
         }}
       >
         {showMenu ? (
-          <AiOutlineClose className="lg:hidden text-4xl font-bold cursor-pointer self-center" />
+          <AiOutlineClose className="lg:hidden text-3xl font-bold cursor-pointer self-center" />
         ) : (
-          <AiOutlineAlignLeft className="lg:hidden text-4xl font-bold cursor-pointer self-center" />
+          <AiOutlineAlignLeft className="lg:hidden text-3xl font-bold cursor-pointer self-center" />
         )}
       </div>
 
@@ -53,7 +53,7 @@ const LandingNavbar = (props) => {
         lg:justify-between 
         lg:pt-0"
         >
-          <li className="text-5xl  lg:text-xl">
+          <li className="text-3xl  lg:text-xl">
             <AnchorLink
               onClick={() => {
                 setShowMenu(false);
@@ -64,7 +64,7 @@ const LandingNavbar = (props) => {
               من نحن
             </AnchorLink>
           </li>
-          <li className="text-5xl  lg:text-xl py-10 lg:py-0">
+          <li className="text-3xl  lg:text-xl py-5 lg:py-0">
             <AnchorLink
               onClick={() => {
                 setShowMenu(false);
@@ -75,7 +75,7 @@ const LandingNavbar = (props) => {
               عن الدم
             </AnchorLink>
           </li>
-          <li className="text-5xl  lg:text-xl">
+          <li className="text-3xl  lg:text-xl">
             <AnchorLink
               onClick={() => {
                 setShowMenu(false);
@@ -93,16 +93,10 @@ const LandingNavbar = (props) => {
           !showMenu ? "hidden" : "w-full lg:w-auto"
         }  flex flex-col lg:flex-row lg:flex  text-center gap-4`}
       >
-        <Link
-          to={"sign-in"}
-          className="outlined-btn py-3 lg:py-2 text-2xl sm:text-lg "
-        >
+        <Link to={"sign-in"} className="outlined-btn py-2 t text-lg ">
           تسجيل الدخول
         </Link>
-        <Link
-          to={"sign-up"}
-          className="contained-btn py-3 lg:py-2 text-2xl sm:text-lg"
-        >
+        <Link to={"sign-up"} className="contained-btn py-2 text-lg">
           حساب جديد
         </Link>
       </div>

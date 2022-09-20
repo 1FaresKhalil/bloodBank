@@ -18,7 +18,7 @@ const LandingContact = () => {
       className="min-h-[525px] mt-24 bg-no-repeat bg-cover bg-[position:left] "
     >
       <div className="container px-5 mx-auto pt-12 md:pt-0">
-        <h2 className="text-3xl md:text-5xl pt-[75px] max-w-[508px] leading-[1.5]">
+        <h2 className="text-3xl md:text-5xl pt-[75px] max-w-[300px] text-red-600 sm:text-black sm:max-w-[508px] leading-[1.5]">
           تواصل معنا اذا كنت تحتاج الى المساعدة
         </h2>
         <button className="outlined-btn bg-white mt-[44px] px-8">

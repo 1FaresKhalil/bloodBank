@@ -11,6 +11,7 @@ const InputLine = (props) => {
         {props.label}
       </label>
       <input
+        onChange={props.onChange}
         className="pb-[11px] border-b border-[#C7CCD0] placeholder:text-[#C7CCD0] focus:outline-none text-[14px]"
         {...props.input}
       />

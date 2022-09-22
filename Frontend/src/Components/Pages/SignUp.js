@@ -14,7 +14,12 @@ const SignUp = () => {
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredConfrimPassword, setEnteredConfirmPassword] = useState("");
   const [enteredUser, setEnteredUser] = useState("");
-  const [isVaild, setIsVaild] = useState(true);
+  // valdition
+  const [userIsvaild, setUserIsvaild] = useState();
+  const [emailIsvaild, setEmailIsvaild] = useState();
+  const [passwordIsvaild, setPasswordIsvaild] = useState();
+  const [confirmPasswordIsvaild, setConfirmPasswordIsvaild] = useState();
+  const [formIsValid, setFormIsValid] = useState(false);
   const userHandler = (event) => {
     setEnteredUser(event.target.value);
   };
@@ -30,12 +35,44 @@ const SignUp = () => {
   const submitHandler = (event) => {
     event.preventDefault();
   };
+  const emailValidHandler = () => {
+    setEmailIsvaild(enteredEmail.includes("@"));
+  };
+  const userValidHandler = () => {
+    setUserIsvaild(enteredUser.trim().length > 6);
+  };
+  const passwordValidHandler = () => {
+    setPasswordIsvaild(enteredPassword.trim().length > 6);
+  };
+  const confrimPasswordValidHandler = () => {
+    setConfirmPasswordIsvaild(
+      enteredPassword.trim().length > 6 &&
+        enteredPassword === enteredConfrimPassword
+    );
+  };
   useEffect(() => {
     AOS.init({
       duration: 2000,
       once: true,
     });
   }, []);
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log("Checking form validity!");
+      setFormIsValid(
+        enteredEmail.includes("@") &&
+          enteredPassword.trim().length > 6 &&
+          enteredConfrimPassword.trim().length > 6 &&
+          enteredUser.trim().length > 6 &&
+          enteredPassword === enteredConfrimPassword
+      );
+    }, 500);
+
+    return () => {
+      clearTimeout(identifier);
+    };
+  }, [enteredEmail, enteredPassword, enteredConfrimPassword, enteredUser]);
+
   return (
     <div
       data-aos="fade-down"
@@ -54,6 +91,8 @@ const SignUp = () => {
           <form className="w-4/5 mx-auto" onSubmit={submitHandler}>
             <div className="flex flex-col">
               <InputLine
+                validtion={userIsvaild}
+                onBlur={userValidHandler}
                 onChange={userHandler}
                 label="اسم المستخدم"
                 input={{
@@ -67,6 +106,8 @@ const SignUp = () => {
             </div>
             <div className="flex flex-col py-[15px]">
               <InputLine
+                validtion={emailIsvaild}
+                onBlur={emailValidHandler}
                 onChange={emailHandler}
                 label="البريد الالكتروني"
                 input={{
@@ -80,6 +121,8 @@ const SignUp = () => {
             </div>
             <div className="flex flex-col">
               <InputLine
+                validtion={passwordIsvaild}
+                onBlur={passwordValidHandler}
                 onChange={passwordHandler}
                 label="كلمة المرور"
                 input={{
@@ -93,6 +136,8 @@ const SignUp = () => {
             </div>
             <div className="flex flex-col pt-5">
               <InputLine
+                validtion={confirmPasswordIsvaild}
+                onBlur={confrimPasswordValidHandler}
                 onChange={confirmPasswordHandler}
                 label=" تاكيد كلمة المرور"
                 input={{
@@ -118,7 +163,11 @@ const SignUp = () => {
                 أوافق على الشروط والأحكام
               </label>
             </div>
-            <button type="submit" className="contained-btn w-full ">
+            <button
+              type="submit"
+              className="contained-btn w-full disabled:opacity-50"
+              disabled={!formIsValid}
+            >
               انشاء حساب
             </button>
             <div className="flex flex-col items-center gap-4">

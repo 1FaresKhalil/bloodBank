@@ -14,6 +14,7 @@ const SignUp = () => {
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredConfrimPassword, setEnteredConfirmPassword] = useState("");
   const [enteredUser, setEnteredUser] = useState("");
+  const [isVaild, setIsVaild] = useState(true);
   const userHandler = (event) => {
     setEnteredUser(event.target.value);
   };
@@ -25,6 +26,9 @@ const SignUp = () => {
   };
   const confirmPasswordHandler = (event) => {
     setEnteredConfirmPassword(event.target.value);
+  };
+  const submitHandler = (event) => {
+    event.preventDefault();
   };
   useEffect(() => {
     AOS.init({
@@ -47,7 +51,7 @@ const SignUp = () => {
               alt="logo"
             />
           </div>
-          <div className="w-4/5 mx-auto">
+          <form className="w-4/5 mx-auto" onSubmit={submitHandler}>
             <div className="flex flex-col">
               <InputLine
                 onChange={userHandler}
@@ -114,7 +118,9 @@ const SignUp = () => {
                 أوافق على الشروط والأحكام
               </label>
             </div>
-            <button className="contained-btn w-full ">انشاء حساب</button>
+            <button type="submit" className="contained-btn w-full ">
+              انشاء حساب
+            </button>
             <div className="flex flex-col items-center gap-4">
               <span className="pt-5">او</span>
               <button>
@@ -127,7 +133,7 @@ const SignUp = () => {
                 </Link>
               </p>
             </div>
-          </div>
+          </form>
         </div>
         <div className="hidden lg:block">
           <img className="h-full" src={SignImg} alt="sign-img" />

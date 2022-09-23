@@ -6,7 +6,15 @@ module.exports = {
       Poppins: ["Poppins", "sans-serif"],
       Rakkas: ["Rakkas"],
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        rotate: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+      },
+      animation: { rotate: "rotate 600ms ease" },
+    },
   },
   plugins: [],
 };

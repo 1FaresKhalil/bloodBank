@@ -8,6 +8,7 @@ import logo from "../../Assets/images/Logo.png";
 const LandingNavbar = (props) => {
   const [showMenu, setShowMenu] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const [animetion, setAnimetion] = useState(false);
   const animateAos = !clicked ? props["data-aos"] : "";
   return (
     <nav
@@ -25,14 +26,18 @@ const LandingNavbar = (props) => {
       </div>
 
       <div
+        className={`${animetion && "animate-rotate"}`}
         onClick={() => {
           setClicked(true);
+          setAnimetion(true);
           return !showMenu ? setShowMenu(true) : setShowMenu(false);
         }}
+        onAnimationEnd={() => setAnimetion(false)}
       >
-        {showMenu ? (
+        {showMenu && (
           <AiOutlineClose className="lg:hidden text-3xl font-bold cursor-pointer self-center" />
-        ) : (
+        )}
+        {!showMenu && (
           <AiOutlineAlignLeft className="lg:hidden text-3xl font-bold cursor-pointer self-center" />
         )}
       </div>

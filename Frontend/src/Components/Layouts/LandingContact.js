@@ -38,11 +38,11 @@ const LandingContact = () => {
               setShowModal(!showModal);
             }}
           >
-            <div
-              className="cursor-pointer"
-              onClick={() => setShowModal(!showModal)}
-            >
-              <AiOutlineClose className="text-3xl font-bold" />
+            <div>
+              <AiOutlineClose
+                onClick={() => setShowModal(!showModal)}
+                className="cursor-pointer text-3xl font-bold"
+              />
             </div>
             <div className="xl:max-w-[1200px] mx-auto  mt-6 xl:pb-0 ">
               <div className="basis-[92%] lg:basis-1/2">

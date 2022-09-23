@@ -93,10 +93,10 @@ const LandingNavbar = (props) => {
           !showMenu ? "hidden" : "w-full lg:w-auto"
         }  flex flex-col lg:flex-row lg:flex  text-center gap-4`}
       >
-        <Link to={"sign-in"} className="outlined-btn py-2 t text-lg ">
+        <Link to={"/sign-in"} className="outlined-btn py-2 t text-lg ">
           تسجيل الدخول
         </Link>
-        <Link to={"sign-up"} className="contained-btn py-2 text-lg">
+        <Link to={"/sign-up"} className="contained-btn py-2 text-lg">
           حساب جديد
         </Link>
       </div>

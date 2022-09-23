@@ -19,7 +19,7 @@ const Navbar = (props) => {
       } lg:bg-transparent`}
     >
       <div>
-        <Link to={"/"}>
+        <Link to={"/home"}>
           <img src={logo} alt="logo" />
         </Link>
       </div>

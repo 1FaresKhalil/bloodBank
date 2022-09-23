@@ -105,13 +105,15 @@ const SignIn = () => {
               />
             </div>
 
-            <button
-              type="submit"
-              className="contained-btn w-full disabled:opacity-50"
-              disabled={!formIsValid}
-            >
-              تسجيل الدخول
-            </button>
+            <Link to="/home">
+              <button
+                type="submit"
+                className="contained-btn w-full disabled:opacity-50"
+                disabled={!formIsValid}
+              >
+                تسجيل الدخول
+              </button>
+            </Link>
             <div className="flex flex-col items-center gap-4">
               <span className="pt-5">او</span>
               <button>

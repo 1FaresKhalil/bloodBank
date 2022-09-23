@@ -6,7 +6,7 @@ download or clone project files
 
 open command line
 
-type'npm install'
+type 'npm install'
 
 then type
 

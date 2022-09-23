@@ -82,7 +82,7 @@ const SignIn = () => {
                 label="البريد الالكتروني"
                 input={{
                   value: enteredEmail,
-                  placeholder: "Enter Email",
+                  placeholder: "اكتب بريدك الالكتروني",
                   id: "mail",
                   type: "mail",
                   name: "mail",
@@ -97,7 +97,7 @@ const SignIn = () => {
                 label="كلمة المرور"
                 input={{
                   value: enteredPassword,
-                  placeholder: "Enter Password",
+                  placeholder: "اكتب كلمة المرور",
                   id: "pass",
                   type: "password",
                   name: "pass",

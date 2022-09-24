@@ -112,7 +112,7 @@ const SignUp = () => {
                 label="البريد الالكتروني"
                 input={{
                   value: enteredEmail,
-                  placeholder: "exmaple@email.com",
+                  placeholder: "example@email.com",
                   id: "mail",
                   type: "mail",
                   name: "mail",

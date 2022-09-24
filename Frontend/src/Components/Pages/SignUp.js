@@ -177,7 +177,7 @@ const SignUp = () => {
               </button>
               <p className="text-[#7B809A] text-[14px] pb-4">
                 هل لديك حساب بالفعل ؟{" "}
-                <Link to={"sign-in"} className="text-red-600">
+                <Link to={"/sign-in"} className="text-red-600">
                   قم بتسجيل الدخول
                 </Link>
               </p>

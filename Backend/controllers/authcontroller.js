@@ -1,6 +1,6 @@
 const Role = require("../models/role");
 const User = require("../models/user");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 exports.signup = async (req, res, next) => {
   /* 
@@ -12,7 +12,7 @@ insert into blood_bank.role (role_name, role_description) VALUES ('user', 'user 
     const email = req.body.email;
     const name = req.body.name;
     const password = req.body.password;
-
+    console.log(req.body);
     const hashedPw = await bcrypt.hash(password, 12);
     const user = new User(null, email, name, hashedPw, null, null, 1);
 

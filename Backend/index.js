@@ -1,13 +1,18 @@
 // libraries
 const express = require("express");
 require("dotenv").config();
+const bodyParser = require("body-parser");
 // routes
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
-app.use(express.urlencoded({ extended: true }));
+//app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");

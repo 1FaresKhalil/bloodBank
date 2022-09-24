@@ -4,7 +4,31 @@ import LandingPage from "./Components/Pages/LandingPage";
 import SignIn from "./Components/Pages/SignIn";
 import SignUp from "./Components/Pages/SignUp";
 
+import { useEffect, useState } from "react";
+
 const App = () => {
+  const users = {
+    email: "fares@",
+    password: "ssasassasaasas",
+    name: "fares",
+  };
+
+  const fetchData = async () => {
+    const res = await fetch("http://localhost:3002/signup", {
+      method: "POST",
+      body: JSON.stringify(users),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    console.log(data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>

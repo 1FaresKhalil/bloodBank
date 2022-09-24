@@ -113,9 +113,9 @@ const SignUp = () => {
                 input={{
                   value: enteredEmail,
                   placeholder: "example@email.com",
-                  id: "mail",
-                  type: "mail",
-                  name: "mail",
+                  id: "email",
+                  type: "email",
+                  name: "email",
                 }}
               />
             </div>

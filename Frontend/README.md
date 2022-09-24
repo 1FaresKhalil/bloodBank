@@ -8,6 +8,6 @@ open command line
 
 type 'npm install'
 
-then type
+then 
 
 type 'npm start'

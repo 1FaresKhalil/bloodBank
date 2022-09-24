@@ -121,7 +121,7 @@ const SignIn = () => {
               </button>
               <p className="text-[#7B809A] text-[14px] pb-4">
                 ليس لديك حساب ؟{" "}
-                <Link to={"/sign-in"} className="text-red-600">
+                <Link to={"/sign-up"} className="text-red-600">
                   قم بانشاء حساب جديد
                 </Link>
               </p>

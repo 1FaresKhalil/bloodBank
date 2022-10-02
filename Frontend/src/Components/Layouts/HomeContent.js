@@ -28,6 +28,7 @@ const HomeContent = () => {
     ما عبر إدخال بعض النوادر
     أو الكلمات العشوائية`}
         buttonText={`ابحث عن متبرع`}
+        path={'needblood'}
       />
       <HomeCard
         bg={health}
@@ -48,6 +49,7 @@ const HomeContent = () => {
     ما عبر إدخال بعض النوادر
     أو الكلمات العشوائية`}
         buttonText={`تبرع الان`}
+        path={"donor"}
       />
     </div>
   );

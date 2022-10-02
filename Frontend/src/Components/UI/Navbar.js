@@ -9,7 +9,8 @@ const Navbar = (props) => {
   const [clicked, setClicked] = useState(false);
   const animateAos = !clicked ? props["data-aos"] : "";
   return (
-    <nav
+    <div className="bg-[#F9F1EF]">
+      <nav
       data-aos={animateAos}
       className={`lg:h-auto lg:container px-5 flex mx-auto pt-1 pb-6 rounded-xl lg:py-0 items-center justify-between w-full text-lg text-gray-700 `}
     >
@@ -53,6 +54,7 @@ const Navbar = (props) => {
         </div>
       </div>
     </nav>
+    </div>
   );
 };
 

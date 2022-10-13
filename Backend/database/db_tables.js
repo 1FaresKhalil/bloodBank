@@ -7,11 +7,12 @@ const mysql = require("mysql2");
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  database: "blood_bank",
   password: "12345",
 });
 
 db.execute("create database blood_bank;");
+
+db.query("use blood_bank;");
 
 db.execute(
   "    CREATE TABLE `blood_bank`.`role` (\
@@ -125,3 +126,22 @@ db.execute(
 db.execute(
   "INSERT INTO role (role_name, role_description) values ('user', 'user desc');"
 );
+
+db.execute(
+  "CREATE TABLE `blood_bank`.`jwt_refresh_token` (\
+  `refresh_tokenID` INT UNSIGNED NOT NULL AUTO_INCREMENT,\
+  `token` TEXT NOT NULL,\
+  `expires_at` DATETIME NOT NULL,\
+  `created_at` DATETIME NOT NULL,\
+  `created_by_ip` VARCHAR(50) NOT NULL,\
+  `revoked_at` DATETIME NULL,\
+  `revoked_by_ip` VARCHAR(50) NULL,\
+  `replacedByToken` TEXT NULL,\
+  PRIMARY KEY (`refresh_tokenID`),\
+  UNIQUE INDEX `refresh_tokenID_UNIQUE` (`refresh_tokenID` ASC) VISIBLE);\
+"
+);
+
+console.log("database and tables created successfully ");
+
+db.end();

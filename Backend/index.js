@@ -7,6 +7,8 @@ const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 
 const app = express();
+// to get req.ip
+//app.set("trust proxy", true);
 
 //app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: false }));

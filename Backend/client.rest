@@ -4,6 +4,32 @@ Content-Type:  application/json
 {
     "email": "fares@gg.com",
     "name":"H. Simpson",
+    "password":"12345",
+    "confirmPassword":"12&@345"
+
+}
+
+###
+
+POST  http://localhost:3002/signin
+Content-Type:  application/json
+
+{
+    "email": "fares@gg.com",
     "password":"12345"
 
 }
+
+###
+
+POST  http://localhost:3002/refresh-token
+Content-Type:  application/json
+refreshToken : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2NjUzMTk2NzQsImV4cCI6MTY2NTkyNDQ3NH0.Q1meqPTYF6Q0EFSCaMo_AkQnfhkzfwRGNXcMfs_MKoA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY1MzE5Njc0LCJleHAiOjE2NjUzMjA1NzR9.eoXKgkggBX8NWY1M4p3ctbdKfJj51nl4FN8H4nMycXo
+
+###
+
+POST  http://localhost:3002/revoke-token
+Content-Type:  application/json
+refreshToken : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2NjU2OTk3MDksImV4cCI6MTY2NjMwNDUwOX0.KgFcoG9CKae_q5F5IXMLzPVCRJJPcIwMS8-SwjkF23U
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY1Njk5NzA5LCJleHAiOjE2NjU3MDA2MDl9.YT-DHCvrwC-yo9dhSPWMbYd95SODR3L5pn7UChLth7s

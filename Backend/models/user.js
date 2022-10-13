@@ -1,8 +1,7 @@
 const db = require("../database/db_connection");
 
 class user {
-  constructor(id, email, name, password, phone, blood_type, role) {
-    this.id = id;
+  constructor(email, name, password, phone, blood_type, role) {
     this.email = email;
     this.name = name;
     this.password = password;
@@ -31,7 +30,7 @@ class user {
     return db.execute("SELECT * FROM blood_bank.user");
   }
 
-  static async editById(id) {
+  static async loginById(id) {
     return db.execute("update user set last_login = NOW() where userId = ?", [
       id,
     ]);
@@ -41,7 +40,7 @@ class user {
     return db.execute("SELECT * FROM user WHERE user.email = ?", [email]);
   }
   static async findById(id) {
-    return db.execute("SELECT * FROM user WHERE user.id = ?", [id]);
+    return db.execute("SELECT * FROM user WHERE user.userID = ?", [id]);
   }
 }
 

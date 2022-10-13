@@ -25,10 +25,6 @@ const App = () => {
     console.log(data);
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
     <BrowserRouter>
       <Routes>

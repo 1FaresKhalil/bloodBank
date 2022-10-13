@@ -1,8 +1,7 @@
 const db = require("../database/db_connection");
 
 class role {
-  constructor(id, role_name, role_desc) {
-    this.id = id;
+  constructor(role_name, role_desc) {
     this.role_name = role_name;
     this.role_desc = role_desc;
   }
@@ -21,7 +20,7 @@ class role {
   }
 
   static async findById(id) {
-    return db.execute("SELECT * FROM role WHERE role.id = ?", [id]);
+    return db.execute("SELECT * FROM role WHERE role.roleID = ?", [id]);
   }
 }
 

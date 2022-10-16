@@ -28,7 +28,7 @@ const HomeContent = () => {
     ما عبر إدخال بعض النوادر
     أو الكلمات العشوائية`}
         buttonText={`ابحث عن متبرع`}
-        path={'needblood'}
+        path={"needblood"}
       />
       <HomeCard
         bg={health}
@@ -39,6 +39,7 @@ const HomeContent = () => {
     ما عبر إدخال بعض النوادر
     أو الكلمات العشوائية`}
         buttonText={`تابع صحتك`}
+        path={"TrackingHealth"}
       />
       <HomeCard
         bg={donate}

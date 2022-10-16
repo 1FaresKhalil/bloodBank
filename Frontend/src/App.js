@@ -10,12 +10,13 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index path="/" element={<TrackingHealth />} />
+        <Route index path="/" element={<LandingPage />} />
         <Route path="sign-up" element={<SignUp />} />
         <Route path="sign-in" element={<SignIn />} />
         <Route path="home" element={<Home />} />
         <Route path="/home/donor" element={<Donor />} />
         <Route path="/home/needblood" element={<NeedBlood />} />
+        <Route path="/home/TrackingHealth" element={<TrackingHealth />} />
       </Routes>
     </BrowserRouter>
   );

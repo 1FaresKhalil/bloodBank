@@ -17,7 +17,9 @@ const Input = (props) => {
       <input
         onBlur={props.onBlur}
         onChange={props.onChange}
-        className={`py-3 px-3 border rounded-lg placeholder:text-[#7B809A]  focus:outline-none text-[14px]
+        className={`py-3 px-3 border rounded-lg placeholder:text-[#7B809A]  focus:outline-none text-[14px] ${
+          props.className
+        }
         ${
           props.validtion === false
             ? "border-red-500 text-red-600"

@@ -27,8 +27,10 @@ const HomeContent = () => {
     هنالك العديد من الأنواع المتوفرة
     ما عبر إدخال بعض النوادر
     أو الكلمات العشوائية`}
+        path={"needblood"}
         buttonText={`ابحث عن متبرع`}
       />
+
       <HomeCard
         bg={health}
         title={`متابعة صحتك`}
@@ -37,8 +39,10 @@ const HomeContent = () => {
     هنالك العديد من الأنواع المتوفرة
     ما عبر إدخال بعض النوادر
     أو الكلمات العشوائية`}
+        path={"trackinghealth"}
         buttonText={`تابع صحتك`}
       />
+
       <HomeCard
         bg={donate}
         title={`تبرع بالدم`}
@@ -48,6 +52,7 @@ const HomeContent = () => {
     ما عبر إدخال بعض النوادر
     أو الكلمات العشوائية`}
         buttonText={`تبرع الان`}
+        path={"donor"}
       />
     </div>
   );

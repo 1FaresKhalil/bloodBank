@@ -14,6 +14,12 @@ module.exports = {
         },
       },
       animation: { rotate: "rotate 600ms ease" },
+      colors: {
+        "dark-grey": "rgba(0, 0, 0, 0.15)",
+      },
+      boxShadow: {
+        "3xl": "0px 4px 4px rgba(0, 0, 0, 0.1)",
+      },
     },
   },
   plugins: [],

@@ -7,6 +7,7 @@ import Donor from "./Components/Pages/Donor";
 import NeedBlood from "./Components/Pages/NeedBlood";
 import TrackingHealth from "./Components/Pages/TrackingHealth";
 import Profile from "./Components/Pages/Profile";
+import Settings from "./Components/Pages/Settings";
 const App = () => {
     return (
         <BrowserRouter>
@@ -21,7 +22,8 @@ const App = () => {
                     path="/home/TrackingHealth"
                     element={<TrackingHealth />}
                 />
-                <Route path="/home/Profile" element={<Profile />} />
+                <Route path="/home/profile" element={<Profile />} />
+                <Route path="/home/settings" element={<Settings />} />
             </Routes>
         </BrowserRouter>
     );

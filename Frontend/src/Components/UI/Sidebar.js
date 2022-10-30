@@ -11,7 +11,7 @@ function Sidebar({ username }) {
         <>
             <div className="navigation w-[24%]">
                 <h2 className="text-[48px] mb-6">
-                    بنك <span className="text-red-600">الدم</span>
+                    بنك <span className="text-[#FF0000]">الدم</span>
                 </h2>
                 <div>
                     <div className="flex items-center gap-7 mb-8">
@@ -40,7 +40,7 @@ function Sidebar({ username }) {
                                         alt=""
                                     />
                                 </div>
-                                <span className="text-red-600">بياناتى</span>
+                                <span className="text-[#FF0000]">بياناتى</span>
                             </a>
                         </div>
                         <div className="flex items-center gap-5">

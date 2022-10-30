@@ -6,7 +6,7 @@ import settings from "../../Assets/images/settings.png";
 import person from "../../Assets/images/person.png";
 import trophy from "../../Assets/images/trophy.png";
 
-function Sidebar({ username }) {
+function Sidebar({ username, setting }) {
     return (
         <>
             <div className="navigation w-[24%]">
@@ -30,7 +30,7 @@ function Sidebar({ username }) {
                     <div className="flex flex-col gap-10">
                         <div className="flex items-center gap-5">
                             <a
-                                href="#"
+                                href="profile"
                                 className="flex items-center gap-5 text-2xl font-semibold"
                             >
                                 <div>
@@ -40,7 +40,13 @@ function Sidebar({ username }) {
                                         alt=""
                                     />
                                 </div>
-                                <span className="text-[#FF0000]">بياناتى</span>
+                                <span
+                                    className={`${
+                                        setting ? "black" : "text-[#FF0000]"
+                                    }`}
+                                >
+                                    بياناتى
+                                </span>
                             </a>
                         </div>
                         <div className="flex items-center gap-5">
@@ -90,7 +96,7 @@ function Sidebar({ username }) {
                         </div>
                         <div className="flex items-center gap-5">
                             <a
-                                href="#"
+                                href="settings"
                                 className="flex items-center gap-5 text-2xl font-semibold"
                             >
                                 <div>
@@ -100,7 +106,13 @@ function Sidebar({ username }) {
                                         alt=""
                                     />
                                 </div>
-                                الاعدادات
+                                <span
+                                    className={`${
+                                        setting ? "text-[#FF0000]" : "black"
+                                    }`}
+                                >
+                                    الاعدادات
+                                </span>
                             </a>
                         </div>
                     </div>
@@ -112,6 +124,7 @@ function Sidebar({ username }) {
 
 Sidebar.defaultProps = {
     username: "احمد محمد",
+    setting: false,
 };
 
 export default Sidebar;

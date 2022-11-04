@@ -2,8 +2,69 @@ POST  http://localhost:3002/signup
 Content-Type:  application/json
 
 {
-    "email": "fares@gg.com",
+    "email": "7fares@gg.com",
     "name":"H. Simpson",
+    "password":"12345",
+    "confirmPassword":"12345"
+
+}
+
+###
+
+POST  http://localhost:3002/signin
+Content-Type:  application/json
+
+{
+    "email": "fares@gg.com",
     "password":"12345"
 
 }
+
+###
+
+POST  http://localhost:3002/refresh-token
+Content-Type:  application/json
+refreshToken : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njc1Nzg1NjYsImV4cCI6MTY2ODE4MzM2Nn0.jFMtKlh2JdLJLoO6BjVALn_YlQtWVM7qTCvwRlTuyMA
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY3NTc4NTY2LCJleHAiOjE2Njc1Nzk0NjZ9.wBLW9TiXH-Klocr-0gh4id6xshGkIwNhWVEkySG-Y4E
+
+###
+
+POST  http://localhost:3002/revoke-token
+Content-Type:  application/json
+refreshToken : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2NjYxOTg3OTcsImV4cCI6MTY2NjgwMzU5N30.jT9Ws4zEZx9j36JfeS-6aAjKUvhOpztTbHknxngmy-4
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY2MjAzMDE2LCJleHAiOjE2NjYyMDM5MTZ9.fnnDyaz6xB84yTQq_QhI_wlGtWSrcIe8tOA7JH1ZSHs
+
+###
+
+GET http://localhost:3002/profile/15
+Content-Type:  application/json
+refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njc1Nzg1NjYsImV4cCI6MTY2ODE4MzM2Nn0.jFMtKlh2JdLJLoO6BjVALn_YlQtWVM7qTCvwRlTuyMA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY3NTc5ODM2LCJleHAiOjE2Njc1ODA3MzZ9.ESMvQeJ_bXuSxVAL5HpdCeatwHG0xFZk2PmohUB0tpQ
+
+###
+
+POST http://localhost:3002/blood-request
+Content-Type:  application/json
+refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njc1Nzg1NjYsImV4cCI6MTY2ODE4MzM2Nn0.jFMtKlh2JdLJLoO6BjVALn_YlQtWVM7qTCvwRlTuyMA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY3NTc4NTY2LCJleHAiOjE2Njc1Nzk0NjZ9.wBLW9TiXH-Klocr-0gh4id6xshGkIwNhWVEkySG-Y4E
+
+{
+    "location": "alexandria"
+}
+
+###
+
+GET http://localhost:3002/blood-requests
+Content-Type:  application/json
+refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njc1Nzg1NjYsImV4cCI6MTY2ODE4MzM2Nn0.jFMtKlh2JdLJLoO6BjVALn_YlQtWVM7qTCvwRlTuyMA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY3NTc5ODM2LCJleHAiOjE2Njc1ODA3MzZ9.ESMvQeJ_bXuSxVAL5HpdCeatwHG0xFZk2PmohUB0tpQ
+
+###
+
+GET http://localhost:3002/blood-request/1
+Content-Type:  application/json
+refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njc1Nzg1NjYsImV4cCI6MTY2ODE4MzM2Nn0.jFMtKlh2JdLJLoO6BjVALn_YlQtWVM7qTCvwRlTuyMA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY3NTc5ODM2LCJleHAiOjE2Njc1ODA3MzZ9.ESMvQeJ_bXuSxVAL5HpdCeatwHG0xFZk2PmohUB0tpQ
+
+
+

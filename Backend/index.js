@@ -1,12 +1,15 @@
 // libraries
-const express = require("express");
 require("dotenv").config();
+const express = require("express");
+
 const bodyParser = require("body-parser");
 // routes
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 
 const app = express();
+// to get req.ip
+//app.set("trust proxy", true);
 
 //app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -7,11 +7,12 @@ const mysql = require("mysql2");
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  database: "blood_bank",
   password: "12345",
 });
 
 db.execute("create database blood_bank;");
+
+db.query("use blood_bank;");
 
 db.execute(
   "    CREATE TABLE `blood_bank`.`role` (\
@@ -50,8 +51,23 @@ db.execute(
   `blood_requestID` INT UNSIGNED NOT NULL AUTO_INCREMENT,\
   `location` VARCHAR(400) NOT NULL,\
   `timestamp` DATETIME NOT NULL,\
+  `active` TINYINT(1) NOT NULL ,\
+  `closed_at` DATETIME NULL AFTER ,\
   PRIMARY KEY (`blood_requestID`),\
   UNIQUE INDEX `idnew_table_UNIQUE` (`blood_requestID` ASC) VISIBLE);"
+);
+//add user fk to blood request
+db.execute(
+  "ALTER TABLE `blood_bank`.`blood_request` \
+ADD COLUMN `requesterID` INT UNSIGNED NOT NULL AFTER `blood_requestID`,\
+ADD INDEX `requesterID_idx` (`requesterID` ASC) VISIBLE;\
+;\
+ALTER TABLE `blood_bank`.`blood_request` \
+ADD CONSTRAINT `requesterID`\
+  FOREIGN KEY (`requesterID`)\
+  REFERENCES `blood_bank`.`user` (`userID`)\
+  ON DELETE NO ACTION\
+  ON UPDATE NO ACTION;"
 );
 
 db.execute(
@@ -125,3 +141,22 @@ db.execute(
 db.execute(
   "INSERT INTO role (role_name, role_description) values ('user', 'user desc');"
 );
+
+db.execute(
+  "CREATE TABLE `blood_bank`.`jwt_refresh_token` (\
+  `refresh_tokenID` INT UNSIGNED NOT NULL AUTO_INCREMENT,\
+  `token` TEXT NOT NULL,\
+  `expires_at` DATETIME NOT NULL,\
+  `created_at` DATETIME NOT NULL,\
+  `created_by_ip` VARCHAR(50) NOT NULL,\
+  `revoked_at` DATETIME NULL,\
+  `revoked_by_ip` VARCHAR(50) NULL,\
+  `replacedByToken` TEXT NULL,\
+  PRIMARY KEY (`refresh_tokenID`),\
+  UNIQUE INDEX `refresh_tokenID_UNIQUE` (`refresh_tokenID` ASC) VISIBLE);\
+"
+);
+
+console.log("database and tables created successfully ");
+
+db.end();

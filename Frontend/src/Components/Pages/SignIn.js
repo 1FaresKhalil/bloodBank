@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Link } from "react-router-dom";
@@ -9,34 +9,44 @@ import GoogleIcon from "../../Assets/images/google-ic.png";
 import SignImg from "../../Assets/images/sign-img.png";
 
 import Input from "../UI/Input";
+import useInput from "../../hooks/useInput";
 
 const SignIn = () => {
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [enteredPassword, setEnteredPassword] = useState("");
+  const isEmail = (value) => value.includes("@");
+  const isPassword = (value) => value.trim() !== "";
 
-  // valdition
+  const {
+    value: emailValue,
+    isValid: emailIsValid,
+    hasError: emailHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    reset: resetEmail,
+  } = useInput(isEmail);
+  const {
+    value: passwordValue,
+    isValid: passwordIsValid,
+    hasError: passwordHasError,
+    valueChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+    reset: resetPassword,
+  } = useInput(isPassword);
 
-  const [emailIsvaild, setEmailIsvaild] = useState();
-  const [passwordIsvaild, setPasswordIsvaild] = useState();
+  let formIsValid = false;
 
-  const [formIsValid, setFormIsValid] = useState(false);
-
-  const emailHandler = (event) => {
-    setEnteredEmail(event.target.value);
-  };
-  const passwordHandler = (event) => {
-    setEnteredPassword(event.target.value);
-  };
+  if (emailIsValid && passwordIsValid) {
+    formIsValid = true;
+  }
 
   const submitHandler = (event) => {
     event.preventDefault();
-  };
-  const emailValidHandler = () => {
-    setEmailIsvaild(enteredEmail.includes("@"));
-  };
 
-  const passwordValidHandler = () => {
-    setPasswordIsvaild(enteredPassword.trim().length > 6);
+    if (!formIsValid) {
+      return;
+    }
+
+    resetEmail();
+    resetPassword();
   };
 
   useEffect(() => {
@@ -45,26 +55,14 @@ const SignIn = () => {
       once: true,
     });
   }, []);
-  useEffect(() => {
-    const identifier = setTimeout(() => {
-      console.log("Checking form validity!");
-      setFormIsValid(
-        enteredEmail.includes("@") && enteredPassword.trim().length > 6
-      );
-    }, 500);
-
-    return () => {
-      clearTimeout(identifier);
-    };
-  }, [enteredEmail, enteredPassword]);
 
   return (
     <div
       data-aos="fade-down"
-      className="bg-[#F9F1EF] flex flex-col justify-between "
+      className="bg-[#F9F1EF] flex flex-col justify-between h-screen"
     >
       <Navbar data-aos="fade-down" />
-      <div className="flex justify-center lg:justify-between container xl:max-w-[1200px] mx-auto bg-white mt-6 rounded-xl shadow  xl:pb-0 ">
+      <div className="flex justify-center h-[72vh] lg:justify-between container xl:max-w-[1200px] mx-auto bg-white mt-6 rounded-xl shadow  xl:pb-0 ">
         <div className="basis-[92%] lg:basis-1/2">
           <div>
             <img
@@ -76,12 +74,12 @@ const SignIn = () => {
           <form className="w-4/5 mx-auto" onSubmit={submitHandler}>
             <div className="flex flex-col mb-3">
               <Input
-                validtion={emailIsvaild}
-                onBlur={emailValidHandler}
-                onChange={emailHandler}
+                validtion={!emailHasError}
+                onBlur={emailBlurHandler}
+                onChange={emailChangeHandler}
                 label="البريد الالكتروني"
                 input={{
-                  value: enteredEmail,
+                  value: emailValue,
                   placeholder: "اكتب بريدك الالكتروني",
                   id: "mail",
                   type: "mail",
@@ -91,12 +89,12 @@ const SignIn = () => {
             </div>
             <div className="flex flex-col mb-4">
               <Input
-                validtion={passwordIsvaild}
-                onBlur={passwordValidHandler}
-                onChange={passwordHandler}
+                validtion={!passwordHasError}
+                onBlur={passwordBlurHandler}
+                onChange={passwordChangeHandler}
                 label="كلمة المرور"
                 input={{
-                  value: enteredPassword,
+                  value: passwordValue,
                   placeholder: "اكتب كلمة المرور",
                   id: "pass",
                   type: "password",

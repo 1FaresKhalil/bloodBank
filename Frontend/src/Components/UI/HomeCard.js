@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const HomeCard = (props) => {
   return (
     <div
@@ -10,9 +11,11 @@ const HomeCard = (props) => {
       <p className="text-2xl text-[#F9F1EF]  mb-32 lg:mb-20 mt-32 lg:mt-0">
         {props.description}
       </p>
-      <button className="contained-btn border-none rounded-[20px] text-2xl font-semibold py-3 px-6 mb-5">
-        {props.buttonText}
-      </button>
+      <Link to={props.path}>
+        <button className="contained-btn border-none rounded-[20px] text-2xl font-semibold py-3 px-6 mb-5">
+          {props.buttonText}
+        </button>
+      </Link>
     </div>
   );
 };

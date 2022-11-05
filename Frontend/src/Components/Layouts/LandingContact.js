@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import AOS from "aos";
 import { AiOutlineClose } from "react-icons/ai";
-import SignImg from "../../Assets/images/sign-img.png";
 import "aos/dist/aos.css";
 
 import ContactImage from "../../Assets/images/contact-background.png";
+
 import Modal from "../UI/Modal";
 import Input from "../UI/Input";
 const LandingContact = () => {

@@ -1,11 +1,13 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Home from "./Components/Pages/Home";
 import LandingPage from "./Components/Pages/LandingPage";
+import Profile from "./Components/Pages/Profile";
 import SignIn from "./Components/Pages/SignIn";
 import SignUp from "./Components/Pages/SignUp";
 import Donor from "./Components/Pages/Donor";
 import NeedBlood from "./Components/Pages/NeedBlood";
 import TrackingHealth from "./Components/Pages/TrackingHealth";
+import DonationHistory from "./Components/Pages/DonationHistory";
 
 import { useEffect, useState } from "react";
 
@@ -37,7 +39,9 @@ const App = () => {
         <Route path="home" element={<Home />} />
         <Route path="/home/donor" element={<Donor />} />
         <Route path="/home/needblood" element={<NeedBlood />} />
-        <Route path="/home/trackinghealth" element={<TrackingHealth />} />
+        <Route path="/home/TrackingHealth" element={<TrackingHealth />} />
+        <Route path="/home/Profile" element={<Profile />} />
+        <Route path="/home/DonationHistory" element={<DonationHistory />} />
       </Routes>
     </BrowserRouter>
   );

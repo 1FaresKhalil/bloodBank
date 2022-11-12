@@ -1,7 +1,6 @@
 import React from "react";
 
 const InputLine = (props) => {
-  console.log(props);
   return (
     <>
       <label

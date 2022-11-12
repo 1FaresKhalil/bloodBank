@@ -13,9 +13,10 @@ import { useEffect, useState } from "react";
 
 const App = () => {
   const users = {
-    email: "fares@",
-    password: "ssasassasaasas",
-    name: "fares",
+    email: "75faresd@gg.com",
+    name: "H. Simpson",
+    password: "12345",
+    confirmPassword: "12345",
   };
 
   const fetchData = async () => {
@@ -28,8 +29,9 @@ const App = () => {
     });
     const data = await res.json();
     console.log(data);
+    return false;
   };
-
+  // fetchData();
   return (
     <BrowserRouter>
       <Routes>

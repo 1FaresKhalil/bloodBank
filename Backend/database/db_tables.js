@@ -23,6 +23,9 @@ db.execute(
         UNIQUE INDEX `roleID_UNIQUE` (`roleID` ASC) VISIBLE,\
         UNIQUE INDEX `role_name_UNIQUE` (`role_name` ASC) VISIBLE);"
 );
+db.execute(
+  "INSERT INTO role (role_name, role_description) values ('user', 'user desc');"
+);
 
 db.execute(
   " CREATE TABLE `blood_bank`.`user` (\
@@ -30,7 +33,7 @@ db.execute(
     `email` VARCHAR(320) NOT NULL,\
     `name` VARCHAR(255) NOT NULL,\
     `password` VARCHAR(255) NOT NULL,\
-    `city` VARCHAR(55) NULL\
+    `city` VARCHAR(55) NULL,\
     `phone` VARCHAR(15) NULL,\
     `blood_type` VARCHAR(3) NULL,\
     `last_login` DATETIME NOT NULL,\
@@ -50,15 +53,16 @@ db.execute(
 db.execute(
   "CREATE TABLE `blood_bank`.`blood_request` (\
   `blood_requestID` INT UNSIGNED NOT NULL AUTO_INCREMENT,\
-  `city` VARCHAR(55) NOT NULL \
+  `city` VARCHAR(55) NOT NULL, \
   `location` VARCHAR(400) NOT NULL,\
   `timestamp` DATETIME NOT NULL,\
   `active` TINYINT(1) NOT NULL ,\
-  `closed_at` DATETIME NULL AFTER ,\
+  `closed_at` DATETIME NULL ,\
   PRIMARY KEY (`blood_requestID`),\
   UNIQUE INDEX `idnew_table_UNIQUE` (`blood_requestID` ASC) VISIBLE);"
 );
 //add user fk to blood request
+
 db.execute(
   "ALTER TABLE `blood_bank`.`blood_request` \
 ADD COLUMN `requesterID` INT UNSIGNED NOT NULL AFTER `blood_requestID`,\
@@ -71,6 +75,19 @@ ADD CONSTRAINT `requesterID`\
   ON DELETE NO ACTION\
   ON UPDATE NO ACTION;"
 );
+/*
+ALTER TABLE `blood_bank`.`blood_request` 
+ADD COLUMN `requesterID` INT UNSIGNED NOT NULL AFTER `blood_requestID`,
+ADD COLUMN `blood_requestcol` VARCHAR(45) NULL AFTER `closed_at`,
+ADD INDEX `requesterID_idx` (`requesterID` ASC) VISIBLE;
+;
+ALTER TABLE `blood_bank`.`blood_request` 
+ADD CONSTRAINT `requesterID`
+  FOREIGN KEY (`requesterID`)
+  REFERENCES `blood_bank`.`user` (`userID`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+*/
 
 db.execute(
   "CREATE TABLE `blood_bank`.`donation_history` (\
@@ -138,10 +155,6 @@ db.execute(
       REFERENCES `blood_bank`.`chat` (`chatID`)\
       ON DELETE NO ACTION\
       ON UPDATE NO ACTION);"
-);
-
-db.execute(
-  "INSERT INTO role (role_name, role_description) values ('user', 'user desc');"
 );
 
 db.execute(

@@ -7,7 +7,7 @@ const mysql = require("mysql2");
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "12345",
+  password: "Rodina!232001",
 });
 
 db.execute("create database blood_bank;");
@@ -52,42 +52,22 @@ db.execute(
 
 db.execute(
   "CREATE TABLE `blood_bank`.`blood_request` (\
-  `blood_requestID` INT UNSIGNED NOT NULL AUTO_INCREMENT,\
-  `city` VARCHAR(55) NOT NULL, \
-  `location` VARCHAR(400) NOT NULL,\
-  `timestamp` DATETIME NOT NULL,\
-  `active` TINYINT(1) NOT NULL ,\
-  `closed_at` DATETIME NULL ,\
-  PRIMARY KEY (`blood_requestID`),\
-  UNIQUE INDEX `idnew_table_UNIQUE` (`blood_requestID` ASC) VISIBLE);"
+    `blood_requestID` INT UNSIGNED NOT NULL AUTO_INCREMENT,\
+    `requesterID` INT UNSIGNED NOT NULL,\
+    `city` VARCHAR(55) NOT NULL,\
+    `location` VARCHAR(400) NOT NULL,\
+    `timestamp` DATETIME NOT NULL,\
+    `active` TINYINT(1) NOT NULL,\
+    `closed_at` DATETIME NULL,\
+    PRIMARY KEY (`blood_requestID`),\
+    UNIQUE INDEX `blood_requestID_UNIQUE` (`blood_requestID` ASC) VISIBLE,\
+    INDEX `requesterID_idx` (`requesterID` ASC) VISIBLE,\
+    CONSTRAINT `requesterID`\
+      FOREIGN KEY (`requesterID`)\
+      REFERENCES `blood_bank`.`user` (`userID`)\
+      ON DELETE NO ACTION\
+      ON UPDATE NO ACTION);"
 );
-//add user fk to blood request
-
-db.execute(
-  "ALTER TABLE `blood_bank`.`blood_request` \
-ADD COLUMN `requesterID` INT UNSIGNED NOT NULL AFTER `blood_requestID`,\
-ADD INDEX `requesterID_idx` (`requesterID` ASC) VISIBLE;\
-;\
-ALTER TABLE `blood_bank`.`blood_request` \
-ADD CONSTRAINT `requesterID`\
-  FOREIGN KEY (`requesterID`)\
-  REFERENCES `blood_bank`.`user` (`userID`)\
-  ON DELETE NO ACTION\
-  ON UPDATE NO ACTION;"
-);
-/*
-ALTER TABLE `blood_bank`.`blood_request` 
-ADD COLUMN `requesterID` INT UNSIGNED NOT NULL AFTER `blood_requestID`,
-ADD COLUMN `blood_requestcol` VARCHAR(45) NULL AFTER `closed_at`,
-ADD INDEX `requesterID_idx` (`requesterID` ASC) VISIBLE;
-;
-ALTER TABLE `blood_bank`.`blood_request` 
-ADD CONSTRAINT `requesterID`
-  FOREIGN KEY (`requesterID`)
-  REFERENCES `blood_bank`.`user` (`userID`)
-  ON DELETE NO ACTION
-  ON UPDATE NO ACTION;
-*/
 
 db.execute(
   "CREATE TABLE `blood_bank`.`donation_history` (\

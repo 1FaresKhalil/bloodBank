@@ -95,9 +95,9 @@ const SignUp = () => {
         resetPassword();
         resetConfrimPassword();
 
-        // setSuccessMessage("User has been registered successfully");
+        setSuccessMessage("User has been registered successfully");
       } else {
-        // setErrorMessage("Email Already exists !");
+        setErrorMessage("Email Already exists !");
       }
     });
   };
@@ -123,10 +123,10 @@ const SignUp = () => {
               alt="logo"
             />
           </div>
-          {/* 
+
           {errorMessage && (
             <div
-              class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
               role="alert"
             >
               <span class="block sm:inline">{errorMessage}.</span>
@@ -150,7 +150,7 @@ const SignUp = () => {
             >
               <p class="text-sm">{successMessage}</p>
             </div>
-          )} */}
+          )}
           <form className="w-4/5 mx-auto" onSubmit={submitHandler}>
             <div className="flex flex-col">
               <InputLine

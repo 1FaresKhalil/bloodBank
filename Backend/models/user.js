@@ -1,10 +1,11 @@
 const db = require("../database/db_connection");
 
 class user {
-  constructor(email, name, password, phone, blood_type, role) {
+  constructor(email, name, password, city, phone, blood_type, role) {
     this.email = email;
     this.name = name;
     this.password = password;
+    this.city = city;
     this.phone = phone;
     this.blood_type = blood_type;
     this.role = role;
@@ -12,21 +13,30 @@ class user {
 
   async save() {
     return db.execute(
-      "insert into user (email, name, password, phone, blood_type, last_login, created_at, role) VALUES (?, ?, ?, ?, ?, NOW(), NOW(), ?)",
+      "insert into user (email, name, password, city, phone, blood_type, last_login, created_at, role) VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)",
       [
         this.email,
         this.name,
         this.password,
+        this.city,
         this.phone,
         this.blood_type,
         this.role,
       ]
     );
   }
+
   static async loginById(id) {
     return db.execute("update user set last_login = NOW() where userId = ?", [
       id,
     ]);
+  }
+
+  static async updateInfoById(name, city, phone, blood_type, id) {
+    return db.execute(
+      "update user set name = ?, city = ?, phone = ?, blood_type = ?,   where userId = ?",
+      [name, city, phone, blood_type, id]
+    );
   }
 
   static async deleteById(id) {}

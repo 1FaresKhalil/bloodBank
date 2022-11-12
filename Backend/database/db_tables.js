@@ -30,6 +30,7 @@ db.execute(
     `email` VARCHAR(320) NOT NULL,\
     `name` VARCHAR(255) NOT NULL,\
     `password` VARCHAR(255) NOT NULL,\
+    `city` VARCHAR(55) NULL\
     `phone` VARCHAR(15) NULL,\
     `blood_type` VARCHAR(3) NULL,\
     `last_login` DATETIME NOT NULL,\
@@ -49,6 +50,7 @@ db.execute(
 db.execute(
   "CREATE TABLE `blood_bank`.`blood_request` (\
   `blood_requestID` INT UNSIGNED NOT NULL AUTO_INCREMENT,\
+  `city` VARCHAR(55) NOT NULL \
   `location` VARCHAR(400) NOT NULL,\
   `timestamp` DATETIME NOT NULL,\
   `active` TINYINT(1) NOT NULL ,\

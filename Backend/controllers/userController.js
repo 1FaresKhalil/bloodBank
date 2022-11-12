@@ -56,7 +56,8 @@ exports.postbloodRequest = async (req, res, next) => {
 
     const requesterID = decodedToken.userID;
     const location = req.body.location;
-    const blood_request = new Blood_request(requesterID, location);
+    const city = req.body.city;
+    const blood_request = new Blood_request(requesterID, city, location);
     await blood_request.save();
     res.status(201).json({ message: "blood request created" });
   } catch (err) {
@@ -69,14 +70,62 @@ exports.postbloodRequest = async (req, res, next) => {
 
 exports.getdonationHistory = async (req, res, next) => {
   try {
-    checkUser(req.user.role, req.User.userID, req.params.userID);
+    checkUser(req.user.role, req.user.id, req.params.userID);
     const user = req.params.userID;
 
-    const donation_history = Donation_history.findByUser(user.userID);
+    const donation_history = await Donation_history.findByUser(user.userID);
 
     res
-      .status(201)
-      .json({ message: "blood request created", donation_history });
+      .status(200)
+      .json({ message: "donation history fetched", donation_history });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+exports.getdonateBlood = async (req, res, next) => {
+  try {
+    const decodedToken = await verifyAccessToken(req.get("Authorization"));
+    const user = await User.findById(decodedToken.userID);
+
+    const userInfo = {
+      name: user.name,
+      city: user.city,
+      phone: user.phone,
+      blood_type: user.blood_type,
+    };
+
+    res.status(200).json({ message: "user Info fetched", userInfo });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+exports.postdonateBlood = async (req, res, next) => {
+  try {
+    const blood_type = req.body.bloodType;
+    const city = req.body.city;
+    const name = req.body.name;
+    const phone = req.body.phone;
+
+    const decodedToken = await verifyAccessToken(req.get("Authorization"));
+    const userID = decodedToken.userID;
+
+    await User.updateInfoById(name, city, phone, blood_type, userID);
+
+    const donation_history = new Donation_history(
+      req.params.bloodRequestID,
+      userID
+    );
+    await donation_history.save();
+
+    res.status(201).json({ message: "added to donation history" });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;

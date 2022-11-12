@@ -2,7 +2,7 @@ POST  http://localhost:3002/signup
 Content-Type:  application/json
 
 {
-    "email": "7fares@gg.com",
+    "email": "75fares@gg.com",
     "name":"H. Simpson",
     "password":"12345",
     "confirmPassword":"12345"

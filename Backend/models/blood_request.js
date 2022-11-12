@@ -3,13 +3,14 @@ const db = require("../database/db_connection");
 class blood_request {
   constructor(requesterID, location) {
     this.requesterID = requesterID;
+    this.city = city;
     this.location = location;
   }
 
   async save() {
     return db.execute(
-      "insert into blood_request (requesterID, location, timestamp, active) VALUES (?, ?, NOW(), TRUE)",
-      [this.requesterID, this.location]
+      "insert into blood_request (requesterID, city, location, timestamp, active) VALUES (?, ?, ?, NOW(), TRUE)",
+      [this.requesterID, this.city, this.location]
     );
   }
 

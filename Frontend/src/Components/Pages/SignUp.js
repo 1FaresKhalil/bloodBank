@@ -77,6 +77,9 @@ const SignUp = () => {
   };
 
   const submitHandler = (event) => {
+
+    setSuccessMessage("");
+    setErrorMessage("");
     event.preventDefault();
 
     if (!formIsValid) {
@@ -95,9 +98,9 @@ const SignUp = () => {
         resetPassword();
         resetConfrimPassword();
 
-        // setSuccessMessage("User has been registered successfully");
+        setSuccessMessage("User has been registered successfully");
       } else {
-        // setErrorMessage("Email Already exists !");
+        setErrorMessage("Email Already exists !");
       }
     });
   };
@@ -123,16 +126,16 @@ const SignUp = () => {
               alt="logo"
             />
           </div>
-          {/* 
+          
           {errorMessage && (
             <div
-              class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
               role="alert"
             >
-              <span class="block sm:inline">{errorMessage}.</span>
-              <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+              <span className="block sm:inline">{errorMessage}.</span>
+              <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
                 <svg
-                  class="fill-current h-6 w-6 text-red-500"
+                  className="fill-current h-6 w-6 text-red-500"
                   role="button"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -145,12 +148,12 @@ const SignUp = () => {
           )}
           {successMessage && (
             <div
-              class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3"
+              className="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3"
               role="alert"
             >
-              <p class="text-sm">{successMessage}</p>
+              <p className="text-sm">{successMessage}</p>
             </div>
-          )} */}
+          )}
           <form className="w-4/5 mx-auto" onSubmit={submitHandler}>
             <div className="flex flex-col">
               <InputLine

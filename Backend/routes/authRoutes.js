@@ -54,4 +54,6 @@ router.post("/refresh-token", authController.refreshToken);
 
 router.post("/revoke-token", authorize(), authController.revokeToken);
 
+router.get("/verify-email", authController.verifyEmail);
+
 module.exports = router;

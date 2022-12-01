@@ -35,3 +35,6 @@
     @apply bg-red-700 transition;
   }
 }
+tr:nth-child(even) {
+  background-color: #fdf8f8;
+}

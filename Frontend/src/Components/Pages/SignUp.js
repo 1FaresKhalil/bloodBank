@@ -9,8 +9,12 @@ import GoogleIcon from "../../Assets/images/google-ic.png";
 import SignImg from "../../Assets/images/sign-img.png";
 import InputLine from "../UI/InputLine";
 import useInput from "../../hooks/useInput";
+import { useState } from "react";
 
 const SignUp = () => {
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   const isNotEmpty = (value) => value.trim() !== "";
   const isEmail = (value) => value.includes("@");
   const isPassword = (value) => value.trim().length >= 6;
@@ -60,17 +64,45 @@ const SignUp = () => {
     formIsValid = true;
   }
 
+  const signUpUser = async (user) => {
+    const res = await fetch("http://localhost:3002/signup", {
+      method: "POST",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    return res;
+  };
+
   const submitHandler = (event) => {
+
+    setSuccessMessage("");
+    setErrorMessage("");
     event.preventDefault();
 
     if (!formIsValid) {
       return;
     }
 
-    resetName();
-    resetEmail();
-    resetPassword();
-    resetConfrimPassword();
+    signUpUser({
+      name: nameValue,
+      email: emailValue,
+      password: passwordValue,
+      confirmPassword: confrimPasswordValue,
+    }).then((res) => {
+      if (res.ok) {
+        resetName();
+        resetEmail();
+        resetPassword();
+        resetConfrimPassword();
+
+        setSuccessMessage("User has been registered successfully");
+      } else {
+        setErrorMessage("Email Already exists !");
+      }
+    });
   };
 
   useEffect(() => {
@@ -94,6 +126,34 @@ const SignUp = () => {
               alt="logo"
             />
           </div>
+          
+          {errorMessage && (
+            <div
+              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <span className="block sm:inline">{errorMessage}.</span>
+              <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
+                <svg
+                  className="fill-current h-6 w-6 text-red-500"
+                  role="button"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <title>Close</title>
+                  <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                </svg>
+              </span>
+            </div>
+          )}
+          {successMessage && (
+            <div
+              className="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3"
+              role="alert"
+            >
+              <p className="text-sm">{successMessage}</p>
+            </div>
+          )}
           <form className="w-4/5 mx-auto" onSubmit={submitHandler}>
             <div className="flex flex-col">
               <InputLine
@@ -155,24 +215,11 @@ const SignUp = () => {
                 }}
               />
             </div>
-            <div className="flex pb-10 pt-8">
-              <input
-                id="terms"
-                type="checkbox"
-                name="accept__terms"
-                value="yes"
-              />
-              <label
-                className="text-red-600 text-[14px] pr-[10px]"
-                htmlFor="terms"
-              >
-                أوافق على الشروط والأحكام
-              </label>
-            </div>
+            
             <button
               disabled={!formIsValid}
               type="submit"
-              className="contained-btn w-full disabled:opacity-50 "
+              className="contained-btn w-full disabled:opacity-50 mt-5"
             >
               انشاء حساب
             </button>

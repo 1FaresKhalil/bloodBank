@@ -1,7 +1,16 @@
 const db = require("../database/db_connection");
 
 class user {
-  constructor(email, name, password, city, phone, blood_type, role) {
+  constructor(
+    email,
+    name,
+    password,
+    city,
+    phone,
+    blood_type,
+    role,
+    verificationToken
+  ) {
     this.email = email;
     this.name = name;
     this.password = password;
@@ -9,11 +18,12 @@ class user {
     this.phone = phone;
     this.blood_type = blood_type;
     this.role = role;
+    this.verificationToken = verificationToken;
   }
 
   async save() {
     return db.execute(
-      "insert into user (email, name, password, city, phone, blood_type, last_login, created_at, role) VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)",
+      "insert into user (email, name, password, city, phone, blood_type, last_login, created_at, role, verificationToken) VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW(), ?, ?)",
       [
         this.email,
         this.name,
@@ -22,7 +32,15 @@ class user {
         this.phone,
         this.blood_type,
         this.role,
+        this.verificationToken,
       ]
+    );
+  }
+
+  async verifyEmail() {
+    return db.execute(
+      "update user set verified = 1, verificationToken = NULL where userId = ?",
+      [this.userID]
     );
   }
 
@@ -67,6 +85,15 @@ class user {
     const temp = await db.execute("SELECT * FROM user WHERE user.userID = ?", [
       id,
     ]);
+
+    return getData(temp);
+  }
+
+  static async findByVerificationToken(token) {
+    const temp = await db.execute(
+      "SELECT * FROM user WHERE user.verificationToken = ?",
+      [token]
+    );
 
     return getData(temp);
   }

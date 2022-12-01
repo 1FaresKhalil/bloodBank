@@ -1,9 +1,10 @@
+
 POST  http://localhost:3002/signup
 Content-Type:  application/json
 
 {
-    "email": "75fares@gg.com",
-    "name":"H. Simpson",
+    "email": "abdoshookry2020@gmail.com",
+    "name":"fgf",
     "password":"12345",
     "confirmPassword":"12345"
 
@@ -24,8 +25,8 @@ Content-Type:  application/json
 
 POST  http://localhost:3002/refresh-token
 Content-Type:  application/json
-refreshToken : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njc1Nzg1NjYsImV4cCI6MTY2ODE4MzM2Nn0.jFMtKlh2JdLJLoO6BjVALn_YlQtWVM7qTCvwRlTuyMA
-Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY3NTc4NTY2LCJleHAiOjE2Njc1Nzk0NjZ9.wBLW9TiXH-Klocr-0gh4id6xshGkIwNhWVEkySG-Y4E
+refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njk0MTA0ODcsImV4cCI6MTY3MDAxNTI4N30.zy42foQ7V7fE3QNCAevF6aijN_HNTgvSRVbLJfC3peM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY5NDEwNDg3LCJleHAiOjE2Njk0MTEzODd9.v7cudXMsTbcTzpETOtEas-nTodr3mYRl66sjxR93lrw
 
 ###
 
@@ -45,26 +46,48 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6
 
 POST http://localhost:3002/blood-request
 Content-Type:  application/json
-refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njc1Nzg1NjYsImV4cCI6MTY2ODE4MzM2Nn0.jFMtKlh2JdLJLoO6BjVALn_YlQtWVM7qTCvwRlTuyMA
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY3NTc4NTY2LCJleHAiOjE2Njc1Nzk0NjZ9.wBLW9TiXH-Klocr-0gh4id6xshGkIwNhWVEkySG-Y4E
+refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njk0MTA0ODcsImV4cCI6MTY3MDAxNTI4N30.zy42foQ7V7fE3QNCAevF6aijN_HNTgvSRVbLJfC3peM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY5NDEzNjM0LCJleHAiOjE2Njk0MTQ1MzR9.57FQLM_jy86HvJgjgKi1GblQqIrd49X6W2ZEU3L37gs
 
 {
-    "location": "alexandria"
+    "location": "this hospital",
+    "city": "alexandria"
 }
 
 ###
 
 GET http://localhost:3002/blood-requests
 Content-Type:  application/json
-refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njc1Nzg1NjYsImV4cCI6MTY2ODE4MzM2Nn0.jFMtKlh2JdLJLoO6BjVALn_YlQtWVM7qTCvwRlTuyMA
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY3NTc5ODM2LCJleHAiOjE2Njc1ODA3MzZ9.ESMvQeJ_bXuSxVAL5HpdCeatwHG0xFZk2PmohUB0tpQ
+refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njk0MTA0ODcsImV4cCI6MTY3MDAxNTI4N30.zy42foQ7V7fE3QNCAevF6aijN_HNTgvSRVbLJfC3peM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY5NzY2ODU0LCJleHAiOjE2Njk3Njc3NTR9.NmgIyOJ8pQ-brAUlrs97uGf2aaULHYgt-FZUU7zBgLU
 
 ###
 
 GET http://localhost:3002/blood-request/1
 Content-Type:  application/json
-refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njc1Nzg1NjYsImV4cCI6MTY2ODE4MzM2Nn0.jFMtKlh2JdLJLoO6BjVALn_YlQtWVM7qTCvwRlTuyMA
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY3NTc5ODM2LCJleHAiOjE2Njc1ODA3MzZ9.ESMvQeJ_bXuSxVAL5HpdCeatwHG0xFZk2PmohUB0tpQ
+refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njk0MTA0ODcsImV4cCI6MTY3MDAxNTI4N30.zy42foQ7V7fE3QNCAevF6aijN_HNTgvSRVbLJfC3peM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY5NzY2ODU0LCJleHAiOjE2Njk3Njc3NTR9.NmgIyOJ8pQ-brAUlrs97uGf2aaULHYgt-FZUU7zBgLU
 
+###
 
+GET http://localhost:3002/donationsSummary
+Content-Type:  application/json
+refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njk0MTA0ODcsImV4cCI6MTY3MDAxNTI4N30.zy42foQ7V7fE3QNCAevF6aijN_HNTgvSRVbLJfC3peM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY5NzY2ODU0LCJleHAiOjE2Njk3Njc3NTR9.NmgIyOJ8pQ-brAUlrs97uGf2aaULHYgt-FZUU7zBgLU
 
+###
+
+GET http://localhost:3002/verify-email?token=db750730527dfb380bf37f10794b8a30854b0b1b6fb3039154f0a97ccaba482f3eb0c63fad60616f7cd58e5f09d11e5365be888702831b880daad0c4776dc163
+Content-Type:  application/json
+
+###
+
+POST http://localhost:3002/donateBlood/1
+Content-Type:  application/json
+refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njk0MTA0ODcsImV4cCI6MTY3MDAxNTI4N30.zy42foQ7V7fE3QNCAevF6aijN_HNTgvSRVbLJfC3peM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY5NzY3NzYzLCJleHAiOjE2Njk3Njg2NjN9.FWOQKJKeOT58h28gvEzDjUR5SP_jKd4BO8W1mO5Jjbs
+
+###
+
+GET http://localhost:3002/verify-donation?token=lk;lk;
+Content-Type:  application/json

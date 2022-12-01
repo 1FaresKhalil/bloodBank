@@ -1,13 +1,16 @@
-const { validationResult } = require("express-validator/check");
+//const { validationResult } = require("express-validator/check");
 const Role = require("../models/role");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
-const userServices = require("../utils/userServices");
+const authServices = require("../utils/authServices");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 exports.signup = async (req, res, next) => {
   try {
+    //await authServices.validateSignUp(req);
+
+    /*
     const errors = validationResult(req);
     // if the validation failed an error will be raised
     if (!errors.isEmpty()) {
@@ -28,17 +31,24 @@ exports.signup = async (req, res, next) => {
         },
       });
       throw error;
-    }
+    }*/
 
-    const email = req.body.email;
-    const name = req.body.name;
-    const password = req.body.password;
-    const hashedPw = await bcrypt.hash(password, 12);
+    await authServices.register(req);
 
-    const user = new User(email, name, hashedPw, null, null, null, 1);
-
-    await user.save();
     res.status(201).json({ message: "user created" });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+exports.verifyEmail = async (req, res, next) => {
+  try {
+    await authServices.verifyEmail(req.query.token);
+
+    res.status(200).json({ message: "verified email successfully" });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
@@ -53,7 +63,7 @@ exports.signin = async (req, res, next) => {
     const password = req.body.password;
     const ipAddress = req.ip;
 
-    const { refreshToken, jwtToken, ...user } = await userServices.authenticate(
+    const { refreshToken, jwtToken, ...user } = await authServices.authenticate(
       email,
       password,
       ipAddress
@@ -92,7 +102,7 @@ exports.revokeToken = async (req, res, next) => {
       throw error;
     }
 
-    await userServices.revokeToken(token, ipAddress);
+    await authServices.revokeToken(token, ipAddress);
 
     res.json({ message: "Token revoked" });
   } catch (err) {
@@ -108,7 +118,7 @@ exports.refreshToken = async (req, res, next) => {
     const token = req.get("refreshToken");
     const ip = req.ip;
 
-    const { refreshToken, jwtToken, ...user } = await userServices.refreshToken(
+    const { refreshToken, jwtToken, ...user } = await authServices.refreshToken(
       token,
       ip
     );
@@ -119,7 +129,9 @@ exports.refreshToken = async (req, res, next) => {
 
     setJwtToken(res, jwtToken);
 
-    res.status(200).json({ message: "token changed" });
+    res
+      .status(200)
+      .json({ message: "token changed", auth: jwtToken, ref: refreshToken });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;

@@ -1,7 +1,7 @@
 const db = require("../database/db_connection");
 
 class blood_request {
-  constructor(requesterID, location) {
+  constructor(requesterID, city, location) {
     this.requesterID = requesterID;
     this.city = city;
     this.location = location;

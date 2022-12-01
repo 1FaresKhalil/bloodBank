@@ -70,7 +70,10 @@ const SignIn = () => {
         resetEmail();
         resetPassword();
 
+        
         return navigate("/Home");
+
+
       } else {
         setErrorMessage("Email or password is Invalid !");
       }

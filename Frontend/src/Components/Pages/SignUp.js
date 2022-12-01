@@ -215,24 +215,11 @@ const SignUp = () => {
                 }}
               />
             </div>
-            <div className="flex pb-10 pt-8">
-              <input
-                id="terms"
-                type="checkbox"
-                name="accept__terms"
-                value="yes"
-              />
-              <label
-                className="text-red-600 text-[14px] pr-[10px]"
-                htmlFor="terms"
-              >
-                أوافق على الشروط والأحكام
-              </label>
-            </div>
+            
             <button
               disabled={!formIsValid}
               type="submit"
-              className="contained-btn w-full disabled:opacity-50 "
+              className="contained-btn w-full disabled:opacity-50 mt-5"
             >
               انشاء حساب
             </button>

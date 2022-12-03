@@ -38,3 +38,6 @@
 tr:nth-child(even) {
   background-color: #fdf8f8;
 }
+.recharts-legend-item-text {
+  padding: 0 5px;
+}

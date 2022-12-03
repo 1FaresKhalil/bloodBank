@@ -10,6 +10,7 @@ import TrackingHealth from "./Components/Pages/TrackingHealth";
 import DonationHistory from "./Components/Pages/DonationHistory";
 
 import { useEffect, useState } from "react";
+import Settings from "./Components/Pages/Settings";
 
 const App = () => {
   const users = {
@@ -42,7 +43,8 @@ const App = () => {
         <Route path="/home/donor" element={<Donor />} />
         <Route path="/home/needblood" element={<NeedBlood />} />
         <Route path="/home/TrackingHealth" element={<TrackingHealth />} />
-        <Route path="/home/Profile" element={<Profile />} />
+        <Route path="/home/profile" element={<Profile />} />
+        <Route path="/home/settings" element={<Settings />} />
         <Route path="/home/DonationHistory" element={<DonationHistory />} />
       </Routes>
     </BrowserRouter>

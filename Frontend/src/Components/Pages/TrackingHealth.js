@@ -141,7 +141,7 @@ const TrackingHealth = () => {
         </BarChart>
 
         <form className="flex flex-col" onSubmit={submitHandler}>
-          <div className="flex gap-10 justify-between  mb-3">
+          <div className="flex flex-col mr-2 lg:mr-0 lg:flex-row gap-10 justify-between  mb-3">
             <div>
               <Input
                 validtion={!bloodPressureHasError}

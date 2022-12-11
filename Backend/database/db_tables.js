@@ -1,6 +1,7 @@
 /* 
 you must run this file by yourself to create the database schema
 */
+require("dotenv").config({ path: "../.env" });
 
 const mysql = require("mysql2");
 
@@ -157,6 +158,6 @@ db.execute(
 "
 );
 
-console.log("database and tables created successfully ");
-
-db.end();
+db.promise()
+  .end()
+  .then(() => console.log("database and tables created successfully"));

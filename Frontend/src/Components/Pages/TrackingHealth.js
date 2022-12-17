@@ -177,22 +177,18 @@ const TrackingHealth = () => {
             <Line dataKey="Weight" stroke="#ff2340" strokeWidth={2} />
           )}
         </LineChart>
-
+        <div className="text-center flex gap-6 justify-center my-4">
+          <button className="outlined-btn" onClick={bloodPressureClickHandler}>
+            ضغط الدم
+          </button>
+          <button className="outlined-btn" onClick={sugarClickHandler}>
+            مستوي السكر
+          </button>
+          <button className="outlined-btn" onClick={weightClickHandler}>
+            الوزن
+          </button>
+        </div>
         <form className="flex flex-col" onSubmit={submitHandler}>
-          <div className="text-center flex gap-6 justify-center my-4">
-            <button
-              className="outlined-btn"
-              onClick={bloodPressureClickHandler}
-            >
-              ضغط الدم
-            </button>
-            <button className="outlined-btn" onClick={weightClickHandler}>
-              الوزن
-            </button>
-            <button className="outlined-btn" onClick={sugarClickHandler}>
-              مستوي السكر
-            </button>
-          </div>
           <div className="flex flex-col mr-2 lg:mr-0 lg:flex-row gap-10 justify-between  mb-3">
             <div>
               <Input

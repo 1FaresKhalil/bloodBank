@@ -9,6 +9,8 @@ const Input = (props) => {
           props.validtion === false
             ? "text-red-500 after:content-['*'] after:ml-0.5 after:text-red-500"
             : "text-[#7B809A]"
+        } ${props.label === "ذكر" ? "pb-0 mr-2" : "pb-[11px] mr-0"} ${
+          props.label === "انثى" ? "pb-0" : "pb-[11px]"
         }`}
         htmlFor={props.input.id}
       >

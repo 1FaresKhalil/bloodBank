@@ -41,3 +41,6 @@ tr:nth-child(even) {
 .recharts-legend-item-text {
   padding: 0 5px;
 }
+.modal {
+  transform: translate(-50%, -50%);
+}

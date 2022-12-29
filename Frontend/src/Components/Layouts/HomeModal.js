@@ -82,14 +82,39 @@ function HomeModal() {
       if (index === 0) {
         if (element < 120) {
           setBloodPressureMessage("Your Blood Pressure Level is Normal");
-        } else if (element[0] > 90 && element[1] < 120) {
+        } else if (element > 120 && element < 129) {
           setBloodPressureMessage("Your Blood Pressure Level is Elevated");
         } else if (element > 130 && element < 139) {
-          setBloodPressureMessage("Your Blood Pressure Level is Stage 1");
+          setBloodPressureMessage(
+            "Your Blood Pressure Level is High Blood Pressure Stage 1"
+          );
         } else if (element > 140 && element < 180) {
-          setBloodPressureMessage("Your Blood Pressure Level is Stage 2");
+          setBloodPressureMessage(
+            "Your Blood Pressure Level is High Blood Pressure Stage 2"
+          );
         } else {
-          setBloodPressureMessage("Your Blood Pressure Level is Hypertensive");
+          setBloodPressureMessage(
+            "Your Blood Pressure Level is Hypertensive Crisis"
+          );
+        }
+      }
+      if (index === 1) {
+        if (element < 80) {
+          setBloodPressureMessage("Your Blood Pressure Level is Normal");
+        } else if (element > 80 && element < 89) {
+          setBloodPressureMessage("Your Blood Pressure Level is Elevated");
+        } else if (element > 90 && element < 99) {
+          setBloodPressureMessage(
+            "Your Blood Pressure Level is High Blood Pressure Stage 1"
+          );
+        } else if (element > 100 && element < 120) {
+          setBloodPressureMessage(
+            "Your Blood Pressure Level is High Blood Pressure Stage 2"
+          );
+        } else {
+          setBloodPressureMessage(
+            "Your Blood Pressure Level is Hypertensive Crisis"
+          );
         }
       }
     });
@@ -209,7 +234,7 @@ function HomeModal() {
                   />
                 </div>
                 <button
-                  // disabled={!formIsValid}
+                  disabled={!formIsValid}
                   type="submit"
                   className="contained-btn w-full disabled:opacity-50"
                 >

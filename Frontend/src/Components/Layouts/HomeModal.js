@@ -63,34 +63,94 @@ function HomeModal() {
   const handleHealth = (e) => {
     e.preventDefault();
     if (cholestrolValue < 200) {
-      setCholestrolMessage("Your Cholestrol Level is Normal");
+      setCholestrolMessage(
+        <p className="text-green-500 text-sm pt-2">
+          مستوى الكوليسترول لديك طبيعي
+        </p>
+      );
     } else if (cholestrolValue > 200 && cholestrolValue < 239) {
-      setCholestrolMessage("Your Cholestrol Level is Border High");
+      setCholestrolMessage(
+        <p className="text-red-500 text-sm pt-2">
+          مستوى الكوليسترول لديك مرتفع للغاية
+        </p>
+      );
     } else {
-      setCholestrolMessage("Your Cholestrol Level is High");
+      setCholestrolMessage(
+        <p className="text-red-500 text-sm pt-2">
+          مستوى الكوليسترول لديك مرتفع
+        </p>
+      );
     }
 
     if (bloodSugarValue < 140) {
-      setBloodSugarMessage("Your Blood Sugar Level is Normal");
+      setBloodSugarMessage(
+        <p className="text-green-500 text-sm pt-2">مستوى السكر في الدم طبيعي</p>
+      );
     } else if (bloodSugarValue > 140 && bloodSugarValue < 199) {
-      setBloodSugarMessage("Your Blood Sugar Level is Prediabetes");
+      setBloodSugarMessage(
+        <p className="text-orange-500 text-sm pt-2">
+          مستوى السكر في الدم هو مقدمات السكري
+        </p>
+      );
     } else {
-      setBloodSugarMessage("Your Blood Sugar Level is Diabetes");
+      setBloodSugarMessage(
+        <p className="text-red-500 text-sm pt-2">
+          مستوى السكر في الدم هو مرض السكري
+        </p>
+      );
     }
 
+<<<<<<< Updated upstream
     bloodPressureValue
       .split("/")
       .trim()
       .map((element, index) => {
         console.log(element[0]);
       });
+=======
+    bloodPressureValue.split("/").map((element, index) => {
+      if (index === 0) {
+        if (element < 120) {
+          setBloodPressureMessage(
+            <p className="text-green-500 text-sm pt-2">
+              مستوى ضغط الدم لديك طبيعي
+            </p>
+          );
+        } else if (element[0] > 90 && element[1] < 120) {
+          setBloodPressureMessage(
+            <p className="text-blue-500 text-sm pt-2">
+              لديك ارتفاع فى مستوى ضغط الدم
+            </p>
+          );
+        } else if (element > 130 && element < 139) {
+          setBloodPressureMessage(
+            <p className="text-orange-500 text-sm pt-2">
+              مستوى ضغط الدم لديك هو المرحلة 1
+            </p>
+          );
+        } else if (element > 140 && element < 180) {
+          setBloodPressureMessage(
+            <p className="text-red-500 text-sm pt-2">
+              مستوى ضغط الدم لديك هو المرحلة الثانية
+            </p>
+          );
+        } else {
+          setBloodPressureMessage(
+            <p className="text-red-700 text-sm pt-2">
+              لديك ارتفاع فى مستوى ضغط الدم
+            </p>
+          );
+        }
+      }
+    });
+>>>>>>> Stashed changes
     if (!formIsValid) {
       return;
     }
-    resetBloodPressure();
-    resetBloodSugar();
-    resetCholestrol();
-    resetFirstName();
+    // resetBloodPressure();
+    // resetBloodSugar();
+    // resetCholestrol();
+    // resetFirstName();
   };
 
   return (
@@ -200,7 +260,7 @@ function HomeModal() {
                   />
                 </div>
                 <button
-                  // disabled={!formIsValid}
+                  disabled={!formIsValid}
                   type="submit"
                   className="contained-btn w-full disabled:opacity-50"
                 >

@@ -7,7 +7,7 @@ const mysql = require("mysql2");
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Rodina!232001",
+  password: "Ajeuw123",
 });
 
 db.execute("create database blood_bank;");

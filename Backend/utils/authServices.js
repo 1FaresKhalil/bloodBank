@@ -163,7 +163,6 @@ async function refreshToken(token, ipAddress) {
   );
 
   const user = await User.findById(decodedToken.userID);
-
   // generate a new refreshToken if there is 1 day left for expiry date
   if ((refreshToken.expires_at - Date.now()) / (1000 * 60 * 60 * 24) < 1) {
     // replace old refresh token with a new one and save
@@ -275,9 +274,10 @@ function basicDetails(user) {
    * @return    {Object} name, email and role of the user
    *
    */
-  const { userId, email, name, password, phone, last_login, created_at, role } =
+  const { userID, email, name, password, phone, last_login, created_at, role } =
     user;
   return {
+    userID,
     name,
     email,
     role,

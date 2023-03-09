@@ -16,7 +16,7 @@ POST  http://localhost:3002/signin
 Content-Type:  application/json
 
 {
-    "email": "fares@gg.com",
+    "email": "abdoshookry2020@gmail.com",
     "password":"12345"
 
 }
@@ -25,8 +25,8 @@ Content-Type:  application/json
 
 POST  http://localhost:3002/refresh-token
 Content-Type:  application/json
-refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njk0MTA0ODcsImV4cCI6MTY3MDAxNTI4N30.zy42foQ7V7fE3QNCAevF6aijN_HNTgvSRVbLJfC3peM
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY5NDEwNDg3LCJleHAiOjE2Njk0MTEzODd9.v7cudXMsTbcTzpETOtEas-nTodr3mYRl66sjxR93lrw
+refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMyLCJlbWFpbCI6ImFiZG9zaG9va3J5MjAyMEBnbWFpbC5jb20iLCJuYW1lIjoiZmdmIiwiaWF0IjoxNjc4MzY5NjQxLCJleHAiOjE2NzgzNzA1NDF9.0HmIR-oqCejxbdzWa1Ze9opUIvj73PA_bNDX7CvlGSE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMyLCJlbWFpbCI6ImFiZG9zaG9va3J5MjAyMEBnbWFpbC5jb20iLCJuYW1lIjoiZmdmIiwiaWF0IjoxNjc4MzY5NTg2LCJleHAiOjE2NzgzNzA0ODZ9.ZkbK7LcEPP9wAuZJ7ukLeFFOn_jaunKT3FDSUymT-5g
 
 ###
 
@@ -84,10 +84,18 @@ Content-Type:  application/json
 
 POST http://localhost:3002/donateBlood/1
 Content-Type:  application/json
-refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njk0MTA0ODcsImV4cCI6MTY3MDAxNTI4N30.zy42foQ7V7fE3QNCAevF6aijN_HNTgvSRVbLJfC3peM
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY5NzY3NzYzLCJleHAiOjE2Njk3Njg2NjN9.FWOQKJKeOT58h28gvEzDjUR5SP_jKd4BO8W1mO5Jjbs
+refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMyLCJyb2xlIjoxLCJpYXQiOjE2NzAxNTM0MzgsImV4cCI6MTY3MDc1ODIzOH0.3k4_s_ZHng71fKHl_CjZerzupWIDx8vBK1DMWj9i7Qk
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMyLCJlbWFpbCI6ImFiZG9zaG9va3J5MjAyMEBnbWFpbC5jb20iLCJuYW1lIjoiZmdmIiwiaWF0IjoxNjcwMTUzNDM4LCJleHAiOjE2NzAxNTQzMzh9.6McpApyCrrJPuYpwPUdpud_jikvDWPfDrLakMgSnxPM
 
 ###
 
-GET http://localhost:3002/verify-donation?token=lk;lk;
+GET http://localhost:3002/verify-donation?token=32fccd7aa17837762a160f2fa0fe91eaf1f2b42163dc95a504e2abcd41f20776714f7b8cdfcb96e2f8b6ecd6565492806005be93142595953e81cc1590df22aa
 Content-Type:  application/json
+
+###
+GET http://localhost:3002/authorize
+Content-Type:  application/json
+refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMyLCJyb2xlIjoxLCJpYXQiOjE2NzgzNjk1ODYsImV4cCI6MTY3ODk3NDM4Nn0.DcP4ci9hOC8hSLwmd5T_qpuFFuOfNYBcIHhqQCK-Jck
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMyLCJlbWFpbCI6ImFiZG9zaG9va3J5MjAyMEBnbWFpbC5jb20iLCJuYW1lIjoiZmdmIiwiaWF0IjoxNjc4MzY5NTg2LCJleHAiOjE2NzgzNzA0ODZ9.ZkbK7LcEPP9wAuZJ7ukLeFFOn_jaunKT3FDSUymT-5g
+
+

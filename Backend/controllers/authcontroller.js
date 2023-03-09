@@ -139,6 +139,18 @@ exports.refreshToken = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.authorize = async (req, res, next) => {
+  try {
+    res.json({ message: "authorized" });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
 function setRefreshToken(res, refreshToken) {
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,

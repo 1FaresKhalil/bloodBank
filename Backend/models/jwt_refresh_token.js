@@ -48,7 +48,6 @@ class jwt_refresh_token {
       "SELECT * FROM jwt_refresh_token WHERE token = ?",
       [token]
     );
-
     return getData(temp);
   }
 
@@ -72,5 +71,4 @@ function getData(temp) {
 
   return obj;
 }
-
 module.exports = jwt_refresh_token;

@@ -100,14 +100,6 @@ function HomeModal() {
       );
     }
 
-<<<<<<< Updated upstream
-    bloodPressureValue
-      .split("/")
-      .trim()
-      .map((element, index) => {
-        console.log(element[0]);
-      });
-=======
     bloodPressureValue.split("/").map((element, index) => {
       if (index === 0) {
         if (element < 120) {
@@ -143,7 +135,6 @@ function HomeModal() {
         }
       }
     });
->>>>>>> Stashed changes
     if (!formIsValid) {
       return;
     }

@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const Role = require("../models/role");
 const Jwt_refresh_token = require("../models/jwt_refresh_token");
+const authServices = require("../utils/authServices");
+
 require("dotenv").config();
 
 module.exports = authorize;
@@ -17,21 +19,24 @@ function authorize(roles = []) {
    */
   return async (req, res, next) => {
     try {
-      const decodedToken = await jwt.verify(
+      let decodedToken = await jwt.verify(
         req.get("Authorization"),
         process.env.ACCESS_TOKEN_SECRET,
 
-        function (err, decoded) {
+        async function (err, decoded) {
           if (err) {
-            const error = new Error("Invalid Token!");
-            error.statusCode = 401;
-            throw error;
+            return "error";
           }
           return decoded;
         }
       );
 
-      const user = await User.joinRole(decodedToken.userID);
+      let tempUser;
+      if (decodedToken == "error") {
+        tempUser = await changeTokens(req, res);
+      }
+
+      const user = await User.joinRole(tempUser.userID);
 
       if (!user || (roles.length && !roles.includes(user.role_name))) {
         // account no longer exists or role not authorized
@@ -54,13 +59,38 @@ function authorize(roles = []) {
   };
 }
 
+async function changeTokens(req, res) {
+  const isValidTokens = await isValidRefreshToken(req.get("refreshToken"));
+
+  if (!isValidTokens) {
+    const error = new Error("Invalid Token!");
+    error.statusCode = 401;
+    throw error;
+  }
+
+  const { refreshToken, jwtToken, ...user } = await authServices.refreshToken(
+    isValidTokens.token,
+    req.ip
+  );
+
+  if (refreshToken !== req.get("refreshToken"))
+    setRefreshToken(req, res, refreshToken);
+
+  setJwtToken(req, res, jwtToken);
+
+  return user;
+}
+
 async function isValidRefreshToken(token) {
   /**
-   * function returns if an object of refresh token data OR false if the token is invalid
+   * function returns an object of refresh token data OR false if the token is invalid
    *@param  {String} token Refresh token
    *@return object of refresh token data OR false if the token is invalid
    */
+
   const refreshToken = await Jwt_refresh_token.findByToken(token);
+
+  if (!refreshToken) return false;
 
   if (
     await Jwt_refresh_token.isActive(
@@ -70,4 +100,24 @@ async function isValidRefreshToken(token) {
   )
     return refreshToken;
   else return false;
+}
+
+function setRefreshToken(req, res, refreshToken) {
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    sameSite: "None",
+    secure: true,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
+  req.headers["refreshToken"] = refreshToken;
+}
+
+function setJwtToken(req, res, jwtToken) {
+  res.cookie("Authorization", jwtToken, {
+    httpOnly: true,
+    sameSite: "None",
+    secure: true,
+    maxAge: 15 * 1000,
+  });
+  req.headers["authorization"] = jwtToken;
 }

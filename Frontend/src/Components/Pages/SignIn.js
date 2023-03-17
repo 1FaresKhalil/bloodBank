@@ -46,11 +46,13 @@ const SignIn = () => {
     const res = await fetch("http://localhost:3002/signin", {
       method: "POST",
       body: JSON.stringify(user),
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
     });
-
+    const data = await res.json();
+    console.log(res);
     return res;
   };
 

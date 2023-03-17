@@ -13,7 +13,7 @@ function authorize(roles = []) {
    * and it adds a user object to the request contains the role (role_name)
    * and the user id
    * and ownsToken (contains refresh token object or false if invalid)
-   * OR returns error if Unauthorized or the access token is invalid
+   * OR returns error if Unauthorized or tokens are invalid
    *@param  {Array} roles the roles that has access to the route (empty if everyone has access)
    *
    */

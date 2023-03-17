@@ -7,6 +7,9 @@ module.exports = {
       Rakkas: ["Rakkas"],
     },
     extend: {
+      backgroundSize: {
+        "200%": "200%",
+      },
       keyframes: {
         rotate: {
           "0%": { transform: "rotate(0deg)" },

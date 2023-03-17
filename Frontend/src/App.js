@@ -11,30 +11,9 @@ import TrackingHealth from "./Components/Pages/TrackingHealth";
 import DonationHistory from "./Components/Pages/DonationHistory";
 import NotFound from "./Components/Pages/NotFound";
 
-import { useEffect, useState } from "react";
 import Settings from "./Components/Pages/Settings";
 
 const App = () => {
-  const users = {
-    email: "75faresd@gg.com",
-    name: "H. Simpson",
-    password: "12345",
-    confirmPassword: "12345",
-  };
-
-  const fetchData = async () => {
-    const res = await fetch("http://localhost:3002/signup", {
-      method: "POST",
-      body: JSON.stringify(users),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
-    console.log(data);
-    return false;
-  };
-  // fetchData();
   return (
     <BrowserRouter>
       <Routes>

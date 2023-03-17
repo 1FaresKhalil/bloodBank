@@ -20,7 +20,7 @@ function authorize(roles = []) {
   return async (req, res, next) => {
     try {
       let decodedToken = await jwt.verify(
-        req.get("Authorization"),
+        req.cookies.Authorization,
         process.env.ACCESS_TOKEN_SECRET,
 
         async function (err, decoded) {
@@ -30,24 +30,24 @@ function authorize(roles = []) {
           return decoded;
         }
       );
-
       let tempUser;
       if (decodedToken == "error") {
         tempUser = await changeTokens(req, res);
+      } else {
+        tempUser = decodedToken;
       }
-
+      // console.log(tempUser);
       const user = await User.joinRole(tempUser.userID);
 
       if (!user || (roles.length && !roles.includes(user.role_name))) {
         // account no longer exists or role not authorized
         return res.status(401).json({ message: "Unauthorized" });
       }
-
       // authentication and authorization successful
       req.user = {};
       req.user.role = user.role_name;
       req.user.id = user.userID;
-      req.user.ownsToken = await isValidRefreshToken(req.get("refreshToken"));
+      req.user.ownsToken = await isValidRefreshToken(req.cookies.refreshToken);
 
       next();
     } catch (err) {
@@ -60,8 +60,9 @@ function authorize(roles = []) {
 }
 
 async function changeTokens(req, res) {
-  const isValidTokens = await isValidRefreshToken(req.get("refreshToken"));
+  const isValidTokens = await isValidRefreshToken(req.cookies.refreshToken);
 
+  //console.log(isValidTokens);
   if (!isValidTokens) {
     const error = new Error("Invalid Token!");
     error.statusCode = 401;
@@ -73,7 +74,7 @@ async function changeTokens(req, res) {
     req.ip
   );
 
-  if (refreshToken !== req.get("refreshToken"))
+  if (refreshToken !== req.cookies.refreshToken)
     setRefreshToken(req, res, refreshToken);
 
   setJwtToken(req, res, jwtToken);
@@ -87,7 +88,6 @@ async function isValidRefreshToken(token) {
    *@param  {String} token Refresh token
    *@return object of refresh token data OR false if the token is invalid
    */
-
   const refreshToken = await Jwt_refresh_token.findByToken(token);
 
   if (!refreshToken) return false;

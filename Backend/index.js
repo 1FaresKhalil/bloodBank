@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 // routes
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");

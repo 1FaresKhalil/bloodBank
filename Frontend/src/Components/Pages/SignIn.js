@@ -12,9 +12,12 @@ import Input from "../UI/Input";
 import useInput from "../../hooks/useInput";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../Store/authSlice";
 
 const SignIn = () => {
   let navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [errorMessage, setErrorMessage] = useState("");
   const isEmail = (value) => value.includes("@");
@@ -50,6 +53,8 @@ const SignIn = () => {
         "Content-Type": "application/json",
       },
     });
+    const data = await res.json();
+    console.log(data);
 
     return res;
   };
@@ -68,7 +73,9 @@ const SignIn = () => {
     }).then((res) => {
       if (res.ok) {
         resetEmail();
+        console.log(res);
         resetPassword();
+        dispatch(authActions.login());
 
         return navigate("/Home");
       } else {

@@ -1,7 +1,7 @@
 import React from "react";
 
 const Input = (props) => {
-  console.log(props);
+  // console.log(props);
   return (
     <>
       <label

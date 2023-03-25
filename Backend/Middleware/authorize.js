@@ -19,6 +19,10 @@ function authorize(roles = []) {
    */
   return async (req, res, next) => {
     try {
+      if (!req.cookies.refreshToken) {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+
       let decodedToken = await jwt.verify(
         req.cookies.Authorization,
         process.env.ACCESS_TOKEN_SECRET,
@@ -30,12 +34,14 @@ function authorize(roles = []) {
           return decoded;
         }
       );
+      // console.log(decodedToken);
       let tempUser;
       if (decodedToken == "error") {
         tempUser = await changeTokens(req, res);
       } else {
         tempUser = decodedToken;
       }
+
       // console.log(tempUser);
       const user = await User.joinRole(tempUser.userID);
 
@@ -43,6 +49,7 @@ function authorize(roles = []) {
         // account no longer exists or role not authorized
         return res.status(401).json({ message: "Unauthorized" });
       }
+
       // authentication and authorization successful
       req.user = {};
       req.user.role = user.role_name;
@@ -50,6 +57,7 @@ function authorize(roles = []) {
       req.user.ownsToken = await isValidRefreshToken(req.cookies.refreshToken);
 
       next();
+      // console.log("gfg");
     } catch (err) {
       if (!err.statusCode) {
         err.statusCode = 500;
@@ -117,7 +125,7 @@ function setJwtToken(req, res, jwtToken) {
     httpOnly: true,
     sameSite: "None",
     secure: true,
-    maxAge: 15 * 1000,
+    maxAge: 15 * 60 * 1000,
   });
   req.headers["authorization"] = jwtToken;
 }

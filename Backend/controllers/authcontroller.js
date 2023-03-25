@@ -142,7 +142,24 @@ exports.refreshToken = async (req, res, next) => {
 
 exports.authorize = async (req, res, next) => {
   try {
-    res.json({ message: "authorized" });
+    let decodedToken = await jwt.verify(
+      req.cookies.Authorization,
+      process.env.ACCESS_TOKEN_SECRET,
+
+      async function (err, decoded) {
+        return decoded;
+      }
+    );
+
+    // console.log(decodedToken);
+    res.json({
+      message: "authorized",
+      user: {
+        email: decodedToken.email,
+        name: decodedToken.name,
+        userID: decodedToken.userID,
+      },
+    });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
@@ -156,6 +173,7 @@ function setRefreshToken(res, refreshToken) {
     httpOnly: true,
     sameSite: "None",
     secure: true,
+
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 }
@@ -165,6 +183,6 @@ function setJwtToken(res, jwtToken) {
     httpOnly: true,
     sameSite: "None",
     secure: true,
-    maxAge: 15 * 1000,
+    maxAge: 15 * 60 * 1000,
   });
 }

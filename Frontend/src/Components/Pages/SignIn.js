@@ -55,7 +55,7 @@ const SignIn = () => {
       },
     });
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
 
     return res;
   };
@@ -74,7 +74,7 @@ const SignIn = () => {
     }).then((res) => {
       if (res.ok) {
         resetEmail();
-        console.log(res);
+        // console.log(res);
         resetPassword();
         dispatch(authActions.login());
 

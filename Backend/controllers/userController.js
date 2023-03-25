@@ -21,8 +21,10 @@ exports.get = async (req, res, next) => {
 
 exports.getProfile = async (req, res, next) => {
   try {
+    // console.log("gg");
     const user = await userServices.getProfile(req);
 
+    // console.log("user");
     res.status(200).json({ message: "user fetched", user });
   } catch (err) {
     if (!err.statusCode) {

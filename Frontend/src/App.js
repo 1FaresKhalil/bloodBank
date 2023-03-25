@@ -1,5 +1,6 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import PrivateRoutes from "./Utils/PrivateRoutes";
+
 import Home from "./Components/Pages/Home";
 import LandingPage from "./Components/Pages/LandingPage";
 import Profile from "./Components/Pages/Profile";
@@ -12,6 +13,11 @@ import DonationHistory from "./Components/Pages/DonationHistory";
 import NotFound from "./Components/Pages/NotFound";
 
 import Settings from "./Components/Pages/Settings";
+import { useDispatch } from "react-redux";
+import { useContext, useEffect, useState } from "react";
+
+import { authActions } from "./Store/authSlice";
+import { AuthContext, AuthDispatchContext } from "./contexts/AuthContext";
 
 const App = () => {
   return (

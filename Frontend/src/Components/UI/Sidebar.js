@@ -40,7 +40,7 @@ function Sidebar({ username }) {
         }`}
       >
         <h2 className="text-[48px] mb-6">
-          بنك <span className="text-white xl:text-red-600">الدم</span>
+          بنك <span className=" text-red-600">الدم</span>
         </h2>
         <div>
           <div className="flex items-center gap-7 mb-8">

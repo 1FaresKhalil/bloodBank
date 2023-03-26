@@ -4,8 +4,6 @@ import { useDispatch } from "react-redux";
 import { useContext, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import Cookies from "js-cookie";
-import { useCookies } from "react-cookie";
 
 import { authActions } from "../Store/authSlice";
 import { AuthContext, AuthDispatchContext } from "../contexts/AuthContext";

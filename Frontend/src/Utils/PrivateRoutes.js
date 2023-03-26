@@ -19,7 +19,7 @@ async function authorize() {
 
   return res;
 }
-const PrivateRoutes = (OriginalComponent) => {
+const PrivateRoutes = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
 

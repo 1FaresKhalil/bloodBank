@@ -150,7 +150,7 @@ exports.authorize = async (req, res, next) => {
         return decoded;
       }
     );
-
+    // console.log(req.cookies);
     // console.log(decodedToken);
     res.json({
       message: "authorized",

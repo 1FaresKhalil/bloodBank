@@ -117,7 +117,8 @@ function setRefreshToken(req, res, refreshToken) {
     secure: true,
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
-  req.headers["refreshToken"] = refreshToken;
+  req.cookies.refreshToken = refreshToken;
+  // req.headers["refreshToken"] = refreshToken;
 }
 
 function setJwtToken(req, res, jwtToken) {
@@ -127,5 +128,6 @@ function setJwtToken(req, res, jwtToken) {
     secure: true,
     maxAge: 15 * 60 * 1000,
   });
-  req.headers["authorization"] = jwtToken;
+  req.cookies.Authorization = jwtToken;
+  // req.headers["Authorization"] = jwtToken;
 }

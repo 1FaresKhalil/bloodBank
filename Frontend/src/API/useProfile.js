@@ -12,7 +12,6 @@ export const useProfile = (userID) => {
   return useQuery(["getProfile", userID], () => fetchProfile(userID), {
     staleTime: 3 * (60 * 1000),
     refetchOnWindowFocus: false,
-    retry: false,
   });
   // const { data: profileData, status: profileStatus } =
 };

@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'config/mixins';
+@import 'config/colors';
+@import 'config/fonts';
+@import 'config/base';
+@import 'config/config';
+@import 'helpers/**.scss';
+@import 'components/**.scss';
+@import 'partials/**.scss';
+@import 'pages/**.scss';

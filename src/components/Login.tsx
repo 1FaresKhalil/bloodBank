@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 type Props = {
   className?: string;
 };
@@ -27,11 +29,11 @@ const Login = (props: Props) => {
           />
           <label
             htmlFor="name"
-            className="absolute left-3 top-[0.4vw] text-[0.729vw] opacity-[0.3] peer-placeholder-shown:text-sm peer-placeholder-shown:text-black peer-placeholder-shown:top-[1.05vw] transition-all peer-focus:top-[.3vw] peer-focus:opacity-100 peer-focus:text-green-700 peer-focus:text-xs lg:pl-[3.1vw]"
+            className="absolute left-3 top-[0.4vw] text-[0.729vw] opacity-[0.3] peer-placeholder-shown:text-sm peer-placeholder-shown:text-black peer-placeholder-shown:top-[1.38vw] transition-all peer-focus:top-[.3vw] peer-focus:opacity-100 peer-focus:text-green-700 peer-focus:text-xs lg:pl-[3.1vw]"
           >
             Username or Email
           </label>
-          <div className="absolute top-[30%] left-[3%]">
+          <div className="absolute top-[35%] left-[3%]">
             <img src="/assets/images/person.svg" alt="" />
           </div>
         </div>
@@ -45,23 +47,58 @@ const Login = (props: Props) => {
           />
           <label
             htmlFor="password"
-            className="absolute left-3 top-[0.4vw] text-[0.729vw] opacity-[0.3] peer-placeholder-shown:text-sm peer-placeholder-shown:text-black peer-placeholder-shown:top-[1.05vw] transition-all peer-focus:top-[.3vw] peer-focus:opacity-100 peer-focus:text-green-700 peer-focus:text-xs lg:pl-[3.1vw]"
+            className="absolute left-3 top-[0.4vw] text-[0.729vw] opacity-[0.3] peer-placeholder-shown:text-sm peer-placeholder-shown:text-black peer-placeholder-shown:top-[1.38vw] transition-all peer-focus:top-[.3vw] peer-focus:opacity-100 peer-focus:text-green-700 peer-focus:text-xs lg:pl-[3.1vw]"
           >
             Password
           </label>
-          <div className="absolute top-[30%] left-[3%]">
+          <div className="absolute top-[35%] left-[3%]">
             <img src="/assets/images/key.svg" alt="" />
           </div>
+          <div className="absolute top-[36%] right-[3%]">
+            <img src="/assets/images/eye.svg" alt="eye" />
+          </div>
+        </div>
+        <div className="remember-me flex justify-between items-center lg:mt-[1.667vw]">
+          <div className="flex gap-[.5vw] items-center">
+            <input
+              className="bg-light-gray !border-none outline-0  checked:!bg-[#00764A]"
+              type="checkbox"
+              id="remember"
+              name="remember"
+            />
+            <label className="font-size-16" htmlFor="remember">
+              Remember Me
+            </label>
+          </div>
+          <Link className="text-[#00764A] font-size-16" href="/forget">
+            Forget Password
+          </Link>
+        </div>
+        <div className="login-button">
+          <button
+            className="bg-green text-white font-bold font-size-24 w-full py-[0.885vw] rounded-[5px] lg:mt-[1.69vw]"
+            onClick={(event) => {
+              event.preventDefault();
+            }}
+          >
+            Login
+          </button>
         </div>
       </form>
-      {/* <div className="login-footet">
+      <div className="login-footer lg:mt-[2.704vw] flex justify-between items-center font-size-16">
         <p>
-          Contact Us: <span>support@tamergroup.com</span>
+          Contact Us:{' '}
+          <span className="text-green font-bold">
+            <a href="mailto:support@tamergroup.com">support@tamergroup.com</a>
+          </span>
         </p>
         <p>
-          Don’t have an account? <span>Register</span>
+          Don’t have an account?{' '}
+          <span className="text-green font-bold">
+            <Link href="/register">Register</Link>
+          </span>
         </p>
-      </div> */}
+      </div>
     </div>
   );
 };

@@ -16,7 +16,7 @@ const Index = () => {
         />
       }
     >
-      <section className="login f main-container grid grid-cols-12 items-center">
+      <section className="login bg- main-container grid grid-cols-12 items-center">
         <div className="col-span-12 lg:col-span-6 relative z-10">
           <div className="mb-4 lg:mb-[3.125vw]">
             <img src="/assets/images/logo1.svg" alt="logo" />

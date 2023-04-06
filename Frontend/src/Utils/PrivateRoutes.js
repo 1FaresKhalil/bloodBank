@@ -1,12 +1,12 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useContext, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 import { authActions } from "../Store/authSlice";
-import { AuthContext, AuthDispatchContext } from "../contexts/AuthContext";
+import { MdOutlineConstruction } from "react-icons/md";
 
 // let isInitial = true;
 async function authorize() {
@@ -30,6 +30,7 @@ const PrivateRoutes = () => {
       retry: false,
     }
   );
+
   // console.log("isAuth");
   // console.log(isAuth);
   useEffect(() => {

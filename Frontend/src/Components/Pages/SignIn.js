@@ -76,7 +76,7 @@ const SignIn = () => {
         resetEmail();
         // console.log(res);
         resetPassword();
-        dispatch(authActions.login());
+        // dispatch(authActions.login());
 
         return navigate("/Home");
       } else {

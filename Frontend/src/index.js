@@ -6,7 +6,7 @@ import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
 import store from "./Store/index";
-import { AuthProvider } from "./contexts/AuthContext";
+// import { AuthProvider } from "./contexts/AuthContext";
 
 const queryClient = new QueryClient();
 
@@ -15,9 +15,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
+        {/* <AuthProvider> */}
+        <App />
+        {/* </AuthProvider> */}
       </QueryClientProvider>
     </Provider>
   </React.StrictMode>

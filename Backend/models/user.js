@@ -51,10 +51,27 @@ class user {
   }
 
   static async updateInfoById(name, city, phone, blood_type, id) {
-    return db.execute(
-      "update user set name = ?, city = ?, phone = ?, blood_type = ?,   where userId = ?",
-      [name, city, phone, blood_type, id]
-    );
+    if (name) {
+      db.execute("update user set name = ? where userId = ?", [name, id]);
+    }
+    if (city) {
+      db.execute("update user set  city = ? where userId = ?", [city, id]);
+    }
+    if (phone) {
+      db.execute("update user set phone = ? where userId = ?", [phone, id]);
+    }
+    if (blood_type) {
+      db.execute("update user set blood_type = ? where userId = ?", [
+        blood_type,
+        id,
+      ]);
+    }
+
+    return;
+    // return db.execute(
+    //   "update user set name = ?, city = ?, phone = ?, blood_type = ?,   where userId = ?",
+    //   [name, city, phone, blood_type, id]
+    // );
   }
 
   static async deleteById(id) {}

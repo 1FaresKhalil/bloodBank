@@ -19,6 +19,7 @@ function authorize(roles = []) {
    */
   return async (req, res, next) => {
     try {
+      // console.log(req.cookies);
       if (!req.cookies.refreshToken) {
         return res.status(401).json({ message: "Unauthorized" });
       }

@@ -16,7 +16,14 @@ router.get("/blood-request/:bloodRequestID", userController.getbloodRequest);
 
 router.post(
   "/blood-request",
+  authorize(),
   [
+    body("blood_type", "Please enter a valid bloodType.")
+      .trim()
+      .not()
+      .isEmpty()
+      .isIn(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"])
+      .withMessage("city cannot be empty."),
     body("city", "Please enter a valid city.")
       .trim()
       .not()

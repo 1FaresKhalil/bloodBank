@@ -40,14 +40,24 @@ async function getbloodRequest(req) {
   return blood_request;
 }
 
-async function postbloodRequest() {
+async function postbloodRequest(req) {
+  // console.log(req.cookies);
   await validateBloodRequest(req);
 
-  const decodedToken = await verifyAccessToken(req.get("Authorization"));
+  const decodedToken = await verifyAccessToken(req.cookies.Authorization);
 
   const requesterID = decodedToken.userID;
+  const blood_type = req.body.blood_type;
   const location = req.body.location;
   const city = req.body.city;
+
+  await User.updateInfoById(
+    undefined,
+    city,
+    undefined,
+    blood_type,
+    decodedToken.userID
+  );
 
   const blood_request = await new Blood_request(requesterID, city, location);
   await blood_request.save();

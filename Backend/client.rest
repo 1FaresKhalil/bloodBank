@@ -47,10 +47,11 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6
 
 POST http://localhost:3002/blood-request
 Content-Type:  application/json
-refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJyb2xlIjoxLCJpYXQiOjE2Njk0MTA0ODcsImV4cCI6MTY3MDAxNTI4N30.zy42foQ7V7fE3QNCAevF6aijN_HNTgvSRVbLJfC3peM
+refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjM1LCJyb2xlIjoxLCJpYXQiOjE2ODA4MTc0MzcsImV4cCI6MTY4MTQyMjIzN30.UfUroPEaHgCxc4zfQiV5As_N5vtLS1KRu7oxgHmkkAg
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjE1LCJlbWFpbCI6ImZhcmVzQGdnLmNvbSIsIm5hbWUiOiJILiBTaW1wc29uIiwiaWF0IjoxNjY5NDEzNjM0LCJleHAiOjE2Njk0MTQ1MzR9.57FQLM_jy86HvJgjgKi1GblQqIrd49X6W2ZEU3L37gs
 
 {
+    "blood_type":"A+",
     "location": "this hospital",
     "city": "alexandria"
 }

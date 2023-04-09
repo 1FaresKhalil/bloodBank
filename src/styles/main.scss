@@ -3,7 +3,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @import 'config/mixins';
 @import 'config/colors';
 @import 'config/fonts';
@@ -14,22 +13,6 @@
 @import 'partials/**.scss';
 @import 'pages/**.scss';
 
-@font-face {
-  font-family: "Rakkas";
-  src: url("/assets/fonts/Rakkas-Regular.eot");
-  src: url("/assets/fonts/Rakkas-Regular.eot?#iefix") format("embedded-opentype"),
-  url("/assets/fonts/Rakkas-Regular.woff2") format("woff2"),
-  url("/assets/fonts/Rakkas-Regular.woff") format("woff"),
-  url("/assets/fonts/Rakkas-Regular.ttf") format("truetype"),
-  url("/assets/fonts/Rakkas-Regular.svg#Rakkas-Regular") format("svg");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-.font-rakkas {
-  font-family: "Rakkas", sans-serif;
-}
 
 @layer base {
   body {

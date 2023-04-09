@@ -17,7 +17,7 @@ const Sidebar: React.FC<SidebarProps> = ({ username = 'احمد محمد' }) => 
   };
   const [showSidebar, setShowSidebar] = useState(false);
 
-  let activeStyle: React.CSSProperties = {};
+  let activeStyle: React.CSSProperties;
 
   if (typeof window !== 'undefined' && window.screen.width < 1024) {
     activeStyle = {
@@ -84,7 +84,7 @@ const Sidebar: React.FC<SidebarProps> = ({ username = 'احمد محمد' }) => 
             </div>
             <div className="flex items-center gap-5">
               <Link
-                href="/home/DonationHistory"
+                href="/home/donation-history"
                 className="flex items-center gap-5 text-xl xl:text-2xl font-semibold"
                 style={
                   isActiveLink('/home/donation-history')

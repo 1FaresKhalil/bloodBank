@@ -27,7 +27,7 @@ const HomeContent = () => {
     هنالك العديد من الأنواع المتوفرة
     ما عبر إدخال بعض النوادر
     أو الكلمات العشوائية`}
-        path={'needblood'}
+        path={'home/need-blood'}
         buttonText={`ابحث عن متبرع`}
       />
 
@@ -39,7 +39,7 @@ const HomeContent = () => {
     هنالك العديد من الأنواع المتوفرة
     ما عبر إدخال بعض النوادر
     أو الكلمات العشوائية`}
-        path={'trackinghealth'}
+        path={'home/tracking-health'}
         buttonText={`تابع صحتك`}
       />
 
@@ -52,7 +52,7 @@ const HomeContent = () => {
     ما عبر إدخال بعض النوادر
     أو الكلمات العشوائية`}
         buttonText={`تبرع الان`}
-        path={'donor'}
+        path={'home/donor'}
       />
     </div>
   );

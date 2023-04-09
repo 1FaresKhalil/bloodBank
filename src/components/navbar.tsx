@@ -12,7 +12,7 @@ const Navbar = () => {
       className="lg:h-auto lg:container px-5 flex mx-auto pt-1 pb-6 rounded-xl lg:py-0 items-center justify-between w-full text-lg text-gray-700 "
     >
       <div className="hidden lg:block">
-        <Link href="/index">
+        <Link href="/home">
           <img src="/assets/images/Logo.png" alt="logo" />
         </Link>
       </div>

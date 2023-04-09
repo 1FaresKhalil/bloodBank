@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,3 +13,53 @@
 @import 'components/**.scss';
 @import 'partials/**.scss';
 @import 'pages/**.scss';
+
+@font-face {
+  font-family: "Rakkas";
+  src: url("/assets/fonts/Rakkas-Regular.eot");
+  src: url("/assets/fonts/Rakkas-Regular.eot?#iefix") format("embedded-opentype"),
+  url("/assets/fonts/Rakkas-Regular.woff2") format("woff2"),
+  url("/assets/fonts/Rakkas-Regular.woff") format("woff"),
+  url("/assets/fonts/Rakkas-Regular.ttf") format("truetype"),
+  url("/assets/fonts/Rakkas-Regular.svg#Rakkas-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-rakkas {
+  font-family: "Rakkas", sans-serif;
+}
+
+@layer base {
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+@layer components {
+  .outlined-btn {
+    @apply rounded-xl border-[1px] border-red-600 px-2 py-1 sm:px-4 sm:py-2 text-red-600 text-base sm:text-lg shadow;
+  }
+
+  .contained-btn {
+    @apply rounded-xl border-[1px] bg-red-600 px-2 py-1 sm:px-4 sm:py-2 text-white text-base sm:text-lg shadow;
+  }
+
+  .outlined-btn:hover {
+    @apply bg-red-700 text-white transition;
+  }
+
+  .contained-btn:hover {
+    @apply bg-red-700 transition;
+  }
+}
+
+tr:nth-child(even) {
+  background-color: #fdf8f8;
+}
+
+.recharts-legend-item-text {
+  padding: 0 5px;
+}
+

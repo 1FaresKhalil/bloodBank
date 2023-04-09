@@ -3,18 +3,22 @@
 *::after {
   box-sizing: border-box;
 }
+
 html,
 body {
   overflow-x: hidden;
   overflow-y: auto;
   scroll-behavior: smooth;
+
   &.no-scroll {
     overflow: hidden !important;
+
     &::-webkit-scrollbar {
       display: none;
     }
   }
 }
+
 body {
   // @extend .corporate-regular;
   position: relative;
@@ -23,6 +27,7 @@ body {
 
   &.is-scroll {
     overflow: hidden;
+
     &::-webkit-scrollbar {
       display: none;
     }
@@ -39,6 +44,7 @@ body {
       z-index: 99;
       background: rgba(35, 34, 33, 0.7);
     }
+
     .topbar {
       a {
         filter: brightness(0.3);
@@ -103,14 +109,21 @@ main {
     padding-left: 24px !important;
   }
 }
+
 .fade#responsibleBusiness {
   opacity: 1 !important;
 }
+
 .label-floating input:not(:placeholder-shown) {
   padding-top: 1.4rem;
 }
+
 .label-floating input:not(:placeholder-shown) ~ label {
   font-size: 0.6rem;
   transition: all 0.2s ease-in-out;
   color: #1f9d55;
+}
+
+ul {
+  list-style: none !important;
 }

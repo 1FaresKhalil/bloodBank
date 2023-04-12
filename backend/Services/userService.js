@@ -42,6 +42,79 @@ class UserService {
             return null;
         }
     }
+
+    async listAllUsers() {
+        try {
+            return await User.find({});
+        } catch (e) {
+            return null;
+        }
+    }
+
+    async getUserById(id) {
+        try {
+            const user = await User.findById(id);
+            if (!user) {
+                return null;
+            } else {
+                return user;
+            }
+        } catch (e) {
+            return null;
+        }
+    }
+
+    async deleteUserById(id) {
+        try {
+            const user = await User.findById(id);
+            if (!user) {
+                return null;
+            } else {
+                return await User.deleteOne({ _id: id });
+            }
+        } catch (e) {
+            return null;
+        }
+    }
+
+    async updateUserById(id, data) {
+        try {
+            const user = await User.findById(id);
+            if (!user) {
+                return null;
+            } else {
+                return await User.updateOne({_id:id},data);
+            }
+        } catch (e) {
+            return null;
+        }
+    }
+
+    async getProfile(token) {
+        try {
+            let data_from_token = await this.extractInfoFromToken(token);
+            let [, id, ] = data_from_token;
+            return await User.findById(id);
+        }catch (e) {
+            return null
+        }
+    }
+
+    async updateUserProfile(token,data) {
+        try {
+            let data_from_token = await this.extractInfoFromToken(token);
+            let [, id, ] = data_from_token;
+            return await User.updateOne({_id:id},data);
+        }catch (e) {
+            return null
+        }
+    }
+
+    async extractInfoFromToken(token){
+        let decoded = jwt.verify(token, 'loginccqq');
+        return [decoded.username, decoded.id, decoded.isAdmin];
+    }
+
 }
 
 module.exports = {

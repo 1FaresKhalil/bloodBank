@@ -131,8 +131,8 @@ body {
   font-size: 32px;
   line-height: 40px;
   @include mdq(all-mobile) {
-    font-size: 22px;
-    line-height: 32px;
+    font-size: 18px;
+    line-height: 28px;
   }
   @include mdq(all-tablet) {
     font-size: 25px;
@@ -205,11 +205,13 @@ body {
   }
 }
 .font-size-22 {
-  font-size: 22px;
-  line-height: 32px;
   @include mdq(all-mobile) {
     font-size: 16px;
     line-height: 26px;
+  }
+  @include mdq(all-tablet) {
+    font-size: 18px;
+    line-height: 28px;
   }
   @include mdq(all-desktop) {
     font-size: 1.14583vw !important;
@@ -243,8 +245,8 @@ body {
   }
 }
 .font-size-16 {
-  font-size: 16px;
-  line-height: 26px;
+  font-size: 12px;
+  line-height: 22px;
   @include mdq(all-desktop) {
     font-size: 0.83vw;
     line-height: 1.354vw;

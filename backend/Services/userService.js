@@ -115,6 +115,15 @@ class UserService {
         return [decoded.username, decoded.id, decoded.isAdmin];
     }
 
+    async forgotPassword(email,resetLink) {
+        // const user = await User.findOne({"username" : email});
+        // if(!user){
+        //     return "user not found"
+        // }else {
+        //
+        //
+        // }
+    }
 }
 
 module.exports = {

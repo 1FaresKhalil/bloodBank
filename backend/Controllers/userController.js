@@ -127,11 +127,15 @@ class UserController {
         }
     }
 
-    forgotPassword() {
+    async forgotPassword(req,res) {
+        // let email = req.body.email;
+        // const token = crypto.randomBytes(20).toString('hex');
+        // const resetLink = `http://${req.headers.host}/admin/reset-password/${token}`;
+        // let result = await service.forgotPassword(email,resetLink);
 
     }
 
-    resetPassword() {
+    async resetPassword(req,res) {
 
     }
 }

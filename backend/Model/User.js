@@ -14,6 +14,10 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    bloodType:{
+        type: String,
+        required: true,
+    },
     isAdmin: Boolean,
     age: Number,
     address: String,

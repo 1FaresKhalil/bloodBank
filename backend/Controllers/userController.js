@@ -128,15 +128,38 @@ class UserController {
     }
 
     async forgotPassword(req,res) {
-        // let email = req.body.email;
-        // const token = crypto.randomBytes(20).toString('hex');
-        // const resetLink = `http://${req.headers.host}/admin/reset-password/${token}`;
-        // let result = await service.forgotPassword(email,resetLink);
-
+        let email = req.body.username;
+        let result = await service.forgotPassword(req,email);
+        if(result === "user not found"){
+            res.status(404).json({
+                "message": "user updated successfully"
+            })
+        }else if (result.message === "Email sent"){
+            res.json(result)
+        }else{
+            res.json({
+                "message": "Error sending email"
+            })
+        }
     }
 
     async resetPassword(req,res) {
-
+        let resetToken = req.params.token;
+        let {username, oldPassword, newPassword} = req.body;
+        let result = await service.resetPassword(resetToken,username,oldPassword,newPassword);
+        if (result === null){
+            res.json({
+                "message": "Time out , the link is expired"
+            })
+        }else if (result === "the old password wrong"){
+            res.json({
+                "message": "The old password is wrong"
+            })
+        }else{
+            res.json({
+                "message": "The password retested successfully"
+            })
+        }
     }
 }
 module.exports = {

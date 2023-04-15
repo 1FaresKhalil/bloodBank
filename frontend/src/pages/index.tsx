@@ -10,6 +10,7 @@ const Index = () => {
   return (
     <Main meta={<Meta title="Blood Bank" description="blood bank app" />}>
       <LandingHeader />
+      <div>about</div>
     </Main>
   );
 };

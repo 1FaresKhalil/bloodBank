@@ -102,7 +102,7 @@ function ResponsiveAppBar(props: NavbarProps) {
                   <Typography textAlign="center">
                     <Link
                       className="text-black"
-                      href={`home/${page.toLowerCase().replace(' ', '-')}`}
+                      href={`/home/${page.toLowerCase().replace(' ', '-')}`}
                     >
                       {page}
                     </Link>
@@ -135,7 +135,7 @@ function ResponsiveAppBar(props: NavbarProps) {
               <Link
                 className="my-2 mx-3 text-white block"
                 key={page}
-                href={`home/${page.toLowerCase().replace(' ', '-')}`}
+                href={`/home/${page.toLowerCase().replace(' ', '-')}`}
                 onClick={handleCloseNavMenu}
               >
                 {page}

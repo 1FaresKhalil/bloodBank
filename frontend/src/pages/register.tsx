@@ -17,6 +17,7 @@ import Grid from '@mui/material/Grid';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
@@ -42,19 +43,29 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [bloodType, setBloodType] = React.useState('');
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    try {
+      // Make POST request using Axios
+      const response = await axios.post('http://localhost:8000/admin/signup', {
+        name: data.get('name'),
+        bloodType: bloodType as string,
+        username: data.get('email'),
+        password: data.get('password'),
+      });
+      console.log(response.data); // Handle response data
+    } catch (error) {
+      console.error(error); // Handle error
+    }
   };
-  const [bloodType, setBloodType] = React.useState('');
 
   const handleChange = (event: SelectChangeEvent) => {
     setBloodType(event.target.value as string);
+    // console.log(bloodType);
   };
+  React.useEffect(() => {}, []);
   return (
     <ThemeProvider theme={theme}>
       <div className="flex flex-col justify-between h-screen ">
@@ -85,24 +96,13 @@ export default function SignUp() {
               sx={{ mt: 3 }}
             >
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    autoComplete="given-name"
-                    name="firstName"
-                    required
-                    fullWidth
-                    id="firstName"
-                    label="First Name"
-                    autoFocus
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12}>
                   <TextField
                     required
                     fullWidth
-                    id="lastName"
-                    label="Last Name"
-                    name="lastName"
+                    id="name"
+                    label="Name"
+                    name="name"
                     autoComplete="family-name"
                   />
                 </Grid>

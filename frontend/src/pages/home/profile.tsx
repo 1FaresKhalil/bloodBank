@@ -10,6 +10,7 @@ import * as React from 'react';
 import useSWR from 'swr';
 
 import Navbar from '@/components/app-bar';
+import ErrorPage from '@/components/error';
 
 function Profile() {
   // Fetch profile data using SWR
@@ -31,8 +32,8 @@ function Profile() {
   );
 
   if (error) {
-    // Handle error
-    console.error(error);
+    return <ErrorPage />;
+    // console.error(error);
   }
 
   return (

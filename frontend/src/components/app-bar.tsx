@@ -1,9 +1,9 @@
-import AdbIcon from '@mui/icons-material/Adb';
+// import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -20,6 +20,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 type NavbarProps = {
   username: string;
 };
+// logout
 
 function ResponsiveAppBar(props: NavbarProps) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -98,39 +99,54 @@ function ResponsiveAppBar(props: NavbarProps) {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center">
+                    <Link
+                      className="text-black"
+                      href={`home/${page.toLowerCase().replace(' ', '-')}`}
+                    >
+                      {page}
+                    </Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
-            variant="h5"
+            variant="h6"
             noWrap
-            component="a"
-            href=""
+            component="div"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: 'arial',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            LOGO
+            <Link className="text-white" href={`/home`}>
+              Blood Bank
+            </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
+              <Link
+                className="my-2 mx-3 text-white block"
                 key={page}
+                href={`home/${page.toLowerCase().replace(' ', '-')}`}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
-              </Button>
+              </Link>
+              // <Button
+              //   key={page}
+              //   onClick={handleCloseNavMenu}
+              //   sx={{ my: 2, color: 'white', display: 'block' }}
+              // >
+              //   {page}
+              // </Button>
             ))}
           </Box>
 
@@ -162,7 +178,7 @@ function ResponsiveAppBar(props: NavbarProps) {
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography
-                    className="block w-full"
+                    className="block w-full text-black"
                     component={Link}
                     href={`/home/${setting.toLowerCase()}`}
                     textAlign="center"

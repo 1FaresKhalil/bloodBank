@@ -20,6 +20,7 @@ import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
+import useRouter from 'next/router';
 import * as React from 'react';
 
 function Copyright(props: any) {
@@ -43,6 +44,7 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const router = useRouter;
   const [bloodType, setBloodType] = React.useState('');
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -51,11 +53,15 @@ export default function SignUp() {
       // Make POST request using Axios
       const response = await axios.post('http://localhost:8000/admin/signup', {
         name: data.get('name'),
-        bloodType: bloodType as string,
+        bloodType: bloodType.toLowerCase() as string,
         username: data.get('email'),
         password: data.get('password'),
       });
-      console.log(response.data); // Handle response data
+      // console.log(response);
+      if (response.data.message === 'Successful signup') {
+        router.push('/login');
+      }
+      // console.log(response.data); // Handle response data
     } catch (error) {
       console.error(error); // Handle error
     }
@@ -169,7 +175,7 @@ export default function SignUp() {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="#">Already have an account? Sign in</Link>
+                  <Link href="/login">Already have an account? Sign in</Link>
                 </Grid>
               </Grid>
             </Box>

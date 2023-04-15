@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
+import useRouter from 'next/router';
 import * as React from 'react';
 
 function Copyright(props: any) {
@@ -34,6 +35,7 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function Login() {
+  const router = useRouter;
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -44,10 +46,10 @@ export default function Login() {
         password: data.get('password'),
       });
       localStorage.setItem('token', response.data.result.token);
-
-      console.log(response.data); // Handle response data
+      router.push('/home');
+      // console.log(response.data); // Handle response data
     } catch (error) {
-      console.error(error); // Handle error
+      // console.error(error); // Handle error
     }
   };
 
@@ -116,7 +118,9 @@ export default function Login() {
                   <Link href="#">Forgot password?</Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#">{"Don't have an account? Sign Up"}</Link>
+                  <Link href="/register">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
                 </Grid>
               </Grid>
             </Box>

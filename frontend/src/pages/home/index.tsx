@@ -4,12 +4,14 @@
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 // import Typography from '@mui/material/Typography';
 import axios from 'axios';
+// import Link from 'next/link';
 // import Image from 'next/image';
 // import Link from 'next/link';
 import * as React from 'react';
 import useSWR from 'swr';
 
 import Navbar from '@/components/app-bar';
+import ErrorPage from '@/components/error';
 
 function Home() {
   // Fetch profile data using SWR
@@ -31,8 +33,8 @@ function Home() {
   );
 
   if (error) {
-    // Handle error
-    console.error(error);
+    // console.error(error);
+    return <ErrorPage />;
   }
 
   return <Navbar username={data?.user?.username} />;

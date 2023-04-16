@@ -16,7 +16,7 @@ import ErrorPage from '@/components/error';
 function Home() {
   // Fetch profile data using SWR
   const { data, error } = useSWR(
-    'http://localhost:8000/admin/profile',
+    'https://gp-backend-topaz.vercel.app//admin/profile',
     async (url) => {
       const token = localStorage.getItem('token');
       if (!token) {

@@ -12,7 +12,7 @@ const Logout = () => {
   }, 1000);
 
   // // Invalidate SWR cache
-  // const { mutate } = useSWR('http://localhost:8000/admin/profile', (url) =>
+  // const { mutate } = useSWR('https://gp-backend-topaz.vercel.app//admin/profile', (url) =>
   //   fetch(url).then((res) => res.json())
   // );
 

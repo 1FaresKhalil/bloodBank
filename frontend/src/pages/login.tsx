@@ -41,10 +41,13 @@ export default function Login() {
     const data = new FormData(event.currentTarget);
     try {
       // Make POST request using Axios
-      const response = await axios.post('http://localhost:8000/admin/login', {
-        username: data.get('email'),
-        password: data.get('password'),
-      });
+      const response = await axios.post(
+        'https://gp-backend-topaz.vercel.app//admin/login',
+        {
+          username: data.get('email'),
+          password: data.get('password'),
+        }
+      );
       localStorage.setItem('token', response.data.result.token);
       router.push('/home');
       // console.log(response.data); // Handle response data

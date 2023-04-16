@@ -165,10 +165,12 @@ class UserService {
         }
     }
 
-    async resetPassword(resetToken, username, oldPassword, newPassword) {
+    async resetPassword(resetToken, username, newPassword) {
         try {
             const user = await User.findOne({"username": username});
-            if (await bcrypt.compare(oldPassword, user.password)) {
+            if(!user){
+                return "The user not found";
+            }else{
                 try{
                     let decoded = jwt.verify(resetToken, "resettoken");
                     newPassword = await bcrypt.hash(newPassword, 10);
@@ -176,8 +178,24 @@ class UserService {
                 }catch (e) {
                     return null
                 }
+            }
+        }catch (e) {
+            return null;
+        }
+    }
+
+    async changePassword(username, oldPassword, newPassword) {
+        try{
+            const user = await User.findOne({"username": username});
+            if(!user){
+                return "The user not found";
             }else{
-                return "the old password wrong";
+                if (await bcrypt.compare(oldPassword, user.password)){
+                    newPassword = await bcrypt.hash(newPassword, 10);
+                    return User.updateOne({"username": username}, {password: newPassword});
+                }else{
+                    return "The old password wrong";
+                }
             }
         }catch (e) {
             return null;

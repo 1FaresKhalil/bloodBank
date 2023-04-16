@@ -14,6 +14,7 @@ function adminRoutes(adminApp) {
     adminApp.get("/profile", user_controller.getProfile);
     adminApp.post('/forgotPassword',user_controller.forgotPassword);
     adminApp.post('/resetPassword/:token',user_controller.resetPassword);
+    adminApp.post('/changePassword',user_controller.changePassword);
     //blood requests
     adminApp.post('/bloodRequest',blood_request_controller.makeBloodRequest);
     adminApp.put('/bloodRequest/done/:id',blood_request_controller.markBloodRequestAsDone);

@@ -132,7 +132,7 @@ class UserController {
         let result = await service.forgotPassword(req,email);
         if(result === "user not found"){
             res.status(404).json({
-                "message": "user updated successfully"
+                "message": "user not found"
             })
         }else if (result.message === "Email sent"){
             res.json(result)
@@ -145,19 +145,41 @@ class UserController {
 
     async resetPassword(req,res) {
         let resetToken = req.params.token;
-        let {username, oldPassword, newPassword} = req.body;
-        let result = await service.resetPassword(resetToken,username,oldPassword,newPassword);
+        let {username, newPassword} = req.body;
+        let result = await service.resetPassword(resetToken,username,newPassword);
         if (result === null){
             res.json({
                 "message": "Time out , the link is expired"
+            })
+        }else if(result === "The user not found"){
+            res.status(404).json({
+                "message": "The user not found"
+            })
+        } else{
+            res.json({
+                "message": "The password retested successfully"
+            })
+        }
+    }
+
+    async changePassword(req ,res) {
+        let {username, oldPassword, newPassword} = req.body;
+        let result = await service.changePassword(username,oldPassword,newPassword);
+        if (result === null){
+            res.json({
+                "message": "Their is error in changing password"
             })
         }else if (result === "the old password wrong"){
             res.json({
                 "message": "The old password is wrong"
             })
+        }else if (result === "The user not found"){
+            res.status(404).json({
+                "message": "The user not found"
+            })
         }else{
             res.json({
-                "message": "The password retested successfully"
+                "message": "The password changed successfully"
             })
         }
     }

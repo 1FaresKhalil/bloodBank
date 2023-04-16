@@ -10,6 +10,7 @@ function WebsiteRoutes(websiteApp) {
     websiteApp.put("/user/profile/update", user_controller.updateUserProfile);
     websiteApp.post('/forgotPassword',user_controller.forgotPassword);
     websiteApp.post('/resetPassword',user_controller.resetPassword);
+    websiteApp.post('/changePassword',user_controller.changePassword);
     //blood requests
     websiteApp.post('/bloodRequest',blood_request_controller.makeBloodRequest);
     websiteApp.put('/bloodRequest/done/:id',blood_request_controller.markBloodRequestAsDone);

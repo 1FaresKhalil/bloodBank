@@ -1,22 +1,23 @@
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
 
 const Logout = () => {
   const router = useRouter();
 
-  // Clear token from localStorage
-  localStorage.removeItem('token');
+  // // Clear token from localStorage
+  // localStorage.removeItem('token');
 
-  // Redirect to home page after clearing token
-  router.push('/');
+  // // Redirect to home page after clearing token
+  setTimeout(() => {
+    router.replace('/');
+  }, 1000);
 
-  // Invalidate SWR cache
-  const { mutate } = useSWR('http://localhost:8000/admin/profile', (url) =>
-    fetch(url).then((res) => res.json())
-  );
+  // // Invalidate SWR cache
+  // const { mutate } = useSWR('http://localhost:8000/admin/profile', (url) =>
+  //   fetch(url).then((res) => res.json())
+  // );
 
-  // Call mutate function to refresh data and trigger re-render of components that use this data
-  mutate();
+  // // Call mutate function to refresh data and trigger re-render of components that use this data
+  // mutate();
 
   return (
     <div>

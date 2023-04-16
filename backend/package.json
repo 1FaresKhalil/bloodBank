@@ -17,5 +17,8 @@
     "mongoose": "^7.0.3",
     "nodemailer": "^6.9.1",
     "nodemailer-sendgrid-transport": "^0.2.0"
+  },
+  "engines": {
+    "node": "v16.15.0"
   }
 }

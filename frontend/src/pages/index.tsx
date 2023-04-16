@@ -30,16 +30,17 @@ const Index = () => {
             learn more about donating blood and making a difference in our
             community.
           </p>
-          <Link href="/register">
-            <Button
-              variant="contained"
-              color="error"
-              href="/register"
-              className="text-lg sm:text-lg"
-            >
-              Join Us
-            </Button>
-          </Link>
+
+          <Button
+            variant="contained"
+            color="error"
+            className="text-lg sm:text-lg"
+          >
+            <Link className="text-white" href="/register">
+              {' '}
+              Join Us{' '}
+            </Link>
+          </Button>
         </div>
       </section>
     </Main>

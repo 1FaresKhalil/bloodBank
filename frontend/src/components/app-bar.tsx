@@ -15,7 +15,13 @@ import Link from 'next/link';
 // import Image from 'next/image';
 import * as React from 'react';
 
-const pages = ['Blood Request', 'Donate', 'Healthy Meals', 'Chat'];
+const pages = [
+  'Blood Request',
+  'Donate',
+  'Healthy Meals',
+  'Tracking Health',
+  'Chat',
+];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 type NavbarProps = {
   username: string;

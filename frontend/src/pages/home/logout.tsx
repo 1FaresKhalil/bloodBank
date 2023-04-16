@@ -3,16 +3,24 @@ import { useRouter } from 'next/router';
 const Logout = () => {
   const router = useRouter();
 
-  // Check if localStorage is defined before using it
-  if (typeof window !== 'undefined' && localStorage) {
-    localStorage.removeItem('token');
-  }
+  const handleLogout = async (): Promise<void> => {
+    // Perform any necessary token removal or cleanup here
+    if (typeof window !== 'undefined' && localStorage) {
+      localStorage.removeItem('token');
+    }
 
-  setTimeout(() => {
-    router.replace('/');
-  }, 1000);
+    // Redirect to home page
+    await router.replace('/');
+  };
 
-  // Rest of your code
+  // Call handleLogout during render to perform the logout logic
+  handleLogout();
+
+  return (
+    <div>
+      <div>Signing out...</div>
+    </div>
+  );
 };
 
 export default Logout;

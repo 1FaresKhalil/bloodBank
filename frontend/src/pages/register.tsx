@@ -51,12 +51,15 @@ export default function SignUp() {
     const data = new FormData(event.currentTarget);
     try {
       // Make POST request using Axios
-      const response = await axios.post('http://localhost:8000/admin/signup', {
-        name: data.get('name'),
-        bloodType: bloodType.toLowerCase() as string,
-        username: data.get('email'),
-        password: data.get('password'),
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_DB_URI}/admin/signup`,
+        {
+          name: data.get('name'),
+          bloodType: bloodType.toLowerCase() as string,
+          username: data.get('email'),
+          password: data.get('password'),
+        }
+      );
       // console.log(response);
       if (response.data.message === 'Successful signup') {
         router.push('/login');

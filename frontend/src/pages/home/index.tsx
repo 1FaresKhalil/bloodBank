@@ -16,7 +16,7 @@ import ErrorPage from '@/components/error';
 function Home() {
   // Fetch profile data using SWR
   const { data, error } = useSWR(
-    'http://localhost:8000/admin/profile',
+    `${process.env.NEXT_PUBLIC_DB_URI}/admin/profile`,
     async (url) => {
       const token = localStorage.getItem('token');
       if (!token) {

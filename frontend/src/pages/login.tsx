@@ -40,11 +40,15 @@ export default function Login() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     try {
+      // console.log(process.env.NEXT_PUBLIC_DB_URI);
       // Make POST request using Axios
-      const response = await axios.post('http://localhost:8000/admin/login', {
-        username: data.get('email'),
-        password: data.get('password'),
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_DB_URI}/admin/login`,
+        {
+          username: data.get('email'),
+          password: data.get('password'),
+        }
+      );
       localStorage.setItem('token', response.data.result.token);
       router.push('/home');
       // console.log(response.data); // Handle response data

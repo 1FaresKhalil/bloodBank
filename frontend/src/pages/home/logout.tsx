@@ -4,7 +4,7 @@ const Logout = () => {
   const router = useRouter();
 
   // // Clear token from localStorage
-  // localStorage.removeItem('token');
+  localStorage.removeItem('token');
 
   // // Redirect to home page after clearing token
   setTimeout(() => {

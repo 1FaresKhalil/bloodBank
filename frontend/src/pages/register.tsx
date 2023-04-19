@@ -74,7 +74,7 @@ export default function SignUp() {
     setBloodType(event.target.value as string);
     // console.log(bloodType);
   };
-  React.useEffect(() => {}, []);
+
   return (
     <ThemeProvider theme={theme}>
       <div className="flex flex-col justify-between h-screen ">

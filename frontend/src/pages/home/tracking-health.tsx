@@ -115,7 +115,7 @@ const TrackingHealth = () => {
           Authorization: `${token}`,
         },
       });
-      console.log(response.data.user);
+      // console.log(response.data.user);
       return response.data;
     }
   );

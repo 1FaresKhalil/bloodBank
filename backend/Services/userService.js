@@ -12,6 +12,7 @@ class UserService {
             const user = await User.findOne({"username": data.username});
             if (!user) {
                 data.password = await bcrypt.hash(data.password, 10);
+                data.verified = false;
                 const new_user = new User(data);
                 await new_user.save();
                 return true;
@@ -134,9 +135,9 @@ class UserService {
             const code = crypto.randomBytes(1).toString('hex');
             let token = jwt.sign({code}, 'resettoken', {expiresIn: '60m'});
 
-            if(user.isAdmin === true){
+            if (user.isAdmin === true) {
                 resetLink = `http://${req.headers.host}/admin/resetPassword/${token}`;
-            }else{
+            } else {
                 resetLink = `http://${req.headers.host}/website/resetPassword/${token}`;
             }
 
@@ -155,8 +156,8 @@ class UserService {
             try {
                 await this.transporter.sendMail(mailOptions);
                 return {
-                    message:'Email sent',
-                    resetLink :resetLink
+                    message: 'Email sent',
+                    resetLink: resetLink
                 };
             } catch (error) {
                 console.error(error);
@@ -168,37 +169,52 @@ class UserService {
     async resetPassword(resetToken, username, newPassword) {
         try {
             const user = await User.findOne({"username": username});
-            if(!user){
+            if (!user) {
                 return "The user not found";
-            }else{
-                try{
+            } else {
+                try {
                     let decoded = jwt.verify(resetToken, "resettoken");
                     newPassword = await bcrypt.hash(newPassword, 10);
                     return User.updateOne({"username": username}, {password: newPassword});
-                }catch (e) {
+                } catch (e) {
                     return null
                 }
             }
-        }catch (e) {
+        } catch (e) {
             return null;
         }
     }
 
     async changePassword(username, oldPassword, newPassword) {
-        try{
+        try {
             const user = await User.findOne({"username": username});
-            if(!user){
+            if (!user) {
                 return "The user not found";
-            }else{
-                if (await bcrypt.compare(oldPassword, user.password)){
+            } else {
+                if (await bcrypt.compare(oldPassword, user.password)) {
                     newPassword = await bcrypt.hash(newPassword, 10);
                     return User.updateOne({"username": username}, {password: newPassword});
-                }else{
+                } else {
                     return "The old password wrong";
                 }
             }
-        }catch (e) {
+        } catch (e) {
             return null;
+        }
+    }
+
+    async accountVerification(token) {
+        try {
+            let data_from_token = await this.extractInfoFromToken(token);
+            let [, id,] = data_from_token;
+            let user = await User.findById(id);
+            if (!user) {
+                return "user not found";
+            } else {
+                return await User.updateOne({_id: id}, {verified: true});
+            }
+        } catch (e) {
+            return null
         }
     }
 }

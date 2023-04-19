@@ -11,6 +11,7 @@ function WebsiteRoutes(websiteApp) {
     websiteApp.post('/forgotPassword',user_controller.forgotPassword);
     websiteApp.post('/resetPassword',user_controller.resetPassword);
     websiteApp.post('/changePassword',user_controller.changePassword);
+    websiteApp.put('/verification',user_controller.accountVerification);
     //blood requests
     websiteApp.post('/bloodRequest',blood_request_controller.makeBloodRequest);
     websiteApp.put('/bloodRequest/done/:id',blood_request_controller.markBloodRequestAsDone);

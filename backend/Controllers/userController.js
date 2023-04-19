@@ -183,6 +183,24 @@ class UserController {
             })
         }
     }
+
+    async accountVerification(req,res) {
+        let token = req.headers["authorization"];
+        let result = await service.accountVerification(token);
+        if(result === null){
+            res.json({
+                "message": "account verification fail"
+            })
+        }else if (result === "user not found"){
+            res.json({
+                "message": "user not found"
+            })
+        }else{
+            res.json({
+                "message": "account verified successfully"
+            })
+        }
+    }
 }
 module.exports = {
     UserController

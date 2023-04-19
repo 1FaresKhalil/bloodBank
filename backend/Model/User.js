@@ -24,6 +24,7 @@ const UserSchema = new Schema({
     nationalId: String,
     gender: String,
     phone: String,
+    verified: Boolean,
 });
 
 module.exports = mongoose.model('users',UserSchema);

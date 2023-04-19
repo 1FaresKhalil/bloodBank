@@ -39,7 +39,11 @@ class BloodRequestController {
             res.json({
                 message :"Their is no blood request found"
             })
-        }else{
+        }else if(result === "you can't update of request done"){
+            res.json({
+                message :"You can't update information of request done"
+            })
+        } else{
             res.json({
                 message :"Blood request updated successfully"
             })
@@ -52,6 +56,10 @@ class BloodRequestController {
         if(result === null){
             res.json({
                 message :"Their is no blood request found"
+            })
+        }else if(result === "you can't delete request done"){
+            res.json({
+                message :"You can't delete request done"
             })
         }else{
             res.json({

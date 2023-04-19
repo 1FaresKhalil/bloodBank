@@ -50,8 +50,7 @@ export default function SignInSide() {
         },
         {
           headers: {
-            Authorization: token, // Replace with your actual access token
-            // You may need to adjust the key and value names depending on your API's requirements
+            Authorization: token,
           },
         }
       );

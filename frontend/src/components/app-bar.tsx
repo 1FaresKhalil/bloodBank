@@ -83,7 +83,7 @@ function ResponsiveAppBar(props: NavbarProps) {
             <ListItemButton
               sx={{ textAlign: 'center' }}
               LinkComponent={Link}
-              href={item.toLowerCase().replace(' ', '-')}
+              href={`/home/${item.toLowerCase().replace(' ', '-')}`}
             >
               <ListItemText
                 className={

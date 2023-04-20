@@ -45,7 +45,7 @@ function Home() {
       <Navbar username={data?.user?.username} />
       <section
         style={{ backgroundImage: "url('/assets/images/header-bg.png')" }}
-        className="h-[100vh] "
+        className="h-[100vh] bg-no-repeat bg-cover bg-center "
       ></section>
       <div className="absolute bottom-0 left-1/2 translate-x-[-50%]">
         <Footer />

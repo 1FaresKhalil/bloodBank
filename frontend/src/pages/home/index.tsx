@@ -12,6 +12,9 @@ import useSWR from 'swr';
 
 import Navbar from '@/components/app-bar';
 import ErrorPage from '@/components/error';
+import Footer from '@/components/footer';
+import { Meta } from '@/layouts/Meta';
+import { Main } from '@/templates/Main';
 
 function Home() {
   // Fetch profile data using SWR
@@ -37,7 +40,18 @@ function Home() {
     return <ErrorPage />;
   }
 
-  return <Navbar username={data?.user?.username} />;
+  return (
+    <Main meta={<Meta title="Home" description="homepage" />}>
+      <Navbar username={data?.user?.username} />
+      <section
+        style={{ backgroundImage: "url('/assets/images/header-bg.png')" }}
+        className="h-[100vh] "
+      ></section>
+      <div className="absolute bottom-0 left-1/2 translate-x-[-50%]">
+        <Footer />
+      </div>
+    </Main>
+  );
 }
 
 export default Home;

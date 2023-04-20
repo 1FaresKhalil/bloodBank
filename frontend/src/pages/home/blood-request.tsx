@@ -19,7 +19,9 @@ import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import * as React from 'react';
+import useSWR from 'swr';
 
+import Navbar from '@/components/app-bar';
 import ErrorPage from '@/components/error';
 
 const theme = createTheme();
@@ -61,11 +63,29 @@ export default function SignInSide() {
       console.error(error); // Handle error here
     }
   };
-  if (!token) {
+  const { data, error } = useSWR(
+    `${process.env.NEXT_PUBLIC_DB_URI}/admin/profile`,
+    async (url) => {
+      if (!token) {
+        throw new Error('Token not found');
+      }
+      const response = await axios.get(url, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+      // console.log(response.data.user);
+      return response.data;
+    }
+  );
+
+  if (error) {
     return <ErrorPage />;
+    // console.error(error);
   }
   return (
     <ThemeProvider theme={theme}>
+      <Navbar username={data?.user?.username} />
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid

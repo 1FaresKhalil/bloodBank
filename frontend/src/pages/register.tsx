@@ -191,7 +191,7 @@ export default function SignUp() {
           <div>
             <Copyright
               className={'my-[20px] text-black font-size-16 '}
-              sx={{ mt: 5 }}
+              sx={{ mt: 5, mb: 2 }}
             />
           </div>
         </div>

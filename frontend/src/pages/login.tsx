@@ -136,7 +136,7 @@ export default function Login() {
           </Container>
           <Copyright
             className="text-black font-size-16"
-            sx={{ mt: 8, mb: 4 }}
+            sx={{ mt: 8, mb: 2 }}
           />
         </div>
       </Main>

@@ -1,5 +1,5 @@
-import { Button } from "@mui/material";
-import Link from "next/link";
+import { Button } from '@mui/material';
+import Link from 'next/link';
 
 const LandingAbout = () => {
   return (
@@ -30,8 +30,7 @@ const LandingAbout = () => {
           className="text-lg sm:text-lg"
         >
           <Link className="text-white" href="/register">
-            {' '}
-            Join Us{' '}
+            Join Us
           </Link>
         </Button>
       </div>

@@ -40,8 +40,8 @@ function Donate() {
 
   // Fetch blood request data using SWR
 
-  const { data: bloodRequestData, error: bloodRequestError } = useSWR(
-    'http://localhost:8000/admin/bloodRequest',
+  const { data: bloodRequestData } = useSWR(
+    `${process.env.NEXT_PUBLIC_DB_URI}/admin/bloodRequest`,
     async (url) => {
       const token = localStorage.getItem('token');
       if (!token) {
@@ -57,7 +57,7 @@ function Donate() {
     }
   );
 
-  if (profileError || bloodRequestError) {
+  if (profileError) {
     return <ErrorPage />;
   }
 

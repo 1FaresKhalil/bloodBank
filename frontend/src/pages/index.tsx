@@ -14,7 +14,7 @@ const Index = () => {
   if (typeof window !== 'undefined' && localStorage) {
     token = localStorage.getItem('token');
   }
-  const { data, error } = useSWR(
+  const { error } = useSWR(
     `${process.env.NEXT_PUBLIC_DB_URI}/admin/profile`,
     async (url) => {
       if (!token) {
@@ -45,7 +45,7 @@ const Index = () => {
   }
   return (
     <Main meta={<Meta title="Blood Bank" description="blood bank app" />}>
-      <div>redirecting... {data?.user?.username}</div>
+      <div>redirecting...</div>
     </Main>
   );
 };

@@ -38,7 +38,7 @@ function Home() {
 
   if (error) {
     // console.error(error);
-    return <Loading />;
+    return <Loading text="Loading" />;
   }
 
   return (

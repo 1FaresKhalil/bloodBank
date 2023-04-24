@@ -5,6 +5,7 @@ import useSWR from 'swr';
 import Footer from '@/components/footer';
 import LandingAbout from '@/components/landing-about';
 import LandingHeader from '@/components/landing-header';
+import Loading from '@/components/loading';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
 
@@ -45,7 +46,7 @@ const Index = () => {
   }
   return (
     <Main meta={<Meta title="Blood Bank" description="blood bank app" />}>
-      <div>redirecting...</div>
+      <Loading text="Loading..." />
     </Main>
   );
 };

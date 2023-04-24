@@ -11,8 +11,9 @@ import * as React from 'react';
 import useSWR from 'swr';
 
 import Navbar from '@/components/app-bar';
-import ErrorPage from '@/components/error';
+// import ErrorPage from '@/components/error';
 import Footer from '@/components/footer';
+import Loading from '@/components/loading';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
 
@@ -37,7 +38,7 @@ function Home() {
 
   if (error) {
     // console.error(error);
-    return <ErrorPage />;
+    return <Loading />;
   }
 
   return (

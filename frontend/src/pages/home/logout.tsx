@@ -9,8 +9,8 @@ const Logout = () => {
       localStorage.removeItem('token');
     }
 
-    // Redirect to home page
-    await router.replace('/');
+    // Redirect to root
+    router.replace('/');
   };
 
   // Call handleLogout during render to perform the logout logic

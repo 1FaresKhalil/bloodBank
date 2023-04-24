@@ -40,12 +40,12 @@ const Index = () => {
     );
     // console.error(error);
   }
-  if (data) {
+  if (token) {
     router.replace('/home');
   }
   return (
     <Main meta={<Meta title="Blood Bank" description="blood bank app" />}>
-      <div>redirecting...</div>
+      <div>redirecting... {data?.user?.username}</div>
     </Main>
   );
 };

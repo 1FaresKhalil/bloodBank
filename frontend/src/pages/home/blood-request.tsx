@@ -192,10 +192,14 @@ export default function SignInSide() {
                     label="Blood Type"
                     onChange={(e) => setBloodType(e.target.value)}
                   >
-                    <MenuItem value={'o'}>O</MenuItem>
+                    <MenuItem value={'o-'}>O-</MenuItem>
+                    <MenuItem value={'o+'}>O+</MenuItem>
                     <MenuItem value={'a+'}>A+</MenuItem>
                     <MenuItem value={'a-'}>A-</MenuItem>
-                    <MenuItem value={'b'}>B</MenuItem>
+                    <MenuItem value={'b-'}>B-</MenuItem>
+                    <MenuItem value={'b+'}>B+</MenuItem>
+                    <MenuItem value={'ab+'}>AB+</MenuItem>
+                    <MenuItem value={'ab-'}>AB-</MenuItem>
                   </Select>
                   <FormHelperText>Please select your blood type</FormHelperText>
                 </FormControl>

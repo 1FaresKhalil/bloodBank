@@ -20,9 +20,12 @@ const bloodRequestsSchema = new Schema({
     },
     note: String,
     phone: String,
+    quantity: Number,
+    requester_username: String,
+    request_date:String,
+    donator_username: String,
+    done_date: String,
     done: Boolean,
-    username: String,
-    date:String
 });
 
 module.exports = mongoose.model('bloodRequests',bloodRequestsSchema);

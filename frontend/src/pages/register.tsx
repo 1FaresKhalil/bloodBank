@@ -23,6 +23,9 @@ import Link from 'next/link';
 import useRouter from 'next/router';
 import * as React from 'react';
 
+import { Meta } from '@/layouts/Meta';
+import { Main } from '@/templates/Main';
+
 function Copyright(props: any) {
   return (
     <Typography
@@ -77,120 +80,126 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="flex flex-col justify-between h-screen ">
-        <Container component="main" maxWidth="xs" className="relative">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Image
-              width={100}
-              height={100}
-              src={'/assets/images/logo.png'}
-              alt="logo"
-            />
-
-            <Typography component="h1" variant="h5">
-              Sign up
-            </Typography>
+      <Main meta={<Meta title="Sign Up" description="sign up" />}>
+        <div className="flex flex-col justify-between h-screen ">
+          <Container component="main" maxWidth="xs" className="relative">
+            <CssBaseline />
             <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
+              sx={{
+                marginTop: 8,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
             >
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="name"
-                    label="Name"
-                    name="name"
-                    autoComplete="family-name"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="new-password"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControl fullWidth required>
-                    <InputLabel id="demo-simple-select-label">
-                      Blood Type
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={bloodType}
-                      label="Blood Type"
-                      onChange={handleChange}
-                    >
-                      <MenuItem value={'o'}>O</MenuItem>
-                      <MenuItem value={'a+'}>A+</MenuItem>
-                      <MenuItem value={'a-'}>A-</MenuItem>
-                      <MenuItem value={'b'}>B</MenuItem>
-                    </Select>
-                    <FormHelperText>
-                      Please select your blood type
-                    </FormHelperText>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox value="allowExtraEmails" color="primary" />
-                    }
-                    label="I want to receive donation requests and updates via email."
-                  />
-                </Grid>
-              </Grid>
-              <Button
-                type="submit"
-                fullWidth
-                color="error"
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+              <Image
+                width={100}
+                height={100}
+                src={'/assets/images/logo.png'}
+                alt="logo"
+              />
+
+              <Typography component="h1" variant="h5">
+                Sign up
+              </Typography>
+              <Box
+                component="form"
+                noValidate
+                onSubmit={handleSubmit}
+                sx={{ mt: 3 }}
               >
-                Sign Up
-              </Button>
-              <Grid container justifyContent="flex-end">
-                <Grid item>
-                  <Link href="/login">Already have an account? Sign in</Link>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      id="name"
+                      label="Name"
+                      name="name"
+                      autoComplete="family-name"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      id="email"
+                      label="Email Address"
+                      name="email"
+                      autoComplete="email"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      name="password"
+                      label="Password"
+                      type="password"
+                      id="password"
+                      autoComplete="new-password"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControl fullWidth required>
+                      <InputLabel id="demo-simple-select-label">
+                        Blood Type
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={bloodType}
+                        label="Blood Type"
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={'o-'}>O-</MenuItem>
+                        <MenuItem value={'o+'}>O+</MenuItem>
+                        <MenuItem value={'a+'}>A+</MenuItem>
+                        <MenuItem value={'a-'}>A-</MenuItem>
+                        <MenuItem value={'b-'}>B-</MenuItem>
+                        <MenuItem value={'b+'}>B+</MenuItem>
+                        <MenuItem value={'ab+'}>AB+</MenuItem>
+                        <MenuItem value={'ab-'}>AB-</MenuItem>
+                      </Select>
+                      <FormHelperText>
+                        Please select your blood type
+                      </FormHelperText>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox value="allowExtraEmails" color="primary" />
+                      }
+                      label="I want to receive donation requests and updates via email."
+                    />
+                  </Grid>
                 </Grid>
-              </Grid>
+                <Button
+                  type="submit"
+                  fullWidth
+                  color="error"
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Sign Up
+                </Button>
+                <Grid container justifyContent="flex-end">
+                  <Grid item>
+                    <Link href="/login">Already have an account? Sign in</Link>
+                  </Grid>
+                </Grid>
+              </Box>
             </Box>
-          </Box>
-        </Container>
-        <div>
-          <Copyright
-            className={'my-[20px] text-black font-size-16 '}
-            sx={{ mt: 5 }}
-          />
+          </Container>
+          <div>
+            <Copyright
+              className={'my-[20px] text-black font-size-16 '}
+              sx={{ mt: 5, mb: 2 }}
+            />
+          </div>
         </div>
-      </div>
+      </Main>
     </ThemeProvider>
   );
 }

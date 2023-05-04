@@ -1,5 +1,13 @@
 // import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
+import {
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -12,6 +20,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 // import Image from 'next/image';
 import * as React from 'react';
 
@@ -24,32 +33,73 @@ const pages = [
 ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 type NavbarProps = {
+  window?: () => Window;
   username: string;
 };
 // logout
 
 function ResponsiveAppBar(props: NavbarProps) {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
+  const { window } = props;
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+
+  // const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+  //   null
+  // );
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  // const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+  //   setAnchorElNav(event.currentTarget);
+  // };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+    // setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const router = useRouter();
+  const drawerWidth = 240;
+  const handleDrawerToggle = () => {
+    setMobileOpen((prevState) => !prevState);
+  };
+
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+      <Typography variant="h6" sx={{ my: 2 }}>
+        Blood Bank
+      </Typography>
+      <Divider />
+      <List>
+        {pages.map((item) => (
+          <ListItem key={item} disablePadding>
+            <ListItemButton
+              sx={{ textAlign: 'center' }}
+              LinkComponent={Link}
+              href={`/home/${item.toLowerCase().replace(' ', '-')}`}
+            >
+              <ListItemText
+                className={
+                  router.pathname ===
+                  `/home/${item.toLowerCase().replace(' ', '-')}`
+                    ? 'opacity-90 my-2 mx-3 text-red-600 block'
+                    : 'my-2 mx-3 text-black block'
+                }
+                primary={item}
+              />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
   return (
     <AppBar sx={{ backgroundColor: 'error.main' }} position="static">
@@ -80,42 +130,31 @@ function ResponsiveAppBar(props: NavbarProps) {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
+              onClick={handleDrawerToggle}
               color="inherit"
             >
               <MenuIcon />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <Link
-                      className="text-black"
-                      href={`/home/${page.toLowerCase().replace(' ', '-')}`}
-                    >
-                      {page}
-                    </Link>
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+            <Box component="nav">
+              <Drawer
+                container={container}
+                variant="temporary"
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                ModalProps={{
+                  keepMounted: true, // Better open performance on mobile.
+                }}
+                sx={{
+                  display: { xs: 'block', sm: 'none' },
+                  '& .MuiDrawer-paper': {
+                    boxSizing: 'border-box',
+                    width: drawerWidth,
+                  },
+                }}
+              >
+                {drawer}
+              </Drawer>
+            </Box>
           </Box>
           <Typography
             variant="h6"
@@ -139,7 +178,12 @@ function ResponsiveAppBar(props: NavbarProps) {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Link
-                className="my-2 mx-3 text-white block"
+                className={
+                  router.pathname ===
+                  `/home/${page.toLowerCase().replace(' ', '-')}`
+                    ? 'opacity-75 my-2 mx-3 text-zinc-100 block'
+                    : 'my-2 mx-3 text-white block'
+                }
                 key={page}
                 href={`/home/${page.toLowerCase().replace(' ', '-')}`}
                 onClick={handleCloseNavMenu}

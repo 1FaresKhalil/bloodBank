@@ -1,187 +1,298 @@
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import MenuIcon from '@mui/icons-material/Menu';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import type { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import MuiAppBar from '@mui/material/AppBar';
-import Badge from '@mui/material/Badge';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import MuiDrawer from '@mui/material/Drawer';
-import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
-// import Link from '@mui/material/Link';
-import List from '@mui/material/List';
-// import Paper from '@mui/material/Paper';
-import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import * as React from 'react';
+import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
+import EmailIcon from '@mui/icons-material/Email';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
+import TrafficIcon from '@mui/icons-material/Traffic';
+import { Box, Button, IconButton, Typography, useTheme } from '@mui/material';
 
-// import Chart from './chart';
-// import Deposits from './Deposits';
-import { mainListItems, secondaryListItems } from './listItems';
-// import Orders from './Orders';
+// import BarChart from '@/components/admin/BarChart';
+import Header from '@/components/admin/Header';
+// import LineChart from '@/components/admin/LineChart';
+import ProgressCircle from '@/components/admin/ProgressCircle';
+import StatBox from '@/components/admin/StatBox';
+import { mockTransactions } from '@/data/mockData';
+import { Meta } from '@/layouts/Meta';
+import { Main } from '@/templates/Main';
+import { tokens } from '@/theme/theme';
 
-// function Copyright(props: any) {
-//   return (
-//     <Typography
-//       variant="body2"
-//       color="text.secondary"
-//       align="center"
-//       {...props}
-//     >
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
-
-const drawerWidth: number = 240;
-
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-  '& .MuiDrawer-paper': {
-    position: 'relative',
-    whiteSpace: 'nowrap',
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    boxSizing: 'border-box',
-    ...(!open && {
-      overflowX: 'hidden',
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      width: theme.spacing(7),
-      [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(9),
-      },
-    }),
-  },
-}));
-
-const mdTheme = createTheme();
-
-function DashboardContent() {
-  const [open, setOpen] = React.useState(true);
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
+const Dashboard = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  // console.log(colors);
 
   return (
-    <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <AppBar position="absolute" open={open}>
-          <Toolbar
-            sx={{
-              pr: '24px', // keep right padding when drawer closed
-            }}
-          >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
+    <Main meta={<Meta title="Dashboard" description="Dashboard" />}>
+      <Box m="20px">
+        {/* HEADER */}
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+
+          <Box>
+            <Button
               sx={{
-                marginRight: '36px',
-                ...(open && { display: 'none' }),
+                bgcolor: colors.blueAccent[700],
+                color: colors.grey[100],
+                fontSize: '14px',
+                fontWeight: 'bold',
+                padding: '10px 20px',
               }}
             >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              Dashboard
-            </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <Toolbar
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              px: [1],
-            }}
-          >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
-          <Divider />
-          <List component="nav">
-            {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
-          </List>
-        </Drawer>
+              <DownloadOutlinedIcon sx={{ mr: '10px' }} />
+              Download Reports
+            </Button>
+          </Box>
+        </Box>
+
+        {/* GRID & CHARTS */}
         <Box
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: '100vh',
-            overflow: 'auto',
-          }}
+          display="grid"
+          gridTemplateColumns="repeat(12, 1fr)"
+          gridAutoRows="140px"
+          gap="20px"
         >
-          <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* content */}
-            </Grid>
-          </Container>
+          {/* ROW 1 */}
+          <Box
+            gridColumn="span 3"
+            // bgcolor={colors.primary[400]}
+            bgcolor={colors.primary[400]}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <StatBox
+              title="12,361"
+              subtitle="Emails Sent"
+              progress={0.75}
+              increase="+14%"
+              icon={
+                <EmailIcon
+                  sx={{ color: colors.greenAccent[600], fontSize: '26px' }}
+                />
+              }
+            />
+          </Box>
+          <Box
+            gridColumn="span 3"
+            // bgcolor={colors.primary[400]}
+            bgcolor={colors.primary[400]}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <StatBox
+              title="431,225"
+              subtitle="Sales Obtained"
+              progress={0.5}
+              increase="+21%"
+              icon={
+                <PointOfSaleIcon
+                  sx={{ color: colors.greenAccent[600], fontSize: '26px' }}
+                />
+              }
+            />
+          </Box>
+          <Box
+            gridColumn="span 3"
+            bgcolor={colors.primary[400]}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <StatBox
+              title="32,441"
+              subtitle="New Clients"
+              progress={0.3}
+              increase="+5%"
+              icon={
+                <PersonAddIcon
+                  sx={{ color: colors.greenAccent[600], fontSize: '26px' }}
+                />
+              }
+            />
+          </Box>
+          <Box
+            gridColumn="span 3"
+            bgcolor={colors.primary[400]}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <StatBox
+              title="1,325,134"
+              subtitle="Traffic Received"
+              progress={0.8}
+              increase="+43%"
+              icon={
+                <TrafficIcon
+                  sx={{ color: colors.greenAccent[600], fontSize: '26px' }}
+                />
+              }
+            />
+          </Box>
+
+          {/* ROW 2 */}
+          <Box
+            gridColumn="span 8"
+            gridRow="span 2"
+            bgcolor={colors.primary[400]}
+          >
+            <Box
+              mt="25px"
+              p="0 30px"
+              display="flex "
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Box>
+                <Typography
+                  variant="h5"
+                  fontWeight="600"
+                  color={colors.grey[100]}
+                >
+                  Revenue Generated
+                </Typography>
+                <Typography
+                  variant="h3"
+                  fontWeight="bold"
+                  color={colors.greenAccent[500]}
+                >
+                  $59,342.32
+                </Typography>
+              </Box>
+              <Box>
+                <IconButton>
+                  <DownloadOutlinedIcon
+                    sx={{ fontSize: '26px', color: colors.greenAccent[500] }}
+                  />
+                </IconButton>
+              </Box>
+            </Box>
+            <Box height="250px" m="-20px 0 0 0">
+              {/* <LineChart isDashboard={true} /> */}
+            </Box>
+          </Box>
+          <Box
+            gridColumn="span 4"
+            gridRow="span 2"
+            bgcolor={colors.primary[400]}
+            overflow="auto"
+          >
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              borderBottom={`4px solid ${colors.primary[500]}`}
+              // colors={colors.grey[100]}
+              sx={{ color: colors.grey[100] }}
+              p="15px"
+            >
+              <Typography
+                color={colors.grey[100]}
+                variant="h5"
+                fontWeight="600"
+              >
+                Recent Transactions
+              </Typography>
+            </Box>
+            {mockTransactions.map((transaction, i) => (
+              <Box
+                key={`${transaction.txId}-${i}`}
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                borderBottom={`4px solid ${colors.primary[500]}`}
+                p="15px"
+              >
+                <Box>
+                  <Typography
+                    color={colors.greenAccent[500]}
+                    variant="h5"
+                    fontWeight="600"
+                  >
+                    {transaction.txId}
+                  </Typography>
+                  <Typography color={colors.grey[100]}>
+                    {transaction.user}
+                  </Typography>
+                </Box>
+                <Box color={colors.grey[100]}>{transaction.date}</Box>
+                <Box
+                  bgcolor={colors.greenAccent[500]}
+                  p="5px 10px"
+                  borderRadius="4px"
+                >
+                  ${transaction.cost}
+                </Box>
+              </Box>
+            ))}
+          </Box>
+
+          {/* ROW 3 */}
+          <Box
+            gridColumn="span 4"
+            gridRow="span 2"
+            bgcolor={colors.primary[400]}
+            p="30px"
+          >
+            <Typography variant="h5" fontWeight="600">
+              Campaign
+            </Typography>
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              mt="25px"
+            >
+              <ProgressCircle size={125} />
+              <Typography
+                variant="h5"
+                color={colors.greenAccent[500]}
+                sx={{ mt: '15px' }}
+              >
+                $48,352 revenue generated
+              </Typography>
+              <Typography>
+                Includes extra misc expenditures and costs
+              </Typography>
+            </Box>
+          </Box>
+          <Box
+            gridColumn="span 4"
+            gridRow="span 2"
+            bgcolor={colors.primary[400]}
+          >
+            <Typography
+              variant="h5"
+              fontWeight="600"
+              sx={{ padding: '30px 30px 0 30px' }}
+            >
+              Sales Quantity
+            </Typography>
+            <Box height="250px" mt="-20px">
+              {/* <BarChart isDashboard={true} /> */}
+            </Box>
+          </Box>
+          <Box
+            gridColumn="span 4"
+            gridRow="span 2"
+            bgcolor={colors.primary[400]}
+            padding="30px"
+          >
+            <Typography
+              variant="h5"
+              fontWeight="600"
+              sx={{ marginBottom: '15px' }}
+            >
+              Geography Based Traffic
+            </Typography>
+            {/* <Box height="200px">
+              <GeographyChart isDashboard={true} />
+            </Box> */}
+          </Box>
         </Box>
       </Box>
-    </ThemeProvider>
+    </Main>
   );
-}
+};
 
-export default function Dashboard() {
-  return <DashboardContent />;
-}
+export default Dashboard;

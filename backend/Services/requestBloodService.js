@@ -124,7 +124,8 @@ class RequestBloodService {
         try {
             let data_from_token = await this.extractInfoFromToken(token);
             let [username, ,] = data_from_token;
-            return await bloodRequestsLog.find({username: username});
+            return await bloodRequestsLog.find({
+                requester_username: username});
         } catch (e) {
             return null;
         }

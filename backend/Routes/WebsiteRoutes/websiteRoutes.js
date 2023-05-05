@@ -2,6 +2,10 @@ let {UserController} = require("../../Controllers/userController");
 let user_controller = new UserController();
 let {BloodRequestController} = require("../../Controllers/bloodRequestController");
 let blood_request_controller = new BloodRequestController();
+let {ConversationController} = require("../../Controllers/conversationController");
+let conversation_controller = new ConversationController();
+let {MessageController} = require("../../Controllers/messageController");
+let message_controller = new MessageController();
 function WebsiteRoutes(websiteApp) {
     //user requests
     websiteApp.post("/signup", user_controller.signUp);
@@ -21,6 +25,13 @@ function WebsiteRoutes(websiteApp) {
     websiteApp.get("/bloodRequest/:id", blood_request_controller.getBloodRequestByID);
     websiteApp.get("/sameBloodType/bloodRequest", blood_request_controller.getAllBloodRequestsWithSameBloodType);
     websiteApp.get("/logs/bloodRequest", blood_request_controller.getLogs);
+    //chat conversations
+    websiteApp.post("/conversation", conversation_controller.newConversation);
+    websiteApp.get("/conversation/:userId", conversation_controller.getConversationOfUser);
+    websiteApp.get("/conversation/find/:firstUserId/:secondUserId",conversation_controller.getConversationOfTwoUsers);
+    //chat messages
+    websiteApp.post("/message", message_controller.addMessage);
+    websiteApp.get("/message/:conversationId", message_controller.getMessagesOfConversation);
 }
 
 module.exports = {

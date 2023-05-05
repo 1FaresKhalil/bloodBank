@@ -2,6 +2,8 @@ let {UserController} = require("../../Controllers/userController");
 let user_controller = new UserController();
 let {BloodRequestController} = require("../../Controllers/bloodRequestController");
 let blood_request_controller = new BloodRequestController();
+let {MachineLearningController} = require("../../Controllers/machineLearningController");
+let ml_controller = new MachineLearningController();
 function adminRoutes(adminApp) {
     //users
     adminApp.post("/signup", user_controller.signUp);
@@ -25,6 +27,8 @@ function adminRoutes(adminApp) {
     adminApp.get("/bloodRequest/:id", blood_request_controller.getBloodRequestByID);
     adminApp.get("/sameBloodType/bloodRequest", blood_request_controller.getAllBloodRequestsWithSameBloodType);
     adminApp.get("/logs/bloodRequest", blood_request_controller.getLogs);
+    //machine learning model
+    adminApp.post("/predict", ml_controller.getEstimatedInformation);
 }
 
 module.exports = {

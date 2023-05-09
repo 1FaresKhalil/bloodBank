@@ -62,7 +62,7 @@ export default function SignInSide() {
         router.push('/home/success-request');
       }
     } catch (error) {
-      console.error(error); // Handle error here
+      // console.error(error); // Handle error here
     }
   };
   const { data, error } = useSWR(

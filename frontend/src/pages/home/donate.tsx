@@ -15,7 +15,7 @@ type BloodRequest = {
   _id: number;
   patientName: string;
   nearestHospital: string;
-  date: string;
+  request_date: string;
   bloodType: string;
 };
 
@@ -96,7 +96,7 @@ function Donate() {
               ).includes(item.bloodType);
             })
             .map((item: BloodRequest) => {
-              const date = item.date.split(',')[0];
+              const date = item.request_date.split(',')[0];
               const [month, day, year] = (date as string).split('-');
               const formattedDate = `${day}/${month}/${year}`;
               return (

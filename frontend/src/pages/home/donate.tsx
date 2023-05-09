@@ -12,6 +12,7 @@ import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
 
 type BloodRequest = {
+  requester_id: string;
   _id: number;
   patientName: string;
   nearestHospital: string;
@@ -20,12 +21,16 @@ type BloodRequest = {
 };
 
 function Donate() {
+  let token: string | null = '';
+  if (typeof window !== 'undefined' && localStorage) {
+    token = localStorage.getItem('token');
+  }
+  // const [receiverId, setReceiverId] = React.useState<any>('');
   // Fetch profile data using SWR
 
   const { data: profileData, error: profileError } = useSWR(
     `${process.env.NEXT_PUBLIC_DB_URI}/admin/profile`,
     async (url) => {
-      const token = localStorage.getItem('token');
       if (!token) {
         throw new Error('Token not found');
       }
@@ -43,7 +48,6 @@ function Donate() {
   const { data: bloodRequestData } = useSWR(
     `${process.env.NEXT_PUBLIC_DB_URI}/admin/bloodRequest`,
     async (url) => {
-      const token = localStorage.getItem('token');
       if (!token) {
         throw new Error('Token not found');
       }
@@ -56,7 +60,45 @@ function Donate() {
       return response.data;
     }
   );
-
+  const { data: peopleWhoIChated } = useSWR(
+    `${process.env.NEXT_PUBLIC_DB_URI}/website/conversation/${profileData?.user?._id}`,
+    async (url: any) => {
+      if (!token) {
+        throw new Error('Token not found');
+      }
+      const response = await axios.get(url, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+      // console.log(response.data);  // output:
+      //   {
+      //     "result": [
+      //         {
+      //             "_id": "645a46a348763afc3a5e9ad2",
+      //             "members": [
+      //                 "6434e05c779e306c654b38bd",
+      //                 "6435ee68c9845e9cd13201b2"
+      //             ],
+      //             "createdAt": "2023-05-09T13:12:03.848Z",
+      //             "updatedAt": "2023-05-09T13:12:03.848Z",
+      //             "__v": 0
+      //         },
+      //         {
+      //             "_id": "645a4b6b48763afc3a5e9bc2",
+      //             "members": [
+      //                 "6434e05c779e306c654b38bd",
+      //                 "645a4afa48763afc3a5e9b5d"
+      //             ],
+      //             "createdAt": "2023-05-09T13:32:27.428Z",
+      //             "updatedAt": "2023-05-09T13:32:27.428Z",
+      //             "__v": 0
+      //         }
+      //     ]
+      // }
+      return response.data;
+    }
+  );
   if (profileError) {
     return <ErrorPage />;
   }
@@ -82,6 +124,31 @@ function Donate() {
         return [];
     }
   }
+
+  const chatHandler = (receiverId: string) => {
+    const existingChat = peopleWhoIChated?.result.find((chat: any) => {
+      const chatMembers = chat.members;
+      return (
+        chatMembers.includes(profileData?.user?._id) &&
+        chatMembers.includes(receiverId)
+      );
+    });
+
+    if (!existingChat) {
+      axios.post(
+        `${process.env.NEXT_PUBLIC_DB_URI}/website/conversation`,
+        {
+          senderId: profileData?.user?._id,
+          receiverId,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+    }
+  };
 
   // console.log(bloodRequestData?.bloodRequests.map((item) => console.log(item)));
   return (
@@ -139,22 +206,41 @@ function Donate() {
                       </div>
                     </div>
                   </div>
-                  <Button
-                    sx={{
-                      bgcolor: '#ef5350',
-                      '&:hover': {
-                        backgroundColor: 'error.main',
-                      },
-                    }}
-                    className="font-size-22 "
-                    fullWidth
-                    variant="contained"
-                    color="error"
-                    LinkComponent={Link}
-                    href="/home"
-                  >
-                    More Details
-                  </Button>
+                  <div className="flex justify-between gap-2">
+                    <Button
+                      sx={{
+                        bgcolor: '#ef5350',
+                        '&:hover': {
+                          backgroundColor: 'error.main',
+                        },
+                      }}
+                      className="font-size-22 w-[48%] "
+                      variant="contained"
+                      onClick={() => {
+                        chatHandler(item.requester_id);
+                      }}
+                      color="error"
+                      LinkComponent={Link}
+                      href="/home/chat"
+                    >
+                      Chat
+                    </Button>
+                    <Button
+                      sx={{
+                        bgcolor: '#ef5350',
+                        '&:hover': {
+                          backgroundColor: 'error.main',
+                        },
+                      }}
+                      className="font-size-22 w-[48%] "
+                      variant="contained"
+                      color="error"
+                      LinkComponent={Link}
+                      href="/home"
+                    >
+                      More Details
+                    </Button>
+                  </div>
                 </div>
               );
             })}

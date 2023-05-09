@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { useState } from 'react';
+// import io from 'socket.io-client';
 import useSWR from 'swr';
 
 import Navbar from '@/components/app-bar';
@@ -49,10 +50,6 @@ const ChatPage = () => {
       });
       // console.log(response.profile.user);
       return response.data;
-    },
-    {
-      revalidateOnFocus: false,
-      revalidateOnMount: true,
     }
   );
   // const { data: userConverstions } =
@@ -71,10 +68,6 @@ const ChatPage = () => {
       setMembers(response.data.result.flatMap((result: any) => result.members));
       // console.log(response.data.result.map((result: any) => result._id));
       return response.data;
-    },
-    {
-      revalidateOnFocus: false,
-      revalidateOnMount: true,
     }
   );
 
@@ -94,10 +87,6 @@ const ChatPage = () => {
       );
       // console.log(responses.map((response) => response.profile.user));
       return responses.map((response) => response.data.user);
-    },
-    {
-      revalidateOnFocus: false,
-      revalidateOnMount: true,
     }
   );
   //  const { data: chatMessages } =
@@ -128,10 +117,6 @@ const ChatPage = () => {
       // console.log(newMessage);
       setLoading(false);
       return newMessage;
-    },
-    {
-      revalidateOnFocus: false,
-      revalidateOnMount: true,
     }
   );
   const handleUserSelect = async (user: any) => {
@@ -189,7 +174,7 @@ const ChatPage = () => {
           sx={{
             display: 'flex',
             flexDirection: 'row',
-            height: '100vh',
+            height: '94vh',
           }}
         >
           <Box sx={{ flex: '1 0 25%', borderRight: '1px solid #e0e0e0' }}>
@@ -207,18 +192,18 @@ const ChatPage = () => {
                 <Typography>Chats</Typography>
               </ListItem>
               {users
-                ?.filter((user) => user._id !== profile.user._id)
+                ?.filter((user) => user?._id !== profile.user._id)
                 .map((user) => (
                   <ListItem
-                    key={user._id}
+                    key={user?._id}
                     button
-                    selected={selectedUser === user._id}
+                    selected={selectedUser === user?._id}
                     onClick={() => handleUserSelect(user)}
                   >
                     <ListItemAvatar>
-                      <Avatar src="/user2.jpg" alt={user.name} />
+                      <Avatar src="/user2.jpg" alt={user?.name} />
                     </ListItemAvatar>
-                    <ListItemText primary={user.name} />
+                    <ListItemText primary={user?.name} />
                   </ListItem>
                 ))}
             </List>

@@ -208,10 +208,8 @@ const ChatPage = () => {
       <Main meta={<Meta title="Chat" description="chat page" />}>
         <Navbar username={profile?.user?.username} />
         <Box
-          className="px-[1vw] flex-col lg:flex-row"
+          className="px-[1vw] flex flex-col lg:flex-row"
           sx={{
-            display: 'flex',
-            flexDirection: 'row',
             height: '90vh',
             overflow: 'auto',
           }}
@@ -352,7 +350,7 @@ const ChatPage = () => {
               </Box>
             )}
             {selectedUser === null && (
-              <div className="font-size-32 h-screen flex justify-center items-center">
+              <div className="main-container font-size-32 h-[100%] lg:h-screen flex justify-center items-center">
                 <h2>Select any user to start chatting!</h2>
               </div>
             )}

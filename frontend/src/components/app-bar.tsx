@@ -1,4 +1,3 @@
-// import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
   Divider,
@@ -145,7 +144,7 @@ function ResponsiveAppBar(props: NavbarProps) {
                   keepMounted: true, // Better open performance on mobile.
                 }}
                 sx={{
-                  display: { xs: 'block', sm: 'none' },
+                  display: { xs: 'block', lg: 'none' },
                   '& .MuiDrawer-paper': {
                     boxSizing: 'border-box',
                     width: drawerWidth,

@@ -41,7 +41,8 @@ const ChatPage = () => {
   const [messageInput, setMessageInput] = useState('');
   const [members, setMembers] = useState([]);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoadingMessages, setIsLoadingMessages] = useState(false);
+
   useEffect(() => {
     socket.on('message', (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
@@ -114,7 +115,7 @@ const ChatPage = () => {
       if (!token) {
         throw new Error('Token not found');
       }
-      setLoading(true);
+      setIsLoadingMessages(true);
       const response = await axios.get(url, {
         headers: {
           Authorization: `${token}`,
@@ -130,13 +131,14 @@ const ChatPage = () => {
       });
       setMessages([...newMessage]);
       // console.log(newMessage);
-      setLoading(false);
+      setIsLoadingMessages(false);
       return newMessage;
+    },
+    {
+      revalidateOnFocus: false,
     }
   );
   const handleUserSelect = async (user: any) => {
-    setLoading(true); // set the loading state to true
-
     // Leave the current room if any
     if (chatId) {
       socket.emit('leave_room', chatId);
@@ -157,7 +159,6 @@ const ChatPage = () => {
     // Join the new room
     socket.emit('join_room', response.data.result._id);
 
-    setLoading(false); // set the loading state to false once the API call is completed
     return response.data.result;
   };
   const handleMessageSend = () => {
@@ -249,9 +250,8 @@ const ChatPage = () => {
                 className="shadow  "
                 sx={{ flexGrow: 1, overflowY: 'scroll', p: 2 }}
               >
-                {' '}
-                {loading ? (
-                  <Loading text="loading" /> // render a loading spinner or message
+                {isLoadingMessages ? (
+                  <Loading text="Loading messages" />
                 ) : (
                   messages
                     .filter(
@@ -326,6 +326,11 @@ const ChatPage = () => {
                       placeholder="Type a message"
                       value={messageInput}
                       onChange={(event) => setMessageInput(event.target.value)}
+                      onKeyUp={(event) => {
+                        if (event.key === 'Enter') {
+                          handleMessageSend();
+                        }
+                      }}
                     />
                   </Grid>
                   <Grid item xs={2}>

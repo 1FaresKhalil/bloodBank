@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
 import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 // import Image from 'next/image';
 // import Link from 'next/link';
 import * as React from 'react';
@@ -21,6 +22,7 @@ type BloodRequest = {
 };
 
 function Donate() {
+  const router = useRouter();
   let token: string | null = '';
   if (typeof window !== 'undefined' && localStorage) {
     token = localStorage.getItem('token');
@@ -147,6 +149,9 @@ function Donate() {
           },
         }
       );
+      setTimeout(() => {
+        router.push('/home/chat');
+      }, 2000);
     }
   };
 
@@ -220,8 +225,8 @@ function Donate() {
                         chatHandler(item.requester_id);
                       }}
                       color="error"
-                      LinkComponent={Link}
-                      href="/home/chat"
+                      // LinkComponent={Link}
+                      // href="/home/chat"
                     >
                       Chat
                     </Button>

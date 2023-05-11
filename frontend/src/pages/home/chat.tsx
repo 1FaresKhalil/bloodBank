@@ -12,6 +12,7 @@ import {
   Typography,
 } from '@mui/material';
 import axios from 'axios';
+// import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import useSWR from 'swr';
@@ -28,7 +29,9 @@ type Message = {
 const socket = io(`https://chief-honored-mice.glitch.me`, {
   transports: ['websocket'],
 });
+
 const ChatPage = () => {
+  // const router = useRouter();
   let token: string | null = '';
   if (typeof window !== 'undefined' && localStorage) {
     token = localStorage.getItem('token');
@@ -100,6 +103,7 @@ const ChatPage = () => {
       return responses.map((response) => response.data.user);
     }
   );
+
   //  const { data: chatMessages } =
   useSWR(
     chatId

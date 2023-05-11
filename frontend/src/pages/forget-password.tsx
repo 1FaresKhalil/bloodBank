@@ -37,7 +37,7 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 
-export default function Login() {
+export default function ForgetPassword() {
   const [emailError, setEmailError] = React.useState(false);
 
   const router = useRouter;

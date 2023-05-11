@@ -12,8 +12,8 @@ import {
   Typography,
 } from '@mui/material';
 import axios from 'axios';
-import { useState } from 'react';
-// import io from 'socket.io-client';
+import { useEffect, useState } from 'react';
+import io from 'socket.io-client';
 import useSWR from 'swr';
 
 import Navbar from '@/components/app-bar';
@@ -25,6 +25,9 @@ type Message = {
   sender: string;
   text: string;
 };
+const socket = io(`https://chief-honored-mice.glitch.me`, {
+  transports: ['websocket'],
+});
 const ChatPage = () => {
   let token: string | null = '';
   if (typeof window !== 'undefined' && localStorage) {
@@ -36,7 +39,15 @@ const ChatPage = () => {
   const [members, setMembers] = useState([]);
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    socket.on('message', (message) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
 
+    return () => {
+      socket.off('message');
+    };
+  }, []);
   const { data: profile, error } = useSWR(
     `${process.env.NEXT_PUBLIC_DB_URI}/admin/profile`,
     async (url) => {
@@ -121,6 +132,12 @@ const ChatPage = () => {
   );
   const handleUserSelect = async (user: any) => {
     setLoading(true); // set the loading state to true
+
+    // Leave the current room if any
+    if (chatId) {
+      socket.emit('leave_room', chatId);
+    }
+
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_DB_URI}/website/conversation/find/${user?._id}/${profile?.user?._id}`,
       {
@@ -129,21 +146,28 @@ const ChatPage = () => {
         },
       }
     );
+
     setChatId(response.data.result._id);
     setSelectedUser(user?._id);
+
+    // Join the new room
+    socket.emit('join_room', response.data.result._id);
+
     setLoading(false); // set the loading state to false once the API call is completed
     return response.data.result;
   };
   const handleMessageSend = () => {
     if (selectedUser !== '' && messageInput !== '') {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          username: profile?.user?.name,
-          sender: profile?.user?._id,
-          text: messageInput,
-        },
-      ]);
+      const message = {
+        username: profile?.user?.name,
+        sender: profile?.user?._id,
+        text: messageInput,
+      };
+
+      // Remove the following line
+      // setMessages((prevMessages) => [...prevMessages, message]);
+
+      socket.emit('message', { chatId, message });
       axios.post(
         `${process.env.NEXT_PUBLIC_DB_URI}/website/message/`,
         {
@@ -170,15 +194,19 @@ const ChatPage = () => {
       <>
         <Navbar username={profile?.user?.username} />
         <Box
-          className="px-[1vw]"
+          className="px-[1vw] flex-col lg:flex-row"
           sx={{
             display: 'flex',
             flexDirection: 'row',
-            height: '94vh',
+            height: '90vh',
+            overflow: 'auto',
           }}
         >
-          <Box sx={{ flex: '1 0 25%', borderRight: '1px solid #e0e0e0' }}>
-            <List>
+          <Box
+            className="shadow"
+            sx={{ flex: '1 0 25%', borderRight: '1px solid #e0e0e0' }}
+          >
+            <List className="h-16vh overflow-auto">
               <ListItem
                 button
                 selected={!selectedUser}
@@ -209,11 +237,12 @@ const ChatPage = () => {
             </List>
           </Box>
           <Box
+            className="mt-2 lg:mt-0 border border-solid border-[#0000001a]"
             sx={{ flex: '1 0 75%', display: 'flex', flexDirection: 'column' }}
           >
             {selectedUser !== null && (
               <Box
-                className="relative"
+                className="shadow  "
                 sx={{ flexGrow: 1, overflowY: 'scroll', p: 2 }}
               >
                 {' '}
@@ -282,25 +311,25 @@ const ChatPage = () => {
                       </Box>
                     ))
                 )}
-                <Box className="absolute bottom-[3%] w-full" sx={{ p: 2 }}>
-                  <Grid container spacing={2} alignItems="center">
-                    <Grid item xs={10}>
-                      <TextField
-                        fullWidth
-                        placeholder="Type a message"
-                        value={messageInput}
-                        onChange={(event) =>
-                          setMessageInput(event.target.value)
-                        }
-                      />
-                    </Grid>
-                    <Grid item xs={2}>
-                      <IconButton onClick={handleMessageSend}>
-                        <SendIcon />
-                      </IconButton>
-                    </Grid>
+              </Box>
+            )}
+            {selectedUser !== null && (
+              <Box className="" sx={{ p: 2 }}>
+                <Grid container spacing={2} alignItems="center">
+                  <Grid item xs={10}>
+                    <TextField
+                      fullWidth
+                      placeholder="Type a message"
+                      value={messageInput}
+                      onChange={(event) => setMessageInput(event.target.value)}
+                    />
                   </Grid>
-                </Box>
+                  <Grid item xs={2}>
+                    <IconButton onClick={handleMessageSend}>
+                      <SendIcon />
+                    </IconButton>
+                  </Grid>
+                </Grid>
               </Box>
             )}
             {selectedUser === null && (

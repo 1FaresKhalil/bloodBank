@@ -1,108 +1,37 @@
-// const io = require("socket.io")(8900, {
-//     cors: {
-//         origin: "http://localhost:3000",
-//     },
-// });
-//
-// let users = [];
-//
-// const addUser = (userId, socketId) => {
-//     !users.some((user) => user.userId === userId) &&
-//     users.push({ userId, socketId });
-// };
-//
-// const removeUser = (socketId) => {
-//     users = users.filter((user) => user.socketId !== socketId);
-// };
-//
-// const getUser = (userId) => {
-//     return users.find((user) => user.userId === userId);
-// };
-//
-// io.on("connection", (socket) => {
-//     //when connect
-//     console.log("a user connected.");
-//
-//     //send event to all users connect to socket
-//     io.emit("welcome","welcome this is socket server")
-//
-//     //take userId and socketId from user to add user and then send users to client
-//     socket.on("addUser", (userId) => {
-//         console.log(userId)
-//         if(userId){
-//             addUser(userId, socket.id);
-//             io.emit("getUsers", users);
-//         }
-//     });
-//
-//
-//     //send and get message
-//     socket.on("sendMessage", ({ senderId, receiverId, text }) => {
-//         const user = getUser(receiverId);
-//         io.to(user?.socketId).emit("getMessage", {
-//             senderId,
-//             text,
-//         });
-//     });
-//
-//
-//     //when disconnect
-//     socket.on("disconnect", () => {
-//         console.log("a user disconnected!");
-//         removeUser(socket.id);
-//         io.emit("getUsers", users);
-//     });
-// });
+const express = require("express");
+const http = require("http");
+const { Server } = require("socket.io");
 
-const io = require("socket.io")(8900, {
-    cors: {
-        origin: "*",
-    },
-});
-
-let users = [];
-
-const addUser = (userId, socketId) => {
-    !users.some((user) => user.userId === userId) &&
-    users.push({ userId, socketId });
-};
-
-const removeUser = (socketId) => {
-    users = users.filter((user) => user.socketId !== socketId);
-};
-
-const getUser = (userId) => {
-    return users.find((user) => user.userId === userId);
-};
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
 
 io.on("connection", (socket) => {
-    //when connect
-    console.log("a user connected.");
+  console.log("a user connected");
 
-    //send event to all users connect to socket
-    io.emit("welcome", "welcome this is socket server");
+  socket.on("join_room", (roomId) => {
+    console.log(`User joined room: ${roomId}`);
+    socket.join(roomId);
+  });
 
-    //take userId and socketId from user to add user and then send users to client
-    socket.on("addUser", (userId) => {
-        if (userId) {
-            addUser(userId, socket.id);
-            io.emit("getUsers", users);
-        }
-    });
+  socket.on("leave_room", (roomId) => {
+    console.log(`User left room: ${roomId}`);
+    socket.leave(roomId);
+  });
 
-    //send and get message
-    socket.on("sendMessage", ({ senderId, receiverId, text }) => {
-        const user = getUser(receiverId);
-        io.to(user?.socketId).emit("getMessage", {
-            senderId,
-            text,
-        });
-    });
+  socket.on("message", async ({ chatId, message }) => {
+    // You can save the message to the database here if required
 
-    //when disconnect
-    socket.on("disconnect", () => {
-        console.log("a user disconnected!");
-        removeUser(socket.id);
-        io.emit("getUsers", users);
-    });
+    // Broadcast the message to all clients in the room
+    io.to(chatId).emit("message", message);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
+});
+
+const PORT = process.env.PORT || 8090;
+server.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
 });

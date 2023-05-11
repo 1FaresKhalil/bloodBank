@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 // import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 import useSWR from 'swr';
 
@@ -42,6 +42,13 @@ const ChatPage = () => {
   const [members, setMembers] = useState([]);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoadingMessages, setIsLoadingMessages] = useState(false);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   useEffect(() => {
     socket.on('message', (message) => {
@@ -247,6 +254,7 @@ const ChatPage = () => {
           >
             {selectedUser !== null && (
               <Box
+                ref={chatContainerRef}
                 className="shadow  "
                 sx={{ flexGrow: 1, overflowY: 'scroll', p: 2 }}
               >

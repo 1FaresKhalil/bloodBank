@@ -47,11 +47,82 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const [nameError, setNameError] = React.useState(false);
+  const [nameHelperText, setNameHelperText] = React.useState('');
+
+  const [emailError, setEmailError] = React.useState(false);
+  const [emailHelperText, setEmailHelperText] = React.useState('');
+
+  const [passwordError, setPasswordError] = React.useState(false);
+  const [passwordHelperText, setPasswordHelperText] = React.useState('');
+
+  const [bloodError, setBloodError] = React.useState(false);
+  const [bloodHelperText, setBloodHelperText] = React.useState('');
+
   const router = useRouter;
   const [bloodType, setBloodType] = React.useState('');
+  const handleValidation = (field: string, value: string) => {
+    if (field === 'name') {
+      if (value.trim() === '') {
+        setNameError(true);
+        setNameHelperText('Name is required');
+      } else {
+        setNameError(false);
+        setNameHelperText('');
+      }
+    } else if (field === 'email') {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(value)) {
+        setEmailError(true);
+        setEmailHelperText('Please enter a valid email address');
+      } else {
+        setEmailError(false);
+        setEmailHelperText('');
+      }
+    } else if (field === 'password') {
+      if (value.length < 6) {
+        setPasswordError(true);
+        setPasswordHelperText('Password must be at least 6 characters long');
+      } else {
+        setPasswordError(false);
+        setPasswordHelperText('');
+      }
+    }
+    if (field === 'bloodType') {
+      if (value === '') {
+        setBloodError(true);
+        setBloodHelperText('Please select your blood type');
+      } else {
+        setBloodError(false);
+        setBloodHelperText('');
+      }
+    }
+  };
+  const handleChange = (event: SelectChangeEvent) => {
+    setBloodType(event.target.value as string);
+    if (event.target.value === '') {
+      setBloodError(true);
+      setBloodHelperText('Please select your blood type');
+    } else {
+      setBloodError(false);
+      setBloodHelperText('');
+    }
+  };
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const name = data.get('name') as string;
+    const email = data.get('email') as string;
+    const password = data.get('password') as string;
+
+    handleValidation('name', name);
+    handleValidation('email', email);
+    handleValidation('password', password);
+    handleValidation('bloodType', bloodType);
+
+    if (nameError || emailError || passwordError || bloodError) {
+      return;
+    }
     try {
       // Make POST request using Axios
       const response = await axios.post(
@@ -67,15 +138,16 @@ export default function SignUp() {
       if (response.data.message === 'Successful signup') {
         router.push('/login');
       }
+      if (
+        response.data.message === 'the username already exists use another one!'
+      ) {
+        setEmailError(true);
+        setEmailHelperText('Email already exists');
+      }
       // console.log(response.data); // Handle response data
     } catch (error) {
-      console.error(error); // Handle error
+      // console.error(error); // Handle error
     }
-  };
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setBloodType(event.target.value as string);
-    // console.log(bloodType);
   };
 
   return (
@@ -111,6 +183,9 @@ export default function SignUp() {
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <TextField
+                      error={nameError}
+                      helperText={nameHelperText}
+                      onChange={(e) => handleValidation('name', e.target.value)}
                       required
                       fullWidth
                       id="name"
@@ -121,6 +196,11 @@ export default function SignUp() {
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
+                      error={emailError}
+                      helperText={emailHelperText}
+                      onChange={(e) =>
+                        handleValidation('email', e.target.value)
+                      }
                       required
                       fullWidth
                       id="email"
@@ -131,6 +211,11 @@ export default function SignUp() {
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
+                      error={passwordError}
+                      helperText={passwordHelperText}
+                      onChange={(e) =>
+                        handleValidation('password', e.target.value)
+                      }
                       required
                       fullWidth
                       name="password"
@@ -142,10 +227,14 @@ export default function SignUp() {
                   </Grid>
                   <Grid item xs={12}>
                     <FormControl fullWidth required>
-                      <InputLabel id="demo-simple-select-label">
+                      <InputLabel
+                        error={bloodError}
+                        id="demo-simple-select-label"
+                      >
                         Blood Type
                       </InputLabel>
                       <Select
+                        error={bloodError}
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={bloodType}
@@ -161,8 +250,8 @@ export default function SignUp() {
                         <MenuItem value={'ab+'}>AB+</MenuItem>
                         <MenuItem value={'ab-'}>AB-</MenuItem>
                       </Select>
-                      <FormHelperText>
-                        Please select your blood type
+                      <FormHelperText error={bloodError}>
+                        {bloodError ? bloodHelperText : ''}
                       </FormHelperText>
                     </FormControl>
                   </Grid>

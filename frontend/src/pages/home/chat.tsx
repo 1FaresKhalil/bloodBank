@@ -20,6 +20,8 @@ import useSWR from 'swr';
 import Navbar from '@/components/app-bar';
 import ErrorPage from '@/components/error';
 import Loading from '@/components/loading';
+import { Meta } from '@/layouts/Meta';
+import { Main } from '@/templates/Main';
 
 type Message = {
   username: string;
@@ -203,7 +205,7 @@ const ChatPage = () => {
   }
   if (profile?.user) {
     return (
-      <>
+      <Main meta={<Meta title="Chat" description="chat page" />}>
         <Navbar username={profile?.user?.username} />
         <Box
           className="px-[1vw] flex-col lg:flex-row"
@@ -356,7 +358,7 @@ const ChatPage = () => {
             )}
           </Box>
         </Box>
-      </>
+      </Main>
     );
   }
   return <Loading text="Loading" />;

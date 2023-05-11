@@ -15,8 +15,8 @@ class RequestBloodService {
             let time = new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '.');
             let data_from_token = await this.extractInfoFromToken(token);
             let [username, ,] = data_from_token;
-            data.username = username;
-            data.date = time;
+            data.requester_username = username;
+            data.request_date = time;
             const new_request = new bloodRequests(data);
             await new_request.save();
             return true;
@@ -25,16 +25,29 @@ class RequestBloodService {
         }
     }
 
-    async markBloodRequestAsDone(id) {
+    async markBloodRequestAsDone(id ,donator_username) {
         try {
             const request = await bloodRequests.findById(id);
             if (!request) {
                 return null;
             } else {
-                await bloodRequests.updateOne({_id: id}, {done: true});
-                const new_log = new bloodRequestsLog(request.toObject());
-                await new_log.save();
-                return true
+                if(request.done === true){
+                    return "request already did";
+                }else{
+                    let time = new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '.');
+                    let log = request.toObject();
+                    log.done = true;
+                    log.done_date = time;
+                    if(donator_username){
+                        await bloodRequests.updateOne({_id: id}, {done: true, done_date: time, donator_username : donator_username});
+                        log.donator_username = donator_username;
+                    }else{
+                        await bloodRequests.updateOne({_id: id}, {done: true, done_date: time});
+                    }
+                    const new_log = new bloodRequestsLog(log);
+                    await new_log.save();
+                    return true
+                }
             }
         } catch (e) {
             return null;
@@ -111,7 +124,8 @@ class RequestBloodService {
         try {
             let data_from_token = await this.extractInfoFromToken(token);
             let [username, ,] = data_from_token;
-            return await bloodRequestsLog.find({username: username});
+            return await bloodRequestsLog.find({
+                requester_username: username});
         } catch (e) {
             return null;
         }

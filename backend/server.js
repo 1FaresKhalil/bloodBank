@@ -24,9 +24,10 @@ app.use("/admin", AdminMiddleWare, adminApp);
 app.use("/website", WebsiteMiddleWare, websiteApp);
 
 const port = process.env.PORT || 8000;
+const URI_DB = "mongodb+srv://fareskhalel:Fares123456789@cluster0.fm5zods.mongodb.net/BankBlood?retryWrites=true&w=majority"
 mongoose
   .connect(
-    "mongodb+srv://fareskhalel:Fares123456789@cluster0.fm5zods.mongodb.net/BankBlood?retryWrites=true&w=majority"
+      URI_DB
   )
   .then(() => {
     app.listen(port, function () {

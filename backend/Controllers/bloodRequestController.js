@@ -19,12 +19,17 @@ class BloodRequestController {
 
     async markBloodRequestAsDone(req,res) {
         let id = req.params.id;
-        let result = await service.markBloodRequestAsDone(id);
+        let donator_username = req.body.donator_username;
+        let result = await service.markBloodRequestAsDone(id,donator_username);
         if(result === null){
             res.json({
                 message :"Their is no blood request found"
             })
-        }else{
+        }else if(result === "request already did"){
+            res.json({
+                message :"The request already did"
+            })
+        } else{
             res.json({
                 message :"Blood request mark as done successfully"
             })

@@ -1,18 +1,18 @@
 import 'react-pro-sidebar/dist/css/styles.css';
 
-import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
+// import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
-import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
+// import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
+// import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
-import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
-import PieChartOutlineOutlinedIcon from '@mui/icons-material/PieChartOutlineOutlined';
-import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
+// import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+// import PieChartOutlineOutlinedIcon from '@mui/icons-material/PieChartOutlineOutlined';
+// import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
-import { Box, IconButton, Typography, useTheme } from '@mui/material';
+import { Avatar, Box, IconButton, Typography, useTheme } from '@mui/material';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Menu, MenuItem, ProSidebar } from 'react-pro-sidebar';
@@ -102,12 +102,19 @@ const Sidebar = () => {
           {!isCollapsed && (
             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center">
-                <img
+                {/* <img
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`../../assets/user.png`}
+                  src={`/assets/images/user.jpg`}
                   style={{ cursor: 'pointer', borderRadius: '50%' }}
+                /> */}
+
+                <Avatar
+                  // alt={props.username?.toUpperCase()}
+                  alt={'jhon doe'?.toUpperCase()}
+                  src="/static/images/avatar/2.jpg"
+                  sx={{ width: '100px', height: '100px', fontSize: '80px' }}
                 />
               </Box>
               <Box textAlign="center">
@@ -117,10 +124,7 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: '10px 0 0 0' }}
                 >
-                  Ed Roh
-                </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
-                  VP Fancy Admin
+                  John Doe
                 </Typography>
               </Box>
             </Box>
@@ -143,26 +147,26 @@ const Sidebar = () => {
               Data
             </Typography>
             <Item
-              title="Manage Team"
-              to="/team"
+              title="Manage Users"
+              to="/admin/Manage"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Contacts Information"
-              to="/contacts"
+              title="Users Information"
+              to="/admin/info"
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            {/* <Item
               title="Invoices Balances"
               to="/invoices"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
 
             <Typography
               variant="h6"
@@ -171,27 +175,27 @@ const Sidebar = () => {
             >
               Pages
             </Typography>
-            <Item
+            {/* <Item
               title="Profile Form"
               to="/form"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Item
               title="Calendar"
-              to="/calendar"
+              to="/admin/calendar"
               icon={<CalendarTodayOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            {/* <Item
               title="FAQ Page"
               to="/faq"
               icon={<HelpOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
 
             <Typography
               variant="h6"
@@ -200,31 +204,24 @@ const Sidebar = () => {
             >
               Charts
             </Typography>
-            <Item
+            {/* <Item
               title="Bar Chart"
               to="/bar"
               icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
-            <Item
+            /> */}
+            {/* <Item
               title="Pie Chart"
               to="/pie"
               icon={<PieChartOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Item
               title="Line Chart"
-              to="/line"
+              to="/admin/line"
               icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Geography Chart"
-              to="/geography"
-              icon={<MapOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

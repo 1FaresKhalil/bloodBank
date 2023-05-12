@@ -26,7 +26,7 @@ app.use("/website", WebsiteMiddleWare, websiteApp);
 
 const port = process.env.PORT || 8000;
 const URI_DB = process.env.MONGO_URI;
-//const URI_DB = "mongodb+srv://fareskhalel:Fares123456789@cluster0.fm5zods.mongodb.net/BankBlood?retryWrites=true&w=majority"
+
 mongoose
   .connect(
       URI_DB

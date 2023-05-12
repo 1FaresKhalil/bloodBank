@@ -126,7 +126,6 @@ class UserService {
       service: "gmail",
       auth: {
         api_key: this.key
-          // "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",
       },
     })
   );

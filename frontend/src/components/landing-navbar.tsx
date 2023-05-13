@@ -30,6 +30,8 @@ const drawerWidth = 240;
 
 function DrawerAppBar(props: Props) {
   const { t } = useTranslation('common');
+  // const drawerPosition = i18n.dir() === 'rtl' ? 'right' : 'left';
+
   const navItems = [t('signIn'), t('signUp')];
   const navItemMap = {
     [t('signIn')]: 'login',
@@ -121,7 +123,7 @@ function DrawerAppBar(props: Props) {
               </Button>
             ))}
           </Box>
-          <LanguageSwitcher mainColor="text-white" mainFz="font-size-18" />
+          <LanguageSwitcher mainColor="text-white" mainFz="font-size-24" />
         </Toolbar>
       </AppBar>
       <Box component="nav">
@@ -136,6 +138,7 @@ function DrawerAppBar(props: Props) {
           sx={{
             display: { xs: 'block', sm: 'none' },
             '& .MuiDrawer-paper': {
+              // if dir is rtl make right 0 and
               boxSizing: 'border-box',
               width: drawerWidth,
             },

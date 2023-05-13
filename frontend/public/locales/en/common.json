@@ -1,0 +1,14 @@
+{
+  "signIn": "Login",
+  "signUp": "Register",
+  "emailAddress": "Email Address",
+  "password": "Password",
+  "rememberMe": "Remember me",
+  "forgotPassword": "Forgot password?",
+  "dontHaveAccount": "Don't have an account? Sign Up",
+  "invalidEmail": "Invalid email",
+  "invalidPassword": "Invalid password",
+  "copyright": "Copyright ©",
+  "switchLanguage": "Ar",
+  "projectName": "Blood Bank"
+}

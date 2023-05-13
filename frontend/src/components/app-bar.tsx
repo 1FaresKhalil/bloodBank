@@ -20,8 +20,11 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { withTranslation } from 'next-i18next';
 // import Image from 'next/image';
 import * as React from 'react';
+
+import LanguageButton from './lang-button';
 
 const pages = [
   'Blood Request',
@@ -38,6 +41,8 @@ type NavbarProps = {
 // logout
 
 function ResponsiveAppBar(props: NavbarProps) {
+  // eslint-disable-next-line unused-imports/no-unused-vars
+  // const { t } = useTranslation('common');
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const container =
@@ -236,6 +241,16 @@ function ResponsiveAppBar(props: NavbarProps) {
                   </Typography>
                 </MenuItem>
               ))}
+              <MenuItem
+                className="w-full text-black"
+                onClick={() => {
+                  setTimeout(() => {
+                    handleCloseUserMenu();
+                  }, 400);
+                }}
+              >
+                <LanguageButton />
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
@@ -244,4 +259,4 @@ function ResponsiveAppBar(props: NavbarProps) {
   );
 }
 
-export default ResponsiveAppBar;
+export default withTranslation('common')(ResponsiveAppBar);

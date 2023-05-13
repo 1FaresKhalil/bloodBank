@@ -13,14 +13,17 @@ import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
-// import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
+// import Link from '@mui/material/Link';
+import type { GetStaticPropsContext } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import useRouter from 'next/router';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import * as React from 'react';
 
 import { Meta } from '@/layouts/Meta';
@@ -47,6 +50,7 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const { t } = useTranslation('common');
   const [nameError, setNameError] = React.useState(false);
   const [nameHelperText, setNameHelperText] = React.useState('');
 
@@ -172,7 +176,7 @@ export default function SignUp() {
               />
 
               <Typography component="h1" variant="h5">
-                Sign up
+                {t('signUp')}
               </Typography>
               <Box
                 component="form"
@@ -293,13 +297,10 @@ export default function SignUp() {
   );
 }
 
-// import { Meta } from '@/layouts/Meta';
-// import { Main } from '@/templates/Main';
-
-// const Register = () => {
-//   return (
-//     <Main meta={<Meta title="Sign Up" description="sign up" />}>sign up</Main>
-//   );
-// };
-
-// export default Register;
+export async function getStaticProps({ locale = 'en' }: GetStaticPropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
+}

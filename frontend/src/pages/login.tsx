@@ -10,11 +10,15 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import type { AxiosError } from 'axios';
 import axios from 'axios';
+import type { GetStaticPropsContext } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import useRouter from 'next/router';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import * as React from 'react';
 
+// import LanguageSwitcher from '@/components/language-switcher';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
 // create Type for Error response
@@ -40,10 +44,12 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function Login() {
+  const { t } = useTranslation('common');
   const [emailError, setEmailError] = React.useState(false);
   const [passwordError, setPasswordError] = React.useState(false);
 
-  const router = useRouter;
+  const router = useRouter();
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setEmailError(false);
@@ -63,6 +69,7 @@ export default function Login() {
         }
       );
       localStorage.setItem('token', response.data.result.token);
+      // console.log(router.locale);
       router.push('/home');
     } catch (error) {
       const axiosError = error as AxiosError; // Add this line
@@ -93,8 +100,9 @@ export default function Login() {
                 src={'/assets/images/logo.png'}
                 alt="logo"
               />
+              {/* <LanguageSwitcher /> */}
               <Typography component="h1" variant="h5">
-                Sign in
+                {t('signIn')}
               </Typography>
               <Box
                 component="form"
@@ -159,4 +167,11 @@ export default function Login() {
       </Main>
     </ThemeProvider>
   );
+}
+export async function getStaticProps({ locale = 'en' }: GetStaticPropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
 }

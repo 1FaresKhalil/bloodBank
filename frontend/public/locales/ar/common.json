@@ -1,0 +1,14 @@
+{
+  "signIn": "تسجيل الدخول",
+  "signUp": "انشاء حساب",
+  "emailAddress": "عنوان البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "rememberMe": "تذكرني",
+  "forgotPassword": "هل نسيت كلمة المرور؟",
+  "dontHaveAccount": "ليس لديك حساب؟ سجل",
+  "invalidEmail": "البريد الإلكتروني غير صالح",
+  "invalidPassword": "كلمة المرور غير صحيحة",
+  "copyright": "حقوق النشر ©",
+  "switchLanguage": "en",
+  "projectName": "بنك الدم"
+}

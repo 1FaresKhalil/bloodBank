@@ -13,7 +13,10 @@ import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
+import { useTranslation, withTranslation } from 'next-i18next';
 import * as React from 'react';
+
+import LanguageSwitcher from './language-switcher';
 
 interface Props {
   /**
@@ -24,9 +27,17 @@ interface Props {
 }
 
 const drawerWidth = 240;
-const navItems = ['Login', 'Register'];
 
-export default function DrawerAppBar(props: Props) {
+function DrawerAppBar(props: Props) {
+  const { t } = useTranslation('common');
+  const navItems = [t('signIn'), t('signUp')];
+  const navItemMap = {
+    [t('signIn')]: 'login',
+    [t('signUp')]: 'register',
+  };
+  function getEnglishPath(item: string): string {
+    return navItemMap[item] || '';
+  }
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -37,7 +48,7 @@ export default function DrawerAppBar(props: Props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        Blood Bank
+        {t('projectName')}
       </Typography>
       <Divider />
       <List>
@@ -46,7 +57,7 @@ export default function DrawerAppBar(props: Props) {
             <ListItemButton
               sx={{ textAlign: 'center' }}
               LinkComponent={Link}
-              href={item.toLowerCase()}
+              href={getEnglishPath(item)}
             >
               <ListItemText primary={item} />
             </ListItemButton>
@@ -91,8 +102,9 @@ export default function DrawerAppBar(props: Props) {
               display: { xs: 'flex', sm: 'block' },
             }}
           >
-            Blood Bank
+            {t('projectName')}
           </Typography>
+
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
               <Button
@@ -102,13 +114,14 @@ export default function DrawerAppBar(props: Props) {
               >
                 <Link
                   className="text-white no-underline hover:text-red-300"
-                  href={`${item.toLowerCase()}`}
+                  href={getEnglishPath(item)}
                 >
                   {item}
                 </Link>
               </Button>
             ))}
           </Box>
+          <LanguageSwitcher mainColor="text-white" mainFz="font-size-18" />
         </Toolbar>
       </AppBar>
       <Box component="nav">
@@ -137,3 +150,4 @@ export default function DrawerAppBar(props: Props) {
     </Box>
   );
 }
+export default withTranslation('common')(DrawerAppBar);

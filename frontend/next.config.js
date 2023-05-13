@@ -23,4 +23,16 @@ module.exports = withBundleAnalyzer({
     importer: globImporter(),
     includePaths: [path.join(__dirname, 'styles')],
   },
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'ar'],
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/:locale(en|ar)/:path*',
+        destination: '/:path*',
+      },
+    ];
+  },
 });

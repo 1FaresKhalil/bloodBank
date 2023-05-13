@@ -1,24 +1,19 @@
-// import Box from '@mui/material/Box';
-// import Container from '@mui/material/Container';
-// import CssBaseline from '@mui/material/CssBaseline';
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
-// import Typography from '@mui/material/Typography';
 import axios from 'axios';
-// import Link from 'next/link';
-// import Image from 'next/image';
-// import Link from 'next/link';
+import type { GetStaticPropsContext } from 'next';
+// import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import * as React from 'react';
 import useSWR from 'swr';
 
 import Navbar from '@/components/app-bar';
 import ErrorPage from '@/components/error';
-// import ErrorPage from '@/components/error';
 import Footer from '@/components/footer';
 import Loading from '@/components/loading';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
 
 function Home() {
+  // const { t } = useTranslation('common');
   // Fetch profile data using SWR
   const { data, error } = useSWR(
     `${process.env.NEXT_PUBLIC_DB_URI}/admin/profile`,
@@ -60,3 +55,10 @@ function Home() {
 }
 
 export default Home;
+export async function getStaticProps({ locale = 'en' }: GetStaticPropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
+}

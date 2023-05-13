@@ -111,6 +111,7 @@ export default function Login() {
                 noValidate
                 sx={{ mt: 1 }}
               >
+                {/* ss */}
                 <TextField
                   error={emailError}
                   helperText={emailError ? 'Invalid email' : ''}
@@ -145,16 +146,14 @@ export default function Login() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  {t("signIn")}
+                  {t('signIn')}
                 </Button>
                 <Grid container>
                   <Grid item xs>
                     <Link href="/forget-password">{t('forgotPassword')}</Link>
                   </Grid>
                   <Grid item>
-                    <Link href="/register">
-                      {t('doNotHaveAccount')}
-                    </Link>
+                    <Link href="/register">{t('doNotHaveAccount')}</Link>
                   </Grid>
                 </Grid>
               </Box>

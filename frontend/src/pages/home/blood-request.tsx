@@ -16,13 +16,13 @@ import TextField from '@mui/material/TextField';
 // import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
+import type { GetStaticPropsContext } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import * as React from 'react';
-import useSWR from 'swr';
-import type { GetStaticPropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import * as React from 'react';
+import useSWR from 'swr';
 
 import Navbar from '@/components/app-bar';
 import ErrorPage from '@/components/error';
@@ -105,10 +105,10 @@ export default function SignInSide() {
             sx={{
               backgroundImage: 'url("/assets/images/header.jpg")',
               backgroundRepeat: 'no-repeat',
-              backgroundColor: (t) =>
-                t.palette.mode === 'light'
-                  ? t.palette.grey[50]
-                  : t.palette.grey[900],
+              backgroundColor: (color) =>
+                color.palette.mode === 'light'
+                  ? color.palette.grey[50]
+                  : color.palette.grey[900],
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}

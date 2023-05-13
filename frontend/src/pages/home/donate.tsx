@@ -1,10 +1,10 @@
 import { Button } from '@mui/material';
 import axios from 'axios';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 // import Image from 'next/image';
 // import Link from 'next/link';
 import type { GetStaticPropsContext } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import * as React from 'react';
@@ -25,7 +25,7 @@ type BloodRequest = {
 };
 
 function Donate() {
-  const {t} = useTranslation('common');
+  const { t } = useTranslation('common');
   const router = useRouter();
   let token: string | null = '';
   if (typeof window !== 'undefined' && localStorage) {
@@ -191,7 +191,7 @@ function Donate() {
                       </div>
                       <div className="flex flex-col gap-1">
                         <span className="opacity-60 font-size-18 text-stone-900">
-                         {t('location')}
+                          {t('location')}
                         </span>
                         <span className="font-size-21">
                           {item.nearestHospital.toUpperCase()}
@@ -232,7 +232,7 @@ function Donate() {
                       // LinkComponent={Link}
                       // href="/home/chat"
                     >
-                    {t('Chat')}
+                      {t('Chat')}
                     </Button>
                     <Button
                       sx={{

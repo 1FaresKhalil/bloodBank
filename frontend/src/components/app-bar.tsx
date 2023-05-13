@@ -20,9 +20,8 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { withTranslation } from 'next-i18next';
 // import Image from 'next/image';
-import { useTranslation } from 'next-i18next';
+import { useTranslation,withTranslation } from 'next-i18next';
 import * as React from 'react';
 
 import LanguageButton from './lang-button';

@@ -12,6 +12,9 @@ import {
   Typography,
 } from '@mui/material';
 import axios from 'axios';
+import type { GetStaticPropsContext } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 // import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
@@ -20,12 +23,8 @@ import useSWR from 'swr';
 import Navbar from '@/components/app-bar';
 import ErrorPage from '@/components/error';
 import Loading from '@/components/loading';
-import type { GetStaticPropsContext } from 'next';
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
-
 
 type Message = {
   username: string;
@@ -37,7 +36,7 @@ const socket = io(`https://chief-honored-mice.glitch.me`, {
 });
 
 const ChatPage = () => {
-  const {t} = useTranslation('common');
+  const { t } = useTranslation('common');
   // const router = useRouter();
   let token: string | null = '';
   if (typeof window !== 'undefined' && localStorage) {
@@ -234,7 +233,7 @@ const ChatPage = () => {
                   pointerEvents: 'none', // Prevent click events
                 }}
               >
-                <Typography>Chats</Typography>
+                <Typography>{t('chats')}</Typography>
               </ListItem>
               {users
                 ?.filter((user) => user?._id !== profile.user._id)
@@ -356,7 +355,7 @@ const ChatPage = () => {
             )}
             {selectedUser === null && (
               <div className="main-container font-size-32 h-[100%] lg:h-screen flex justify-center items-center">
-                <h2>Select any user to start chatting!</h2>
+                <h2>{t('selectUser')}</h2>
               </div>
             )}
           </Box>

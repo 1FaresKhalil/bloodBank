@@ -123,7 +123,7 @@ function DrawerAppBar(props: Props) {
               </Button>
             ))}
           </Box>
-          <LanguageSwitcher mainColor="text-white" mainFz="font-size-24" />
+          <LanguageSwitcher mainColor="!text-white" mainFz="font-size-24" />
         </Toolbar>
       </AppBar>
       <Box component="nav">

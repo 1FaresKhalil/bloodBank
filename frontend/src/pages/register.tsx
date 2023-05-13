@@ -30,6 +30,7 @@ import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
 
 function Copyright(props: any) {
+   const { t } = useTranslation('common');
   return (
     <Typography
       variant="body2"
@@ -37,9 +38,9 @@ function Copyright(props: any) {
       align="center"
       {...props}
     >
-      {'Copyright © '}
+      {t('copyright')}
       <Link className="text-black" href="/">
-        Blood Bank
+        {t('projectName')}
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -193,7 +194,7 @@ export default function SignUp() {
                       required
                       fullWidth
                       id="name"
-                      label="Name"
+                      label={t('userNamePlaceholder')}
                       name="name"
                       autoComplete="family-name"
                     />
@@ -208,7 +209,7 @@ export default function SignUp() {
                       required
                       fullWidth
                       id="email"
-                      label="Email Address"
+                      label={t('EmailPlaceholder')}
                       name="email"
                       autoComplete="email"
                     />
@@ -223,7 +224,7 @@ export default function SignUp() {
                       required
                       fullWidth
                       name="password"
-                      label="Password"
+                      label={t('passwordPlaceholder')}
                       type="password"
                       id="password"
                       autoComplete="new-password"
@@ -235,7 +236,7 @@ export default function SignUp() {
                         error={bloodError}
                         id="demo-simple-select-label"
                       >
-                        Blood Type
+                        {t('BloodType')}
                       </InputLabel>
                       <Select
                         error={bloodError}
@@ -264,7 +265,7 @@ export default function SignUp() {
                       control={
                         <Checkbox value="allowExtraEmails" color="primary" />
                       }
-                      label="I want to receive donation requests and updates via email."
+                      label={t('signUpConfirmation')}
                     />
                   </Grid>
                 </Grid>
@@ -275,11 +276,11 @@ export default function SignUp() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Sign Up
+                  {t('signUp')}
                 </Button>
                 <Grid container justifyContent="flex-end">
                   <Grid item>
-                    <Link href="/login">Already have an account? Sign in</Link>
+                    <Link href="/login">{t('alreadyHaveAccount')}</Link>
                   </Grid>
                 </Grid>
               </Box>

@@ -24,6 +24,7 @@ import { Main } from '@/templates/Main';
 // create Type for Error response
 
 function Copyright(props: any) {
+  const { t } = useTranslation('common');
   return (
     <Typography
       variant="body2"
@@ -31,9 +32,9 @@ function Copyright(props: any) {
       align="center"
       {...props}
     >
-      {'Copyright © '}
-      <Link className="text-black " color="inherit" href="/">
-        Blood Bank
+      {t('copyright')}
+      <Link className="text-black" href="/">
+        {t('projectName')}
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -117,7 +118,7 @@ export default function Login() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label={t('EmailPlaceholder')}
                   name="email"
                   autoComplete="email"
                   autoFocus
@@ -129,14 +130,14 @@ export default function Login() {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label={t('passwordPlaceholder')}
                   type="password"
                   id="password"
                   autoComplete="current-password"
                 />
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
+                  label={t('rememberMe')}
                 />
                 <Button
                   type="submit"
@@ -144,15 +145,15 @@ export default function Login() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Sign In
+                  {t("signIn")}
                 </Button>
                 <Grid container>
                   <Grid item xs>
-                    <Link href="/forget-password">Forgot password?</Link>
+                    <Link href="/forget-password">{t('forgotPassword')}</Link>
                   </Grid>
                   <Grid item>
                     <Link href="/register">
-                      {"Don't have an account? Sign Up"}
+                      {t('doNotHaveAccount')}
                     </Link>
                   </Grid>
                 </Grid>

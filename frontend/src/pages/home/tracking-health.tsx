@@ -1,6 +1,9 @@
 import { Button, TextField } from '@mui/material';
 import axios from 'axios';
 import React, { useLayoutEffect, useRef, useState } from 'react';
+import type { GetStaticPropsContext } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {
   CartesianGrid,
@@ -26,6 +29,7 @@ type HealthData = {
 };
 
 const TrackingHealth = () => {
+  const {t} = useTranslation('common');
   const [showSugar, setShowSugar] = useState(true);
   const [showWeight, setShowWeight] = useState(true);
   const [showBloodPressure, setShowBloodPressure] = useState(true);
@@ -244,3 +248,10 @@ const TrackingHealth = () => {
 };
 
 export default TrackingHealth;
+export async function getStaticProps({ locale = 'en' }: GetStaticPropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
+}

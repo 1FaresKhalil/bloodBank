@@ -8,7 +8,9 @@ import Image from 'next/image';
 // import Link from 'next/link';
 import * as React from 'react';
 import useSWR from 'swr';
-
+import type { GetStaticPropsContext } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Navbar from '@/components/app-bar';
 import ErrorPage from '@/components/error';
 

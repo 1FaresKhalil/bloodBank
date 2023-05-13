@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 // import Image from 'next/image';
 // import Link from 'next/link';
+import type { GetStaticPropsContext } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import * as React from 'react';
 import useSWR from 'swr';
 
@@ -22,6 +25,7 @@ type BloodRequest = {
 };
 
 function Donate() {
+  const {t} = useTranslation('common');
   const router = useRouter();
   let token: string | null = '';
   if (typeof window !== 'undefined' && localStorage) {
@@ -181,13 +185,13 @@ function Donate() {
                     <div className="flex flex-col gap-6">
                       <div className="flex flex-col gap-1">
                         <span className="opacity-60 font-size-18 text-stone-900">
-                          Patient Name
+                          {t('patientName')}
                         </span>
                         <span className="font-size-21">{item.patientName}</span>
                       </div>
                       <div className="flex flex-col gap-1">
                         <span className="opacity-60 font-size-18 text-stone-900">
-                          Location
+                         {t('location')}
                         </span>
                         <span className="font-size-21">
                           {item.nearestHospital.toUpperCase()}
@@ -197,13 +201,13 @@ function Donate() {
                     <div className="flex flex-col gap-6">
                       <div className="flex flex-col gap-1">
                         <span className="opacity-60 font-size-18 text-stone-900">
-                          Date Posted
+                          {t('datePosted')}
                         </span>
                         <span className="font-size-21">{formattedDate}</span>
                       </div>
                       <div className="flex flex-col gap-1">
                         <span className="opacity-60 font-size-18 text-stone-900">
-                          Blood Type
+                          {t('BloodType')}
                         </span>
                         <span className="font-size-21">
                           {item.bloodType.toUpperCase()}
@@ -228,7 +232,7 @@ function Donate() {
                       // LinkComponent={Link}
                       // href="/home/chat"
                     >
-                      Chat
+                    {t('Chat')}
                     </Button>
                     <Button
                       sx={{
@@ -243,7 +247,7 @@ function Donate() {
                       LinkComponent={Link}
                       href="/home"
                     >
-                      More Details
+                      {t('moreDetails')}
                     </Button>
                   </div>
                 </div>
@@ -256,3 +260,10 @@ function Donate() {
 }
 
 export default Donate;
+export async function getStaticProps({ locale = 'en' }: GetStaticPropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
+}

@@ -20,6 +20,9 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import useSWR from 'swr';
+import type { GetStaticPropsContext } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import Navbar from '@/components/app-bar';
 import ErrorPage from '@/components/error';
@@ -29,6 +32,7 @@ import { Main } from '@/templates/Main';
 const theme = createTheme();
 
 export default function SignInSide() {
+  const { t } = useTranslation('common');
   let token: string | null = '';
   if (typeof window !== 'undefined' && localStorage) {
     token = localStorage.getItem('token');
@@ -134,7 +138,7 @@ export default function SignInSide() {
                 alt="logo"
               />
               <Typography component="h1" variant="h5">
-                Submit a Blood Request
+                {t('submitBloodRequest')}
               </Typography>
               <Box
                 component="form"
@@ -148,7 +152,7 @@ export default function SignInSide() {
                   required
                   fullWidth
                   id="name"
-                  label="Patient Name"
+                  label={t('patientName')}
                   name="name"
                   type="text"
                   autoComplete="name"
@@ -163,7 +167,7 @@ export default function SignInSide() {
                     maxLength: 11,
                   }}
                   id="phone"
-                  label="Phone Number"
+                  label={t('phonePlaceholder')}
                   name="phone"
                   type="tel"
                   autoComplete="phone"
@@ -175,7 +179,7 @@ export default function SignInSide() {
                   required
                   fullWidth
                   id="address"
-                  label="Address"
+                  label={t('addressPlaceholder')}
                   name="address"
                   type="text"
                   autoComplete="address"
@@ -183,7 +187,7 @@ export default function SignInSide() {
                 />
                 <FormControl fullWidth required className="my-2">
                   <InputLabel id="demo-simple-select-label">
-                    Blood Type
+                    {t('BloodType')}
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
@@ -201,11 +205,11 @@ export default function SignInSide() {
                     <MenuItem value={'ab+'}>AB+</MenuItem>
                     <MenuItem value={'ab-'}>AB-</MenuItem>
                   </Select>
-                  <FormHelperText>Please select your blood type</FormHelperText>
+                  <FormHelperText>{t('selectBloodType')}</FormHelperText>
                 </FormControl>
                 <FormControl fullWidth required className="my-2">
                   <InputLabel id="demo-simple-select-label">
-                    Nearest Hospital
+                    {t('nearestHospital')}
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
@@ -223,9 +227,7 @@ export default function SignInSide() {
                     </MenuItem>
                     <MenuItem value={'shraq-medena'}>Shraq Elmedina</MenuItem>
                   </Select>
-                  <FormHelperText>
-                    Please select your nearest hospital to you
-                  </FormHelperText>
+                  <FormHelperText>{t('selectNearestHospital')}</FormHelperText>
                 </FormControl>
                 <TextField
                   className="my-2"
@@ -234,7 +236,7 @@ export default function SignInSide() {
                   fullWidth
                   id="note"
                   type="text"
-                  label="Note"
+                  label={t('notePlaceholder')}
                   name="note"
                   autoComplete="note"
                   autoFocus
@@ -245,7 +247,7 @@ export default function SignInSide() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Submit Blood Request
+                  {t('submitBloodRequest')}
                 </Button>
               </Box>
             </Box>
@@ -254,4 +256,11 @@ export default function SignInSide() {
       </Main>
     </ThemeProvider>
   );
+}
+export async function getStaticProps({ locale = 'en' }: GetStaticPropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
 }

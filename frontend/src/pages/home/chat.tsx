@@ -20,8 +20,12 @@ import useSWR from 'swr';
 import Navbar from '@/components/app-bar';
 import ErrorPage from '@/components/error';
 import Loading from '@/components/loading';
+import type { GetStaticPropsContext } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
+
 
 type Message = {
   username: string;
@@ -33,6 +37,7 @@ const socket = io(`https://chief-honored-mice.glitch.me`, {
 });
 
 const ChatPage = () => {
+  const {t} = useTranslation('common');
   // const router = useRouter();
   let token: string | null = '';
   if (typeof window !== 'undefined' && localStorage) {
@@ -363,3 +368,10 @@ const ChatPage = () => {
 };
 
 export default ChatPage;
+export async function getStaticProps({ locale = 'en' }: GetStaticPropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
+}

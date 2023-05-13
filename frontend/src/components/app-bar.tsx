@@ -22,6 +22,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { withTranslation } from 'next-i18next';
 // import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
 import * as React from 'react';
 
 import LanguageButton from './lang-button';
@@ -42,7 +43,7 @@ type NavbarProps = {
 
 function ResponsiveAppBar(props: NavbarProps) {
   // eslint-disable-next-line unused-imports/no-unused-vars
-  // const { t } = useTranslation('common');
+  const { t } = useTranslation('common');
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const container =
@@ -78,7 +79,7 @@ function ResponsiveAppBar(props: NavbarProps) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        Blood Bank
+        {t('projectName')}
       </Typography>
       <Divider />
       <List>
@@ -96,7 +97,7 @@ function ResponsiveAppBar(props: NavbarProps) {
                     ? 'opacity-90 my-2 mx-3 text-red-600 block'
                     : 'my-2 mx-3 text-black block'
                 }
-                primary={item}
+                primary={t(item)}
               />
             </ListItemButton>
           </ListItem>
@@ -124,7 +125,7 @@ function ResponsiveAppBar(props: NavbarProps) {
             }}
           >
             <Link className="text-white" href={`/home`}>
-              Blood Bank
+              {t('projectName')}
             </Link>
           </Typography>
 
@@ -176,7 +177,7 @@ function ResponsiveAppBar(props: NavbarProps) {
             }}
           >
             <Link className="text-white" href={`/home`}>
-              Blood Bank
+              {t('projectName')}
             </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -192,7 +193,7 @@ function ResponsiveAppBar(props: NavbarProps) {
                 href={`/home/${page.toLowerCase().replace(' ', '-')}`}
                 onClick={handleCloseNavMenu}
               >
-                {page}
+                {t(page)}
               </Link>
               // <Button
               //   key={page}
@@ -237,7 +238,7 @@ function ResponsiveAppBar(props: NavbarProps) {
                     href={`/home/${setting.toLowerCase()}`}
                     textAlign="center"
                   >
-                    {setting}
+                    {t(setting)}
                   </Typography>
                 </MenuItem>
               ))}

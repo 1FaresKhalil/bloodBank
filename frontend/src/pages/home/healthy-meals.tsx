@@ -5,9 +5,13 @@ import * as React from 'react';
 import useSWR from 'swr';
 
 import Navbar from '@/components/app-bar';
+import type { GetStaticPropsContext } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import ErrorPage from '@/components/error';
 
 function HealthyMeals() {
+  const {t} = useTranslation('common');
   // Fetch profile data using SWR
   const { data, error } = useSWR(
     `${process.env.NEXT_PUBLIC_DB_URI}/admin/profile`,
@@ -39,3 +43,10 @@ function HealthyMeals() {
 }
 
 export default HealthyMeals;
+export async function getStaticProps({ locale = 'en' }: GetStaticPropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
+}

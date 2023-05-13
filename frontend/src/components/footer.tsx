@@ -1,5 +1,7 @@
+import { useTranslation, withTranslation } from 'next-i18next';
 const Footer = () => {
-  return <div className="text-center my-4">Copyright © Blood Bank 2023.</div>;
+  const { t } = useTranslation('common');
+  return <div className="text-center my-4">{t('footerCopyRight')}</div>;
 };
 
-export default Footer;
+export default withTranslation('common')(Footer);

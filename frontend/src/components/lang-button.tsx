@@ -19,7 +19,7 @@ const LanguageSwitcher: React.FC = () => {
   return (
     <div>
       <FormControlLabel
-        className="mx-0"
+        className="!mx-0 "
         control={
           <Switch
             checked={i18n.language === 'ar'}

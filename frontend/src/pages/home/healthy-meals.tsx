@@ -17,6 +17,8 @@ import useSWR from 'swr';
 import Navbar from '@/components/app-bar';
 import ErrorPage from '@/components/error';
 import Loading from '@/components/loading';
+import { Meta } from '@/layouts/Meta';
+import { Main } from '@/templates/Main';
 
 type Meal = {
   id: string;
@@ -26,6 +28,7 @@ type Meal = {
   steps: string[];
   readyInMinutes: number;
   calories: number;
+  pricePerServing: number;
 };
 
 function HealthyMeals() {
@@ -74,6 +77,7 @@ function HealthyMeals() {
           steps,
           readyInMinutes: mealDetails.data.readyInMinutes,
           calories,
+          // pricePerServing: mealDetails.data.pricePerServing,
         };
       })
     );
@@ -121,7 +125,7 @@ function HealthyMeals() {
   }
 
   return (
-    <div>
+    <Main meta={<Meta title="Healthy Meals" description="healthy meals" />}>
       <Navbar username={data?.user?.username} />
       <Box>
         <div className="main-container">
@@ -175,7 +179,7 @@ function HealthyMeals() {
                   {meals.map((meal) => (
                     <Grid item xs={12} sm={6} lg={4} key={meal.id}>
                       <Card
-                        className="shadow max-h-[70vh] overflow-auto"
+                        className="shadow max-h-[70vh] !overflow-auto"
                         sx={{
                           display: 'flex',
                           flexDirection: 'column',
@@ -225,6 +229,13 @@ function HealthyMeals() {
                           >
                             {meal.readyInMinutes} minutes
                           </Typography>
+                          {/* <Typography variant="h6">Price:</Typography>
+                          <Typography
+                            variant="body1"
+                            sx={{ fontWeight: 'bold' }}
+                          >
+                            ${meal.pricePerServing.toFixed(2)} per serving
+                          </Typography> */}
                           <Typography variant="h6">Calories:</Typography>
                           <Typography
                             variant="body1"
@@ -255,7 +266,7 @@ function HealthyMeals() {
           )}
         </div>
       </Box>
-    </div>
+    </Main>
   );
 }
 

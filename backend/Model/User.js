@@ -1,22 +1,23 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
+const UserSchema = new Schema(
+  {
     name: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     username: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     password: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
-    bloodType:{
-        type: String,
-        required: true,
+    bloodType: {
+      type: String,
+      required: true,
     },
     isAdmin: Boolean,
     age: Number,
@@ -25,6 +26,8 @@ const UserSchema = new Schema({
     gender: String,
     phone: String,
     verified: Boolean,
-});
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('users',UserSchema);
+module.exports = mongoose.model("users", UserSchema);

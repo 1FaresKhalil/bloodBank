@@ -27,6 +27,8 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.0",
     "@mui/x-data-grid": "^6.4.0",
+    "@nivo/line": "^0.83.0",
+    "@nivo/pie": "^0.83.0",
     "axios": "^1.3.5",
     "next": "^13.2.4",
     "next-i18next": "^13.2.2",

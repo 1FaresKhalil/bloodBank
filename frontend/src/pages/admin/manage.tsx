@@ -82,6 +82,7 @@ const Manage = () => {
     params: GridRowParams,
     event: MuiEvent<React.SyntheticEvent>
   ) => {
+    console.log(params);
     event.defaultMuiPrevented = true;
   };
 
@@ -89,6 +90,7 @@ const Manage = () => {
     params,
     event
   ) => {
+    console.log(params);
     event.defaultMuiPrevented = true;
   };
 

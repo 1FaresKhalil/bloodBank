@@ -13,7 +13,6 @@ import type {
   GridRowId,
   GridRowModel,
   GridRowModesModel,
-  GridRowParams,
   GridRowsProp,
   MuiEvent,
 } from '@mui/x-data-grid';

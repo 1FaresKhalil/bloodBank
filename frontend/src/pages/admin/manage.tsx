@@ -111,11 +111,13 @@ const Manage = () => {
       throw new Error('Token not found');
     }
 
-    axios.delete(`${process.env.NEXT_PUBLIC_DB_URI}/admin/users/${id}`, {
-      headers: {
-        Authorization: `${token}`,
-      },
-    });
+    axios
+      .delete(`${process.env.NEXT_PUBLIC_DB_URI}/admin/users/${id}`, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      })
+      .then((res) => console.log(res));
   };
 
   const handleCancelClick = (id: GridRowId) => () => {

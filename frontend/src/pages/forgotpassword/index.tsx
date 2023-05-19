@@ -2,20 +2,16 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import type { AxiosError } from 'axios';
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
-import useRouter from 'next/router';
 import * as React from 'react';
 
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
-// create Type for Error response
 
 function Copyright(props: any) {
   return (
@@ -37,41 +33,39 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 
-export default function ForgetPassword() {
-  const [emailError, setEmailError] = React.useState(false);
-
-  const router = useRouter;
+export default function Forgotpassword() {
+  const [message, setMessage] = React.useState('');
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setEmailError(false);
-
     const data = new FormData(event.currentTarget);
-    const email = data.get('email');
-    const password = data.get('password');
 
     try {
+      // console.log(process.env.NEXT_PUBLIC_DB_URI);
       // Make POST request using Axios
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_DB_URI}/admin/login`,
+        `${process.env.NEXT_PUBLIC_DB_URI}/admin/forgotPassword`,
         {
-          username: email,
-          password,
+          username: data.get('email'),
+          hostname: window.location.host,
         }
       );
-      localStorage.setItem('token', response.data.result.token);
-      router.push('/home');
-    } catch (error) {
-      const axiosError = error as AxiosError; // Add this line
-      // Handle error
-      if (axiosError.response) {
-        setEmailError(true);
+      console.log(response);
+
+      setMessage(response.data.message);
+    } catch (error: any) {
+      console.log(error);
+      if (error?.response?.status === 404) {
+        setMessage(error.response.data.message);
+      } else {
+        setMessage(error.response.data.message || error.message);
       }
     }
   };
+
   return (
     <ThemeProvider theme={theme}>
       <Main
-        meta={<Meta title="Forget Password" description="forget password" />}
+        meta={<Meta title="Forgot Password" description="Forgot Password" />}
       >
         <div className="h-screen flex flex-col justify-between">
           <Container component="div" maxWidth="xs">
@@ -91,7 +85,7 @@ export default function ForgetPassword() {
                 alt="logo"
               />
               <Typography component="h1" variant="h5">
-                Forget Password
+                Forgot Password
               </Typography>
               <Box
                 component="form"
@@ -100,8 +94,6 @@ export default function ForgetPassword() {
                 sx={{ mt: 1 }}
               >
                 <TextField
-                  error={emailError}
-                  helperText={emailError ? 'Invalid email' : ''}
                   margin="normal"
                   required
                   fullWidth
@@ -111,20 +103,34 @@ export default function ForgetPassword() {
                   autoComplete="email"
                   autoFocus
                 />
-
                 <Button
                   type="submit"
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Submit
+                  Send Email
+                </Button>{' '}
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: 'error.main',
+                    ':hover': { bgcolor: '#c02b2b' },
+                  }}
+                  href="login"
+                  component={Link}
+                >
+                  cancel
+                  {/* <Link href="login">cancel</Link> */}
                 </Button>
-                <Grid container>
-                  <Grid item xs>
-                    <Link href="/login">Go back to Login</Link>
-                  </Grid>
-                </Grid>
+                <Typography
+                  color={message === 'Email sent' ? 'green' : 'error'}
+                  textAlign={'center'}
+                  fontWeight={'bold'}
+                  fontSize={'h6.fontSize'}
+                >
+                  {message}
+                </Typography>
               </Box>
             </Box>
           </Container>

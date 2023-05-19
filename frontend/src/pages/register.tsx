@@ -30,7 +30,7 @@ import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
 
 function Copyright(props: any) {
-   const { t } = useTranslation('common');
+  const { t } = useTranslation('common');
   return (
     <Typography
       variant="body2"
@@ -137,6 +137,7 @@ export default function SignUp() {
           bloodType: bloodType.toLowerCase() as string,
           username: data.get('email'),
           password: data.get('password'),
+          hostname: window.location.host,
         }
       );
       // console.log(response);

@@ -6,14 +6,31 @@ const sendGridTransport = require("nodemailer-sendgrid-transport");
 const crypto = require("crypto");
 
 class UserService {
-  async signUp(data) {
+  async signUp(data, req) {
     try {
       const user = await User.findOne({ username: data.username });
       if (!user) {
         data.password = await bcrypt.hash(data.password, 10);
         data.verified = false;
+
         const new_user = new User(data);
+
         await new_user.save();
+        // console.log(new_user);
+        let verificationToken = jwt.sign(
+          {
+            username: new_user.username,
+            id: new_user._id,
+          },
+          "loginccqq"
+        );
+
+        this.sendVerificationEmail(
+          data.username,
+          verificationToken,
+          req,
+          data.isAdmin
+        );
         return true;
       } else {
         return "the username already exists use another one!";
@@ -75,9 +92,11 @@ class UserService {
       if (!user) {
         return null;
       } else {
+        console.log(user);
         return await User.deleteOne({ _id: id });
       }
     } catch (e) {
+      // console.log(e);
       return null;
     }
   }
@@ -120,33 +139,39 @@ class UserService {
     return [decoded.username, decoded.id, decoded.isAdmin];
   }
 
-  key = process.env.SENDGRID_SECRET_KEY
-  transporter = nodemailer.createTransport(
-    sendGridTransport({
-      service: "gmail",
-      auth: {
-        api_key: this.key
-      },
-    })
-  );
+  // key = process.env.SENDGRID_SECRET_KEY
+  // transporter = nodemailer.createTransport(
+  //   sendGridTransport({
+  //     service: "gmail",
+  //     auth: {
+  //       api_key: this.key
+  //     },
+  //   })
+  // );
 
   async forgotPassword(req, email) {
-    let resetLink;
     const user = await User.findOne({ username: email });
     if (!user) {
       return "user not found";
     } else {
-      const code = crypto.randomBytes(1).toString("hex");
-      let token = jwt.sign({ code }, "resettoken", { expiresIn: "60m" });
+      let token = jwt.sign({ username: user.username }, "resettoken", {
+        expiresIn: "60m",
+      });
 
+      let resetLink;
       if (user.isAdmin === true) {
-        resetLink = `http://${req.headers.host}/admin/resetPassword/${token}`;
+        resetLink = `http://${req.body.hostname}/forgotpassword/reset/${token}`;
       } else {
-        resetLink = `http://${req.headers.host}/website/resetPassword/${token}`;
+        resetLink = `http://${req.body.hostname}/forgotpassword/reset/${token}`;
       }
 
+      if (!req.body.hostname && user.isAdmin)
+        resetLink = `http://${req.headers.host}/admin/resetpassword/${token}`;
+      else if (!req.body.hostname && !user.isAdmin)
+        resetLink = `http://${req.headers.host}/website/resetpassword/${token}`;
+
       const mailOptions = {
-        from: "0xalameda@gmail.com",
+        from: process.env.SENDGRID_Email,
         to: email,
         subject: "Reset your password",
         html: `
@@ -158,7 +183,15 @@ class UserService {
       };
 
       try {
-        await this.transporter.sendMail(mailOptions);
+        const transporter = nodemailer.createTransport(
+          sendGridTransport({
+            auth: {
+              api_key: process.env.SENDGRID_SECRET_KEY,
+            },
+          })
+        );
+        await transporter.sendMail(mailOptions);
+
         return {
           message: "Email sent",
           resetLink: resetLink,
@@ -170,17 +203,17 @@ class UserService {
     }
   }
 
-  async resetPassword(resetToken, username, newPassword) {
+  async resetPassword(resetToken, newPassword) {
     try {
-      const user = await User.findOne({ username: username });
+      let decoded = jwt.verify(resetToken, "resettoken");
+      const user = await User.findOne({ username: decoded.username });
       if (!user) {
         return "The user not found";
       } else {
         try {
-          let decoded = jwt.verify(resetToken, "resettoken");
           newPassword = await bcrypt.hash(newPassword, 10);
           return User.updateOne(
-            { username: username },
+            { username: user.username },
             { password: newPassword }
           );
         } catch (e) {
@@ -213,9 +246,47 @@ class UserService {
     }
   }
 
+  async sendVerificationEmail(to, verificationToken, req, isAdmin) {
+    // console.log("ff");
+
+    const transporter = nodemailer.createTransport(
+      sendGridTransport({
+        auth: {
+          api_key: process.env.SENDGRID_SECRET_KEY,
+        },
+      })
+    );
+    // console.log(req.body);
+    let verifyUrl;
+    if (isAdmin === true) {
+      verifyUrl = `http://${req.body.hostname}/verifyemail/${verificationToken}`;
+    } else {
+      verifyUrl = `http://${req.body.hostname}/verifyemail/${verificationToken}`;
+    }
+
+    if (!req.body.hostname && isAdmin)
+      verifyUrl = `http://${req.headers.host}/admin/verification/${verificationToken}`;
+    else if (!req.body.hostname && !isAdmin)
+      verifyUrl = `http://${req.headers.host}/website/verification/${verificationToken}`;
+
+    const message = `<div>please verify your email</div>
+    <a href=${verifyUrl}>
+    <button>verify</button>
+    </a>
+    `;
+
+    await transporter.sendMail({
+      to: to,
+      from: "abdoshookry2001@gmail.com",
+      subject: "verify email",
+      html: message,
+    });
+  }
+
   async accountVerification(token) {
     try {
       let data_from_token = await this.extractInfoFromToken(token);
+
       let [, id] = data_from_token;
       let user = await User.findById(id);
       if (!user) {

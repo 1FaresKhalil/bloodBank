@@ -150,7 +150,7 @@ export default function Login() {
                 </Button>
                 <Grid container>
                   <Grid item xs>
-                    <Link href="/forget-password">{t('forgotPassword')}</Link>
+                    <Link href="/forgotpassword">{t('forgotPassword')}</Link>
                   </Grid>
                   <Grid item>
                     <Link href="/register">{t('doNotHaveAccount')}</Link>

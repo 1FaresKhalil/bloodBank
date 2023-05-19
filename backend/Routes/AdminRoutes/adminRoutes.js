@@ -24,7 +24,7 @@ function adminRoutes(adminApp) {
   adminApp.post("/forgotPassword", user_controller.forgotPassword);
   adminApp.post("/resetPassword/:token", user_controller.resetPassword);
   adminApp.post("/changePassword", user_controller.changePassword);
-  adminApp.put("/verification", user_controller.accountVerification);
+  adminApp.get("/verification", user_controller.accountVerification);
   //blood requests
   adminApp.post("/bloodRequest", blood_request_controller.makeBloodRequest);
   adminApp.put(

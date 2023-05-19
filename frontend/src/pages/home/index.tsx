@@ -16,7 +16,7 @@ function Home() {
   // const { t } = useTranslation('common');
   // Fetch profile data using SWR
   const { data, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_DB_URI}/admin/profile`,
+    `${process.env.NEXT_PUBLIC_DB_URI}/website/profile`,
     async (url) => {
       const token = localStorage.getItem('token');
       if (!token) {

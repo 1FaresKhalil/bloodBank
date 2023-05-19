@@ -35,7 +35,7 @@ function Donate() {
   // Fetch profile data using SWR
 
   const { data: profileData, error: profileError } = useSWR(
-    `${process.env.NEXT_PUBLIC_DB_URI}/admin/profile`,
+    `${process.env.NEXT_PUBLIC_DB_URI}/website/profile`,
     async (url) => {
       if (!token) {
         throw new Error('Token not found');

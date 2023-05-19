@@ -14,6 +14,7 @@ function WebsiteRoutes(websiteApp) {
   //user requests
   websiteApp.post("/signup", user_controller.signUp);
   websiteApp.post("/login", user_controller.login);
+  websiteApp.get("/users/:id", user_controller.getUserById);
   websiteApp.get("/profile", user_controller.getProfile);
   websiteApp.put("/user/profile/update", user_controller.updateUserProfile);
   websiteApp.post("/forgotPassword", user_controller.forgotPassword);

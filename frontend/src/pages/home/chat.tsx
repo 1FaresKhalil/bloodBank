@@ -67,7 +67,7 @@ const ChatPage = () => {
     };
   }, []);
   const { data: profile, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_DB_URI}/admin/profile`,
+    `${process.env.NEXT_PUBLIC_DB_URI}/website/profile`,
     async (url) => {
       if (!token) {
         throw new Error('Token not found');
@@ -102,7 +102,8 @@ const ChatPage = () => {
 
   const { data: users } = useSWR(
     members?.map(
-      (member: any) => `${process.env.NEXT_PUBLIC_DB_URI}/admin/users/${member}`
+      (member: any) =>
+        `${process.env.NEXT_PUBLIC_DB_URI}/website/users/${member}`
     ),
     async (urls: string[]) => {
       setIsLoadingUsers(true);

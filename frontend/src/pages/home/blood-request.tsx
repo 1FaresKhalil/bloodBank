@@ -70,7 +70,7 @@ export default function SignInSide() {
     }
   };
   const { data, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_DB_URI}/admin/profile`,
+    `${process.env.NEXT_PUBLIC_DB_URI}/website/profile`,
     async (url) => {
       if (!token) {
         throw new Error('Token not found');

@@ -12,6 +12,7 @@ import ResponsiveBarChart from '@/components/admin/ResponsiveBarChart';
 import ResponsivePieChart from '@/components/admin/ResponsivePieChart';
 import ResponsiveTimeSeriesChart from '@/components/admin/ResponsiveTimeSeriesChart';
 import StatBox from '@/components/admin/StatBox';
+import ErrorPage from '@/components/error';
 // import { mockTransactions } from '@/data/mockData';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
@@ -21,7 +22,7 @@ const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const { data } = useSWR(
+  const { data, error } = useSWR(
     `${process.env.NEXT_PUBLIC_DB_URI}/admin/dashboard`,
     async (url) => {
       const token = localStorage.getItem('token');
@@ -39,6 +40,10 @@ const Dashboard = () => {
       return response.data;
     }
   );
+
+  if (error) {
+    return <ErrorPage />;
+  }
 
   if (!data) return null;
   const { dashboard } = data;

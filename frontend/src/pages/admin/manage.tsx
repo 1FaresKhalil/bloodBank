@@ -13,6 +13,7 @@ import type {
   GridRowId,
   GridRowModel,
   GridRowModesModel,
+  GridRowParams,
   GridRowsProp,
   MuiEvent,
 } from '@mui/x-data-grid';
@@ -27,6 +28,7 @@ import * as React from 'react';
 import useSWR from 'swr';
 
 import Header from '@/components/admin/Header';
+import ErrorPage from '@/components/error';
 import { tokens } from '@/theme/theme';
 
 const Manage = () => {
@@ -37,7 +39,7 @@ const Manage = () => {
   const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>(
     {}
   );
-  const { data } = useSWR(
+  const { data, error } = useSWR(
     `${process.env.NEXT_PUBLIC_DB_URI}/admin/users`,
     async (url) => {
       const token = localStorage.getItem('token');
@@ -60,6 +62,10 @@ const Manage = () => {
     if (data) setRows(data.users);
   }, [setRows, data]);
 
+  if (error) {
+    return <ErrorPage />;
+  }
+
   if (!data) return null;
 
   const dateGetter = (params: any) => {
@@ -78,18 +84,16 @@ const Manage = () => {
   };
 
   const handleRowEditStart = (
-    _: any,
+    params: GridRowParams,
     event: MuiEvent<React.SyntheticEvent>
   ) => {
-    // console.log(params);
     event.defaultMuiPrevented = true;
   };
 
   const handleRowEditStop: GridEventListener<'rowEditStop'> = (
-    _: any,
+    params,
     event
   ) => {
-    // console.log(params);
     event.defaultMuiPrevented = true;
   };
 
@@ -111,13 +115,11 @@ const Manage = () => {
       throw new Error('Token not found');
     }
 
-    axios
-      .delete(`${process.env.NEXT_PUBLIC_DB_URI}/admin/users/${id}`, {
-        headers: {
-          Authorization: `${token}`,
-        },
-      })
-      .then((res) => console.log(res));
+    axios.delete(`${process.env.NEXT_PUBLIC_DB_URI}/admin/users/${id}`, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
   };
 
   const handleCancelClick = (id: GridRowId) => () => {

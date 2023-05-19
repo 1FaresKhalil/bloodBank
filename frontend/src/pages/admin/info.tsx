@@ -5,13 +5,14 @@ import axios from 'axios';
 import useSWR from 'swr';
 
 import Header from '@/components/admin/Header';
+import ErrorPage from '@/components/error';
 import { tokens } from '@/theme/theme';
 
 const Info = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const { data } = useSWR(
+  const { data, error } = useSWR(
     `${process.env.NEXT_PUBLIC_DB_URI}/admin/users`,
     async (url) => {
       const token = localStorage.getItem('token');
@@ -29,6 +30,10 @@ const Info = () => {
       return response.data;
     }
   );
+
+  if (error) {
+    return <ErrorPage />;
+  }
 
   if (!data) return null;
   const { users } = data;

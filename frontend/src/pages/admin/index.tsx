@@ -22,6 +22,24 @@ const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const { data: profile, error: profileError } = useSWR(
+    `${process.env.NEXT_PUBLIC_DB_URI}/website/profile`,
+    async (url) => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('Token not found');
+      }
+      const response = await axios.get(url, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+      // console.log(response.data.user);
+      // console.log(response?.data?.user?.isAdmin);
+      return response?.data?.user?.isAdmin;
+    }
+  );
+
   const { data, error } = useSWR(
     `${process.env.NEXT_PUBLIC_DB_URI}/admin/dashboard`,
     async (url) => {
@@ -36,12 +54,13 @@ const Dashboard = () => {
           Authorization: `${token}`,
         },
       });
-      // console.log(response.data.user);
+
+      // console.log(response.data);
       return response.data;
     }
   );
 
-  if (error) {
+  if (error || profileError || profile === undefined) {
     return <ErrorPage />;
   }
 

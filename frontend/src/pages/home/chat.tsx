@@ -48,6 +48,7 @@ const ChatPage = () => {
   const [members, setMembers] = useState([]);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoadingMessages, setIsLoadingMessages] = useState(false);
+  const [isLoadingUsers, setIsLoadingUsers] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (chatContainerRef.current) {
@@ -104,6 +105,7 @@ const ChatPage = () => {
       (member: any) => `${process.env.NEXT_PUBLIC_DB_URI}/admin/users/${member}`
     ),
     async (urls: string[]) => {
+      setIsLoadingUsers(true);
       const responses = await axios.all(
         urls.map((url) =>
           axios.get(url, {
@@ -114,6 +116,7 @@ const ChatPage = () => {
         )
       );
       // console.log(responses.map((response) => response.profile.user));
+      setIsLoadingUsers(false);
       return responses.map((response) => response.data.user);
     }
   );
@@ -235,21 +238,25 @@ const ChatPage = () => {
               >
                 <Typography>{t('chats')}</Typography>
               </ListItem>
-              {users
-                ?.filter((user) => user?._id !== profile.user._id)
-                .map((user) => (
-                  <ListItem
-                    key={user?._id}
-                    button
-                    selected={selectedUser === user?._id}
-                    onClick={() => handleUserSelect(user)}
-                  >
-                    <ListItemAvatar>
-                      <Avatar src="/user2.jpg" alt={user?.name} />
-                    </ListItemAvatar>
-                    <ListItemText primary={user?.name} />
-                  </ListItem>
-                ))}
+              {isLoadingUsers ? (
+                <Loading text="Loading users" />
+              ) : (
+                users
+                  ?.filter((user) => user?._id !== profile.user._id)
+                  .map((user) => (
+                    <ListItem
+                      key={user?._id}
+                      button
+                      selected={selectedUser === user?._id}
+                      onClick={() => handleUserSelect(user)}
+                    >
+                      <ListItemAvatar>
+                        <Avatar src="/user2.jpg" alt={user?.name} />
+                      </ListItemAvatar>
+                      <ListItemText primary={user?.name} />
+                    </ListItem>
+                  ))
+              )}
             </List>
           </Box>
           <Box

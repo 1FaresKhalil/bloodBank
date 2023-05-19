@@ -43,7 +43,7 @@ export default function Forgotpassword() {
       // console.log(process.env.NEXT_PUBLIC_DB_URI);
       // Make POST request using Axios
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_DB_URI}/admin/forgotPassword`,
+        `${process.env.NEXT_PUBLIC_DB_URI}/website/forgotPassword`,
         {
           username: data.get('email'),
           hostname: window.location.host,

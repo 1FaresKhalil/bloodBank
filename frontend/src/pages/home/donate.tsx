@@ -52,7 +52,7 @@ function Donate() {
   // Fetch blood request data using SWR
 
   const { data: bloodRequestData } = useSWR(
-    `${process.env.NEXT_PUBLIC_DB_URI}/admin/bloodRequest`,
+    `${process.env.NEXT_PUBLIC_DB_URI}/website/bloodRequest`,
     async (url) => {
       if (!token) {
         throw new Error('Token not found');

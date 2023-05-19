@@ -46,7 +46,7 @@ export default function SignInSide() {
     const data = new FormData(event.currentTarget);
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_DB_URI}/admin/bloodRequest`,
+        `${process.env.NEXT_PUBLIC_DB_URI}/website/bloodRequest`,
         {
           patientName: data.get('name'),
           bloodType: bloodType.toLowerCase() as string,

@@ -63,7 +63,7 @@ export default function Login() {
     try {
       // Make POST request using Axios
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_DB_URI}/admin/login`,
+        `${process.env.NEXT_PUBLIC_DB_URI}/website/login`,
         {
           username: email,
           password,

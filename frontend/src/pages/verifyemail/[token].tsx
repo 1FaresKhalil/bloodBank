@@ -7,7 +7,7 @@ const VerifyEmail = () => {
   const router = useRouter();
   const { token } = router.query;
   const { data } = useSWR(
-    `${process.env.NEXT_PUBLIC_DB_URI}/admin/verification?token=${token}`,
+    `${process.env.NEXT_PUBLIC_DB_URI}/website/verification?token=${token}`,
     async (url: string) => {
       const response = await axios.get(url);
       // console.log(response.data.user);

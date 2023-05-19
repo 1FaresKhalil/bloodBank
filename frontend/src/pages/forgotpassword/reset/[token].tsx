@@ -44,7 +44,7 @@ export default function Reset() {
     try {
       const { token } = router.query;
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_DB_URI}/admin/resetPassword/${token}`,
+        `${process.env.NEXT_PUBLIC_DB_URI}/website/resetPassword/${token}`,
         {
           newPassword: data.get('password'),
         }

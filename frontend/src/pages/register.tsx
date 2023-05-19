@@ -131,7 +131,7 @@ export default function SignUp() {
     try {
       // Make POST request using Axios
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_DB_URI}/admin/signup`,
+        `${process.env.NEXT_PUBLIC_DB_URI}/website/signup`,
         {
           name: data.get('name'),
           bloodType: bloodType.toLowerCase() as string,

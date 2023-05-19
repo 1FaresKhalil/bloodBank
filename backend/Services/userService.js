@@ -92,7 +92,7 @@ class UserService {
       if (!user) {
         return null;
       } else {
-        console.log(user);
+        // console.log(user);
         return await User.deleteOne({ _id: id });
       }
     } catch (e) {
@@ -169,9 +169,9 @@ class UserService {
         resetLink = `http://${req.headers.host}/admin/resetpassword/${token}`;
       else if (!req.body.hostname && !user.isAdmin)
         resetLink = `http://${req.headers.host}/website/resetpassword/${token}`;
-
+      // console.log(user);
       const mailOptions = {
-        from: process.env.SENDGRID_Email,
+        from: process.env.SENDGRID_EMAIL,
         to: email,
         subject: "Reset your password",
         html: `

@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import type { AxiosError } from 'axios';
+// import type { AxiosError } from 'axios';
 import axios from 'axios';
 import type { GetStaticPropsContext } from 'next';
 import Image from 'next/image';
@@ -73,9 +73,11 @@ export default function Login() {
       // console.log(router.locale);
       router.push('/home');
     } catch (error) {
-      const axiosError = error as AxiosError; // Add this line
+      // const axiosError = error as AxiosError; // Add this line
+      // console.log(error);
       // Handle error
-      if (axiosError.response) {
+      if (error) {
+        // console.log('ture');
         setEmailError(true);
         setPasswordError(true);
       }

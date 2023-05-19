@@ -141,18 +141,23 @@ function Donate() {
     });
 
     if (!existingChat) {
-      axios.post(
-        `${process.env.NEXT_PUBLIC_DB_URI}/website/conversation`,
-        {
-          senderId: profileData?.user?._id,
-          receiverId,
-        },
-        {
-          headers: {
-            Authorization: token,
+      console.log('dddddd');
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_DB_URI}/website/conversation`,
+          {
+            senderId: profileData?.user?._id,
+            receiverId,
           },
-        }
-      );
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        )
+        .catch((err) => {
+          console.log(err);
+        });
       setTimeout(() => {
         router.push('/home/chat');
       }, 2000);

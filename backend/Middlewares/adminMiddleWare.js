@@ -20,7 +20,7 @@ async function AdminMiddleWare(req, res, next) {
         let decoded = jwt.verify(token, "loginccqq");
         const user = await User.findById(decoded.id);
 
-        if (!user || decoded.isAdmin === false) {
+        if (!user || !decoded.isAdmin) {
           return res.status(401).json({ message: "unauthorized" });
         } else {
           req.user = user;

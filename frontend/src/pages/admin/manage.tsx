@@ -84,16 +84,13 @@ const Manage = () => {
   };
 
   const handleRowEditStart = (
-    params: GridRowParams,
+    _: GridRowParams,
     event: MuiEvent<React.SyntheticEvent>
   ) => {
     event.defaultMuiPrevented = true;
   };
 
-  const handleRowEditStop: GridEventListener<'rowEditStop'> = (
-    params,
-    event
-  ) => {
+  const handleRowEditStop: GridEventListener<'rowEditStop'> = (_, event) => {
     event.defaultMuiPrevented = true;
   };
 

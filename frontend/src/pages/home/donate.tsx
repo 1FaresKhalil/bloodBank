@@ -141,7 +141,7 @@ function Donate() {
     });
 
     if (!existingChat) {
-      console.log('dddddd');
+      // console.log('dddddd');
       axios
         .post(
           `${process.env.NEXT_PUBLIC_DB_URI}/website/conversation`,

@@ -1,10 +1,8 @@
 import { Button, TextField } from '@mui/material';
 import axios from 'axios';
 import type { GetStaticPropsContext } from 'next';
-// import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React, { useLayoutEffect, useRef, useState } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import {
   CartesianGrid,
   Legend,
@@ -23,9 +21,19 @@ import useInput from '@/hooks/useInput';
 
 type HealthData = {
   name: string;
-  BloodPreasure: string;
-  Weight: string;
-  Sugar: string;
+  Systolic: any;
+  Diastolic: any;
+  Weight: any;
+  Sugar: any;
+};
+const isValidBloodPressure = (value: string) => {
+  const regex = /^\d{1,3}\/\d{1,3}$/;
+  return regex.test(value);
+};
+
+const separateBloodPressure = (value: string) => {
+  const [systolic, diastolic] = value.split('/').map(Number);
+  return { systolic, diastolic };
 };
 
 const TrackingHealth = () => {
@@ -39,12 +47,10 @@ const TrackingHealth = () => {
 
   const {
     value: bloodPressureValue,
-    // isValid: bloodPressureIsValid,
-
     valueChangeHandler: bloodPressureChangeHandler,
     inputBlurHandler: bloodPressureBlurHandler,
     reset: resetBloodPressure,
-  } = useInput(notEmpty);
+  } = useInput(isValidBloodPressure);
   const {
     value: sugarValue,
     // isValid: sugarIsValid,
@@ -66,13 +72,34 @@ const TrackingHealth = () => {
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // If no input is provided, do not submit the form
+    if (
+      !isValidBloodPressure(bloodPressureValue) &&
+      !notEmpty(sugarValue) &&
+      !notEmpty(weightValue)
+    ) {
+      return;
+    }
+
     setCounter((prevCounter) => prevCounter + 1);
+
+    // Initialize values with null to allow for partial data submission
+    let systolic = null;
+    let diastolic = null;
+    if (isValidBloodPressure(bloodPressureValue)) {
+      const separatedValues = separateBloodPressure(bloodPressureValue);
+      systolic = separatedValues.systolic;
+      diastolic = separatedValues.diastolic;
+    }
+
     const enteredData: HealthData = {
       name: `Day ${counter + 1}`,
-      BloodPreasure: bloodPressureValue,
-      Weight: weightValue,
-      Sugar: sugarValue,
+      Systolic: systolic,
+      Diastolic: diastolic,
+      Weight: notEmpty(weightValue) ? weightValue : null,
+      Sugar: notEmpty(sugarValue) ? sugarValue : null,
     };
+
     setHealthData((prevData) => [...prevData, enteredData]);
     resetBloodPressure();
     resetSugar();
@@ -108,7 +135,7 @@ const TrackingHealth = () => {
     }
   }, []);
   const { data, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_DB_URI}/website/profile`,
+    `${process.env.NEXT_PUBLIC_DB_URI}/admin/profile`,
     async (url) => {
       const token = localStorage.getItem('token');
       if (!token) {
@@ -149,8 +176,12 @@ const TrackingHealth = () => {
           <Tooltip />
           <Legend />
           {showBloodPressure && (
-            <Line dataKey="BloodPreasure" stroke="#8884d8" strokeWidth={2} />
+            <>
+              <Line dataKey="Systolic" stroke="#8884d8" strokeWidth={2} />
+              <Line dataKey="Diastolic" stroke="#82ca9d" strokeWidth={2} />
+            </>
           )}
+
           {showSugar && (
             <Line dataKey="Sugar" stroke="#82ca9d" strokeWidth={2} />
           )}
@@ -196,7 +227,7 @@ const TrackingHealth = () => {
                   value: bloodPressureValue,
                   placeholder: '120/180',
                   id: 'bloodPressure',
-                  type: 'number',
+                  type: 'text',
                   name: 'bloodPressure',
                 }}
               />

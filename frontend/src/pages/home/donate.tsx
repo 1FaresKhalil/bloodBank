@@ -160,7 +160,7 @@ function Donate() {
         });
       setTimeout(() => {
         router.push('/home/chat');
-      }, 1000);
+      }, 2000);
     } else {
       router.push('/home/chat');
     }

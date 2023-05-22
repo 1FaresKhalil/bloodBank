@@ -18,7 +18,7 @@ function WebsiteRoutes(websiteApp) {
   websiteApp.get("/profile", user_controller.getProfile);
   websiteApp.put("/user/profile/update", user_controller.updateUserProfile);
   websiteApp.post("/forgotPassword", user_controller.forgotPassword);
-  websiteApp.post("/resetPassword", user_controller.resetPassword);
+  websiteApp.post("/resetPassword/:token", user_controller.resetPassword);
   websiteApp.post("/changePassword", user_controller.changePassword);
   websiteApp.get("/verification", user_controller.accountVerification);
   //blood requests

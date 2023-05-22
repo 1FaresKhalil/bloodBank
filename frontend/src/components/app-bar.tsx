@@ -21,7 +21,7 @@ import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 // import Image from 'next/image';
-import { useTranslation,withTranslation } from 'next-i18next';
+import { useTranslation, withTranslation } from 'next-i18next';
 import * as React from 'react';
 
 import LanguageButton from './lang-button';
@@ -33,7 +33,7 @@ const pages = [
   'Tracking Health',
   'Chat',
 ];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Logout'];
 type NavbarProps = {
   window?: () => Window;
   username: string;

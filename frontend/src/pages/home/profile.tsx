@@ -22,6 +22,7 @@ import type { GetStaticPropsContext } from 'next';
 import Image from 'next/image';
 // import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 // import Link from 'next/link';
 import * as React from 'react';
 import useSWR from 'swr';
@@ -30,6 +31,7 @@ import Navbar from '@/components/app-bar';
 import ErrorPage from '@/components/error';
 
 function Profile() {
+  const { t } = useTranslation('common');
   const [editMode, setEditMode] = React.useState(false);
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -170,7 +172,7 @@ function Profile() {
                   alt="logo"
                 />
                 <Typography component="h1" variant="h5">
-                  Profile
+                  {t('profile')}
                 </Typography>
                 {data && (
                   <Grid container spacing={2} sx={{ mt: 2 }}>
@@ -201,7 +203,7 @@ function Profile() {
                                     variant="contained"
                                     type="submit"
                                   >
-                                    Save
+                                    {t('saveBtn')}
                                   </Button>
                                   <Button
                                     fullWidth
@@ -209,7 +211,7 @@ function Profile() {
                                     color="error"
                                     onClick={cancelHandler}
                                   >
-                                    Cancel
+                                    {t('cancel')}
                                   </Button>
                                 </Grid>
                                 <TextField
@@ -221,14 +223,14 @@ function Profile() {
                                     setName(e.target.value);
                                   }}
                                   id="filled-basic"
-                                  label="Name"
+                                  label={t('userNamePlaceholder')}
                                   value={name}
                                   variant="filled"
                                 />
                                 <TextField
                                   fullWidth
                                   id="filled-basic"
-                                  label="Email"
+                                  label={t('emailAddress')}
                                   value={email}
                                   onChange={(e) => setEmail(e.target.value)}
                                   variant="filled"
@@ -239,14 +241,14 @@ function Profile() {
                                     error={bloodError}
                                     id="demo-simple-select-label"
                                   >
-                                    Blood Type
+                                    {t('BloodType')}
                                   </InputLabel>
                                   <Select
                                     error={bloodError}
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
                                     value={bloodType}
-                                    label="Blood Type"
+                                    label={t('BloodType')}
                                     variant="filled"
                                     onChange={handleChange}
                                   >
@@ -266,7 +268,7 @@ function Profile() {
                                 <TextField
                                   fullWidth
                                   id="filled-basic"
-                                  label="Phone Number"
+                                  label={t('phonePlaceholder')}
                                   value={phone}
                                   onChange={(e) => setPhone(e.target.value)}
                                   variant="filled"
@@ -313,7 +315,7 @@ function Profile() {
                 alt="logo"
               />
               <Typography component="h1" variant="h5">
-                Profile
+                {t('profile')}
               </Typography>
               {data && (
                 <Grid container spacing={2} sx={{ mt: 2 }}>
@@ -340,10 +342,10 @@ function Profile() {
                                 variant="contained"
                                 onClick={() => setEditMode(true)}
                               >
-                                Edit
+                                {t('edit')}
                               </Button>
                               <TextField
-                                label="Name"
+                                label={t('userNamePlaceholder')}
                                 id="filled-read-only-input"
                                 value={data?.user?.name}
                                 InputProps={{
@@ -352,7 +354,7 @@ function Profile() {
                                 variant="filled"
                               />
                               <TextField
-                                label="Email"
+                                label={t('emailAddress')}
                                 id="filled-read-only-input"
                                 value={data?.user?.username}
                                 InputProps={{
@@ -361,7 +363,7 @@ function Profile() {
                                 variant="filled"
                               />
                               <TextField
-                                label="Blood Type"
+                                label={t('BloodType')}
                                 id="filled-read-only-input"
                                 value={data?.user?.bloodType}
                                 InputProps={{
@@ -370,7 +372,7 @@ function Profile() {
                                 variant="filled"
                               />
                               <TextField
-                                label="Phone Number"
+                                label={t('phonePlaceholder')}
                                 id="filled-read-only-input"
                                 value={
                                   data?.user?.phone

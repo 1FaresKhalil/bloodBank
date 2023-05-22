@@ -1,6 +1,7 @@
 import { Button, TextField } from '@mui/material';
 import axios from 'axios';
 import type { GetStaticPropsContext } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import {
@@ -37,7 +38,7 @@ const separateBloodPressure = (value: string) => {
 };
 
 const TrackingHealth = () => {
-  // const { t } = useTranslation('common');
+  const { t } = useTranslation('common');
   const [showSugar, setShowSugar] = useState(true);
   const [showWeight, setShowWeight] = useState(true);
   const [showBloodPressure, setShowBloodPressure] = useState(true);
@@ -196,7 +197,7 @@ const TrackingHealth = () => {
             className="outlined-btn"
             onClick={bloodPressureClickHandler}
           >
-            ضغط الدم
+            {t('trackingBloodPreasure')}
           </Button>
           <Button
             color="error"
@@ -204,7 +205,7 @@ const TrackingHealth = () => {
             className="outlined-btn"
             onClick={sugarClickHandler}
           >
-            مستوي السكر
+            {t('sugarLevel')}
           </Button>
           <Button
             color="error"
@@ -212,7 +213,7 @@ const TrackingHealth = () => {
             className="outlined-btn"
             onClick={weightClickHandler}
           >
-            الوزن
+            {t('weight')}
           </Button>
         </div>
         <form className="flex flex-col" onSubmit={submitHandler}>
@@ -222,7 +223,7 @@ const TrackingHealth = () => {
                 onChange={bloodPressureChangeHandler}
                 onBlur={bloodPressureBlurHandler}
                 className={`flex flex-col `}
-                label="ادخل ضغط الدم"
+                label={t('enterBloodPreasure')}
                 inputProps={{
                   value: bloodPressureValue,
                   placeholder: '120/80',
@@ -237,7 +238,7 @@ const TrackingHealth = () => {
                 onChange={sugarChangeHandler}
                 onBlur={sugarBlurHandler}
                 className={`flex flex-col `}
-                label="ادخل مستوي السكر"
+                label={t('enterSugarLevel')}
                 inputProps={{
                   value: sugarValue,
                   placeholder: '140',
@@ -252,7 +253,7 @@ const TrackingHealth = () => {
                 onChange={weightChangeHandler}
                 onBlur={weightBlurHandler}
                 className={`flex flex-col `}
-                label=" ادخل وزنك"
+                label={t('enterWeight')}
                 inputProps={{
                   value: weightValue,
                   placeholder: '68Kg',
@@ -269,7 +270,7 @@ const TrackingHealth = () => {
             type="submit"
             className=" mt-4 contained-btn px-9 py-2 self-center disabled:opacity-50"
           >
-            حفظ
+            {t('saveBtn')}
           </Button>
         </form>
       </section>

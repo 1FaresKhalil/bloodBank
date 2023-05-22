@@ -43,5 +43,15 @@
   "selectNearestHospital": "الرجاء اختار اقرب مستشفى اليك",
   "notePlaceholder": "ملاحظة",
   "chats": "المحادثات",
-  "selectUser": "اختار اي مستخدم وابدء بالمحادثه"
+  "selectUser": "اختار اي مستخدم وابدء بالمحادثه",
+  "trackingBloodPreasure" : "ضغط الدم",
+  "sugarLevel": "مستوى السكر",
+  "weight" : "الوزن",
+  "enterBloodPreasure": "ادخل ضغط الدم",
+  "enterSugarLevel" : "ادخل مستوى السكر",
+  "enterWeight": "ادخل وزنك",
+  "saveBtn" : "حفظ",
+  "profile": "الحساب الشخصى",
+  "cancel" : "الغاء",
+  "edit": "تعديل"
 }

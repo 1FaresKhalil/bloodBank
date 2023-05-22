@@ -43,5 +43,15 @@
   "selectNearestHospital": "Please select your nearest hospital to you",
   "notePlaceholder": "Note",
   "chats": "Chats",
-  "selectUser": "Select any user to start chat"
+  "selectUser": "Select any user to start chat",
+  "trackingBloodPreasure" : "blood Preasure",
+  "sugarLevel": "Sugar Level",
+  "weight" : "Weight",
+  "enterBloodPreasure": "Enter Blood Preasure",
+  "enterSugarLevel" : "Enter Sugar Level",
+  "enterWeight": "Enter Weight",
+  "saveBtn" : "Save",
+  "profile": "Profile",
+  "cancel" : "Cancel",
+  "edit": "edit"
 }

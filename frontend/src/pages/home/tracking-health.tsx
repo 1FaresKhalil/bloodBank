@@ -177,8 +177,8 @@ const TrackingHealth = () => {
           <Legend />
           {showBloodPressure && (
             <>
-              <Line dataKey="Systolic" stroke="#8884d8" strokeWidth={2} />
-              <Line dataKey="Diastolic" stroke="#82ca9d" strokeWidth={2} />
+              <Line dataKey="Systolic" stroke="#82ca9d" strokeWidth={2} />
+              <Line dataKey="Diastolic" stroke="#8884d8" strokeWidth={2} />
             </>
           )}
 
@@ -225,7 +225,7 @@ const TrackingHealth = () => {
                 label="ادخل ضغط الدم"
                 inputProps={{
                   value: bloodPressureValue,
-                  placeholder: '120/180',
+                  placeholder: '120/80',
                   id: 'bloodPressure',
                   type: 'text',
                   name: 'bloodPressure',

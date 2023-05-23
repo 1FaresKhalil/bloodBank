@@ -4,6 +4,7 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import OpacityOutlinedIcon from '@mui/icons-material/OpacityOutlined';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
 // import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import { Avatar, Box, IconButton, Typography, useTheme } from '@mui/material';
@@ -158,7 +159,11 @@ const Sidebar = () => {
               to="/admin/info"
               icon={<ContactsOutlinedIcon />}
             />
-
+            <Item
+              title="Predict"
+              to="/admin/predict"
+              icon={<OpacityOutlinedIcon />}
+            />
             {/* <Typography
               variant="h6"
               color={colors.grey[300]}
